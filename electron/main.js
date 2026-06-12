@@ -4,6 +4,23 @@ import { fileURLToPath } from 'url';
 import { initDatabase, getDatabase, closeDatabase } from './database/connection.js';
 import { hasUsers, setupAdmin, authenticateUser } from './auth.js';
 import { v4 as uuidv4 } from 'uuid';
+import { 
+  isOllamaInstalled,
+  isOllamaRunning,
+  getInstalledModels,
+  hasQwenModel,
+  hasEmbedModel,
+  startOllamaProcess,
+  getDeviceSpecs,
+  getQwenModel,
+  checkDiskSpace,
+  downloadOllamaInstaller,
+  downloadQwenModel,
+  downloadEmbedModel,
+  askOllama,
+  getEmbedding,
+  getLegalSuggestion
+} from './service/ai-setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +48,7 @@ function createWindow() {
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
+    mainWindow.webContents.openDevTools();
   });
 
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -55,6 +73,58 @@ ipcMain.handle('auth:setup-admin', (_, username, password) => {
 
 ipcMain.handle('auth:login', (_, username, password) => {
   return authenticateUser(username, password);
+});
+
+ipcMain.handle('ai:check-setup', async () => {
+  const device = getDeviceSpecs();
+  const qwenModel = getQwenModel();
+  const ollama = isOllamaInstalled();
+  const running = ollama.installed ? await isOllamaRunning() : false;
+  const models = ollama.installed && running ? getInstalledModels() : [];
+  const qwenReady = models.some(m => m.name.toLowerCase().includes('qwen'));
+  const embedReady = models.some(m => m.name.toLowerCase().includes('nomic-embed'));
+  const diskSpace = checkDiskSpace();
+
+  return {
+    ready: ollama.installed && running && qwenReady && embedReady,
+    installed: ollama.installed,
+    running,
+    qwenReady,
+    embedReady,
+    modelReady: qwenReady && embedReady,
+    device,
+    qwenModel,
+    models,
+    diskSpace
+  };
+});
+
+ipcMain.handle('ai:install-ollama', async () => {
+  return await downloadOllamaInstaller(mainWindow);
+});
+
+ipcMain.handle('ai:download-model', async () => {
+  return await downloadQwenModel(mainWindow);
+});
+
+ipcMain.handle('ai:download-embed-model', async () => {
+  return await downloadEmbedModel(mainWindow);
+});
+
+ipcMain.handle('ai:start-ollama', async () => {
+  return await startOllamaProcess();
+});
+
+ipcMain.handle('ai:chat', async (_, message) => {
+  return await askOllama(message);
+});
+
+ipcMain.handle('ai:legal-suggestion', async (_, firDescription) => {
+  return await getLegalSuggestion(firDescription);
+});
+
+ipcMain.handle('ai:embedding', async (_, text) => {
+  return await getEmbedding(text);
 });
 
 ipcMain.handle('case:create', (_, data) => {
