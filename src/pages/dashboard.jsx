@@ -3,6 +3,9 @@ import { useAuth } from '../context/AuthContext';
 import Sidebar from '../components/Sidebar';
 import StatCard from '../components/StatCard';
 import AIChat from './AIChat';
+import NewCase from './NewCase';
+import SearchCases from './SearchCases';
+import CaseDetail from './CaseDetail';
 import { Search, FileText, AlertCircle } from 'lucide-react';
 
 export default function Dashboard() {
@@ -11,6 +14,7 @@ export default function Dashboard() {
   const [recentCases, setRecentCases] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeView, setActiveView] = useState('dashboard');
+  const [selectedCase, setSelectedCase] = useState(null);
 
   useEffect(() => { loadDashboard(); }, []);
 
@@ -40,6 +44,32 @@ export default function Dashboard() {
     );
   }
 
+  if (activeView === 'new-case') {
+    return <NewCase onNavigate={setActiveView} />;
+  }
+
+  if (activeView === 'search') {
+    return (
+      <SearchCases 
+        onNavigate={setActiveView} 
+        onViewCase={(id) => { setSelectedCase(id); setActiveView('case-detail'); }} 
+      />
+    );
+  }
+
+  if (activeView === 'case-detail') {
+    return <CaseDetail onNavigate={setActiveView} caseId={selectedCase} />;
+  }
+
+  if (activeView === 'diary') {
+    return (
+      <SearchCases 
+        onNavigate={setActiveView} 
+        onViewCase={(id) => { setSelectedCase(id); setActiveView('case-detail'); }} 
+      />
+    );
+  }
+
   return (
     <div className="flex h-screen bg-white">
       <Sidebar user={user} activeView={activeView} onNavigate={setActiveView} onLogout={logout} />
@@ -66,18 +96,28 @@ export default function Dashboard() {
           </div>
 
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm">
-            <div className="px-6 py-4 border-b border-gray-50">
+            <div className="px-6 py-4 border-b border-gray-50 flex items-center justify-between">
               <h3 className="text-base font-semibold text-gray-800">Recent Cases</h3>
+              <button onClick={() => setActiveView('search')} className="text-sm text-orange-500 hover:text-orange-600 font-medium">
+                View All
+              </button>
             </div>
             <div className="divide-y divide-gray-50">
               {recentCases.length === 0 ? (
                 <div className="px-6 py-16 text-center">
                   <FileText size={40} className="mx-auto mb-3 text-gray-200" />
                   <p className="text-gray-400 font-medium">No cases found</p>
+                  <button onClick={() => setActiveView('new-case')} className="mt-3 text-sm text-orange-500 hover:text-orange-600 font-medium">
+                    Create your first case
+                  </button>
                 </div>
               ) : (
                 recentCases.map((c) => (
-                  <div key={c.id} className="px-6 py-4 flex items-center justify-between hover:bg-orange-50/30 transition cursor-pointer">
+                  <div 
+                    key={c.id} 
+                    onClick={() => { setSelectedCase(c.id); setActiveView('case-detail'); }}
+                    className="px-6 py-4 flex items-center justify-between hover:bg-orange-50/30 transition cursor-pointer"
+                  >
                     <div>
                       <p className="font-medium text-gray-800 text-sm">{c.fir_number}</p>
                       <p className="text-xs text-gray-400 truncate max-w-md mt-0.5">{c.description}</p>
