@@ -1,7 +1,7 @@
-import { Shield, FileText, Plus, Clock, MessageSquare, Zap } from 'lucide-react';
+import { FileText, Plus, Clock, MessageSquare, Zap } from 'lucide-react';
 import NavButton from './NavButton';
 
-export default function Sidebar({ user, activeView, onNavigate }) {
+export default function Sidebar({ user, activeView, onNavigate, onLogout }) {
   return (
     <aside 
       className="w-64 flex flex-col relative overflow-hidden border-r border-orange-100"
@@ -12,9 +12,11 @@ export default function Sidebar({ user, activeView, onNavigate }) {
       
       <div className="relative p-5 border-b border-orange-100">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-green-500 rounded-xl flex items-center justify-center shadow-lg shadow-orange-200">
-            <Shield size={20} className="text-white" />
-          </div>
+          <img 
+            src="./logo1.png" 
+            alt="CrimeGPT Logo" 
+            className="w-10 h-10 rounded-xl object-contain"
+          />
           <div>
             <h1 className="text-lg font-bold text-gray-800">CrimeGPT</h1>
             <div className="flex items-center gap-1.5 mt-0.5">
@@ -42,7 +44,7 @@ export default function Sidebar({ user, activeView, onNavigate }) {
           icon={<Clock size={18} />} 
           label="Case Diary" 
           active={activeView === 'diary'} 
-          onClick={() => onNavigate('diary')} 
+          onClick={() => onNavigate('search')} 
         />
         <NavButton 
           icon={<MessageSquare size={18} />} 
@@ -62,6 +64,13 @@ export default function Sidebar({ user, activeView, onNavigate }) {
             <p className="text-sm font-semibold truncate text-gray-700">{user?.fullName}</p>
             <p className="text-[10px] text-green-600 font-medium">{user?.role}</p>
           </div>
+          <button onClick={onLogout} className="text-gray-400 hover:text-red-400 transition p-1">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+          </button>
         </div>
       </div>
     </aside>

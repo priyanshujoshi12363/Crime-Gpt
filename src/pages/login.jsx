@@ -27,10 +27,11 @@ export default function Login() {
     <div className="min-h-screen bg-white flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl shadow-lg shadow-orange-200 mb-4">
-            <Shield size={28} className="text-white" />
-          </div>
+        <div className="text-center mb-8">   <img 
+  src="./logo1.png" 
+  alt="CrimeGPT" 
+  className="w-24 h-24 object-contain mx-auto mb-4"
+/>
           <h1 className="text-2xl font-bold text-gray-800">CrimeGPT</h1>
           <p className="text-gray-500 text-sm mt-1">Sign in to continue</p>
         </div>

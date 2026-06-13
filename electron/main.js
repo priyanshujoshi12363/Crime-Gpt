@@ -40,7 +40,8 @@ function createWindow() {
     },
     title: 'CrimeGPT',
     show: false,
-    autoHideMenuBar: true
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, '../public/logo1.png')
   });
 
   mainWindow.setMenuBarVisibility(false);
