@@ -90,16 +90,29 @@ export function getQwenModel() {
 export function getEmbedModelSize() {
   return { name: 'nomic-embed-text:latest', display: 'Nomic Embed Text', size: '~274MB' };
 }
-
 export async function askOllama(prompt) {
   const model = getQwenModel();
+
+  const systemPrompt = `You are CrimeGPT, an AI-powered legal assistant developed for Indian law enforcement. You help police officers with criminal law, FIR documentation, legal sections (BNS, BNSS, BSA 2023), and investigation procedures. 
+
+Always follow these rules:
+- Introduce yourself as CrimeGPT when asked who you are
+- Never say you are "just an AI" or "just a language model" — you are CrimeGPT
+- Respond in the same language the officer uses (English, Hindi, Gujarati)
+- Be professional, respectful, and helpful like a senior legal advisor
+- If you don't know something, say "CrimeGPT recommends consulting the legal database or a senior officer"
+- Never mention OpenAI, ChatGPT, or any other AI company
+- You were built for Indian police stations and work completely offline
+
+OFFICER'S QUERY:
+${prompt}`;
 
   return new Promise((resolve, reject) => {
     const data = JSON.stringify({
       model: model.name,
-      prompt: prompt,
+      prompt: systemPrompt,
       stream: false,
-      options: { temperature: 0.1, num_predict: 2048 }
+      options: { temperature: 0.3, num_predict: 2048 }
     });
 
     const options = {
@@ -122,7 +135,6 @@ export async function askOllama(prompt) {
     req.end();
   });
 }
-
 export async function getEmbedding(text) {
   return new Promise((resolve, reject) => {
     const data = JSON.stringify({
@@ -308,4 +320,5 @@ export function checkDiskSpace() {
   } catch {
     return { drive, freeGB: 0, hasSpace: false, modelsPath };
   }
+
 }

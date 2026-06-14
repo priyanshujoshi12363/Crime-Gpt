@@ -1,15 +1,15 @@
 import { app, BrowserWindow, ipcMain, Menu } from 'electron';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { initDatabase, getDatabase, closeDatabase } from './database/connection.js';
 import { hasUsers, setupAdmin, authenticateUser } from './auth.js';
 import { v4 as uuidv4 } from 'uuid';
+import { getLegalOpinion } from './service/legal-advisor.js';
 import { 
   isOllamaInstalled,
   isOllamaRunning,
   getInstalledModels,
-  hasQwenModel,
-  hasEmbedModel,
   startOllamaProcess,
   getDeviceSpecs,
   getQwenModel,
@@ -21,11 +21,13 @@ import {
   getEmbedding,
   getLegalSuggestion
 } from './service/ai-setup.js';
+import { initVectorStore, indexLawFile, indexCaseJSON, searchLaws, searchCases } from './service/vector-db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let mainWindow = null;
+let dataIndexed = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -58,9 +60,62 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
   }
 }
+async function indexAllLegalData() {
+  const basePath = path.join(__dirname, '..', 'database', 'vectra', 'laws');
+  
+  if (fs.existsSync(basePath)) {
+    const files = fs.readdirSync(basePath);
+    const indexFile = path.join(basePath, 'index.json');
+    
+    if (files.length > 0 && fs.existsSync(indexFile)) {
+      const stats = fs.statSync(indexFile);
+      const fileSizeKB = stats.size / 1024;
+      
+      console.log(`Index file size: ${fileSizeKB.toFixed(2)} KB`);
+      
+      if (fileSizeKB > 10) {
+        console.log('Vector DB already has data, skipping indexing...');
+        dataIndexed = true;
+        return;
+      }
+    }
+  }
 
+  console.log('Starting fresh indexing...');
+  
+  const dataPath = path.join(__dirname, '..', 'data');
+
+  const files = {
+    bns: path.join(dataPath, 'BNS1.txt'),
+    bnss: path.join(dataPath, 'BNSS.txt'),
+    bsa: path.join(dataPath, 'BSA.txt'),
+    special: path.join(dataPath, 'special.txt')
+  };
+
+  for (const [name, filePath] of Object.entries(files)) {
+    if (fs.existsSync(filePath)) {
+      console.log(`Indexing ${name.toUpperCase()}...`);
+      await indexLawFile(filePath, name.toUpperCase());
+    }
+  }
+
+  dataIndexed = true;
+  console.log('All legal data indexed');
+}
 app.whenReady().then(async () => {
   await initDatabase();
+  await initVectorStore();
+  await indexAllLegalData();
+
+  const ollama = isOllamaInstalled();
+  if (ollama.installed) {
+    const running = await isOllamaRunning();
+    if (!running) {
+      console.log('Starting Ollama in background...');
+      startOllamaProcess();
+    }
+  }
+
   createWindow();
 });
 
@@ -128,6 +183,27 @@ ipcMain.handle('ai:embedding', async (_, text) => {
   return await getEmbedding(text);
 });
 
+ipcMain.handle('rag:search-laws', async (_, query) => {
+  return await searchLaws(query);
+});
+
+ipcMain.handle('rag:search-cases', async (_, query) => {
+  return await searchCases(query);
+});
+
+ipcMain.handle('rag:get-context', async (_, query) => {
+  return await getRAGContext(query);
+});
+
+ipcMain.handle('rag:legal-suggestion', async (_, firDescription) => {
+  return await getLegalOpinion(firDescription);
+});
+
+ipcMain.handle('rag:index-case', async (_, caseData) => {
+  await indexCaseJSON(caseData);
+  return { success: true };
+});
+
 ipcMain.handle('case:create', (_, data) => {
   const db = getDatabase();
   const id = uuidv4();
@@ -140,6 +216,14 @@ ipcMain.handle('case:create', (_, data) => {
     data.complainant_id_number || null, data.officer_name || null,
     data.officer_badge || null
   ]);
+
+  indexCaseJSON({
+    fir_number: data.fir_number,
+    description: data.description,
+    incident_location: data.incident_location,
+    incident_date: data.incident_date,
+    sections_applied: []
+  });
   
   return { success: true, caseId: id };
 });

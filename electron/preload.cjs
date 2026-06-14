@@ -21,4 +21,5 @@ downloadEmbedModel: () => ipcRenderer.invoke('ai:download-embed-model'),
 aiChat: (message) => ipcRenderer.invoke('ai:chat', message),
 getLegalSuggestion: (fir) => ipcRenderer.invoke('ai:legal-suggestion', fir),
 getEmbedding: (text) => ipcRenderer.invoke('ai:embedding', text),
+getLegalSuggestionRAG: (fir) => ipcRenderer.invoke('rag:legal-suggestion', fir),
 });

@@ -1,0 +1,1431 @@
+BNS SECTION 1 - SHORT TITLE, COMMENCEMENT AND APPLICATION
+This Act may be called the Bharatiya Nyaya Sanhita, 2023. It extends to the whole of India and applies to every person guilty of any act or omission contrary to its provisions within India. It also applies to any citizen of India committing an offence outside India, any person on a ship or aircraft registered in India wherever it may be, and any person outside India committing an offence targeting a computer resource located in India.
+Procedure: Jurisdiction
+
+BNS SECTION 2 - DEFINITIONS
+Act denotes a series of acts as well as a single act. Animal means any living creature other than a human being. Child means any person below eighteen years of age. Court means a Judge or body of Judges empowered to act judicially. Death means the death of a human being. Dishonestly means doing anything with intention of causing wrongful gain to one person or wrongful loss to another. Document includes electronic and digital records intended to be used as evidence. Fraudulently means doing anything with intention to defraud. Gender pronoun "he" includes male, female, and transgender persons. Government means Central Government or State Government. Injury means any harm illegally caused to any person in body, mind, reputation or property. Judge includes any person empowered to give definitive judgment in legal proceedings. Man means male human being of any age. Movable property includes property of every description except land. Omission denotes a series of omissions as well as a single omission. Person includes any company or association of persons. Public servant includes commissioned officers, judges, court officers, government officers, and persons in service of government or local authorities. Vessel means anything made for conveyance by water. Voluntarily means causing an effect by means intended or known to be likely to cause it. Woman means a female human being of any age. Wrongful gain means gain by unlawful means of property to which the person is not legally entitled. Wrongful loss means loss by unlawful means of property to which the person losing it is legally entitled.
+Procedure: Definitions
+
+BNS SECTION 3 - GENERAL EXPLANATIONS
+Every definition of an offence and every penal provision is understood subject to the exceptions contained in Chapter III titled "General Exceptions". When property is in possession of a person's spouse, clerk, or servant on account of that person, it is in that person's possession. Words referring to acts done extend also to illegal omissions. When a criminal act is done by several persons in furtherance of common intention, each is liable as if done by him alone. Where causing of a certain effect partly by act and partly by omission is an offence, it is the same offence. When several persons are engaged in a criminal act, they may be guilty of different offences by means of that act.
+Procedure: General Explanations
+
+BNS SECTION 4 - PUNISHMENTS
+The punishments to which offenders are liable under this Sanhita are: (a) Death, (b) Imprisonment for life, (c) Imprisonment of two descriptions - rigorous (with hard labour) or simple, (d) Forfeiture of property, (e) Fine, and (f) Community Service.
+Procedure: Sentencing
+
+BNS SECTION 5 - COMMUTATION OF SENTENCE
+The appropriate Government may, without the consent of the offender, commute any punishment under this Sanhita to any other punishment in accordance with section 474 of the Bharatiya Nagarik Suraksha Sanhita, 2023. The appropriate Government means the Central Government where sentence is death or offence relates to Union executive power, and the State Government where sentence relates to State executive power.
+Procedure: Commutation
+
+BNS SECTION 6 - FRACTIONS OF TERMS OF PUNISHMENT
+In calculating fractions of terms of punishment, imprisonment for life shall be reckoned as equivalent to imprisonment for twenty years unless otherwise provided.
+Procedure: Sentence Calculation
+
+BNS SECTION 7 - SENTENCE MAY BE WHOLLY OR PARTLY RIGOROUS OR SIMPLE
+In every case where an offender is punishable with imprisonment of either description, the Court may direct that imprisonment shall be wholly rigorous, wholly simple, or partly rigorous and partly simple.
+Procedure: Sentencing
+
+BNS SECTION 8 - AMOUNT OF FINE, LIABILITY IN DEFAULT OF PAYMENT
+Where no sum is expressed to which a fine may extend, the amount of fine is unlimited but shall not be excessive. The Court may direct that in default of payment of fine, the offender shall suffer imprisonment for a certain term not exceeding one-fourth of the maximum term fixed for the offence. Imprisonment in default of payment of fine shall terminate when fine is paid or levied.
+Procedure: Fine and Default
+
+BNS SECTION 9 - LIMIT OF PUNISHMENT OF OFFENCE MADE UP OF SEVERAL OFFENCES
+Where anything which is an offence is made up of parts, any of which parts is itself an offence, the offender shall not be punished with punishment of more than one of such offences. Where several acts constitute different offences when combined, the offender shall not be punished with more severe punishment than the Court could award for any one of such offences.
+Procedure: Sentencing
+
+BNS SECTION 10 - PUNISHMENT WHEN DOUBTFUL OF WHICH OFFENCE
+In cases where judgment is given that a person is guilty of one of several offences but it is doubtful of which, the offender shall be punished for the offence for which the lowest punishment is provided if the same punishment is not provided for all.
+Procedure: Sentencing
+
+BNS SECTION 11 - SOLITARY CONFINEMENT
+The Court may order solitary confinement for a portion of imprisonment not exceeding three months in the whole according to scale: not exceeding one month if imprisonment does not exceed six months; not exceeding two months if imprisonment exceeds six months but not one year; not exceeding three months if imprisonment exceeds one year.
+Procedure: Solitary Confinement
+
+BNS SECTION 12 - LIMIT OF SOLITARY CONFINEMENT
+Solitary confinement shall not exceed fourteen days at a time with intervals of not less duration than such periods. When imprisonment exceeds three months, solitary confinement shall not exceed seven days in any one month of imprisonment awarded.
+Procedure: Solitary Confinement
+
+BNS SECTION 13 - ENHANCED PUNISHMENT FOR CERTAIN OFFENCES AFTER PREVIOUS CONVICTION
+Whoever having been convicted by a Court in India of an offence punishable under Chapter X or Chapter XVII with imprisonment of three years or upwards, and is subsequently guilty of any offence punishable under either Chapter with like imprisonment, shall be subject to imprisonment for life or imprisonment up to ten years.
+Procedure: Enhanced Punishment
+
+BNS SECTION 14 - ACT DONE BY PERSON BOUND BY LAW
+Nothing is an offence which is done by a person who is, or who by reason of a mistake of fact and not by reason of mistake of law in good faith believes himself to be, bound by law to do it.
+Procedure: General Exception
+
+BNS SECTION 15 - ACT OF JUDGE WHEN ACTING JUDICIALLY
+Nothing is an offence which is done by a Judge when acting judicially in the exercise of any power which is, or which in good faith he believes to be, given to him by law.
+Procedure: Judicial Immunity
+
+BNS SECTION 16 - ACT DONE PURSUANT TO JUDGMENT OR ORDER OF COURT
+Nothing which is done in pursuance of or warranted by the judgment or order of a Court, if done whilst such judgment or order remains in force, is an offence, provided the person doing the act in good faith believes that the Court had jurisdiction.
+Procedure: Court Orders
+
+BNS SECTION 17 - ACT DONE BY PERSON JUSTIFIED BY LAW
+Nothing is an offence which is done by any person who is justified by law, or who by reason of a mistake of fact and not by reason of mistake of law in good faith believes himself to be justified by law, in doing it.
+Procedure: General Exception
+
+BNS SECTION 18 - ACCIDENT IN DOING A LAWFUL ACT
+Nothing is an offence which is done by accident or misfortune, and without any criminal intention or knowledge, in the doing of a lawful act in a lawful manner by lawful means and with proper care and caution.
+Procedure: Accident Exception
+
+BNS SECTION 19 - ACT LIKELY TO CAUSE HARM BUT DONE WITHOUT CRIMINAL INTENT
+Nothing is an offence merely by reason of its being done with knowledge that it is likely to cause harm, if done without any criminal intention to cause harm, and in good faith for the purpose of preventing or avoiding other harm to person or property.
+Procedure: Necessity Exception
+
+BNS SECTION 20 - ACT OF A CHILD UNDER SEVEN YEARS OF AGE
+Nothing is an offence which is done by a child under seven years of age.
+Procedure: Child Exception
+
+BNS SECTION 21 - ACT OF A CHILD ABOVE SEVEN AND UNDER TWELVE OF IMMATURE UNDERSTANDING
+Nothing is an offence which is done by a child above seven and under twelve years of age who has not attained sufficient maturity of understanding to judge of the nature and consequences of his conduct on that occasion.
+Procedure: Child Exception
+
+BNS SECTION 22 - ACT OF A PERSON OF UNSOUND MIND
+Nothing is an offence which is done by a person who, at the time of doing it, by reason of unsoundness of mind, is incapable of knowing the nature of the act, or that he is doing what is either wrong or contrary to law.
+Procedure: Insanity Defence
+
+BNS SECTION 23 - ACT OF PERSON INCAPABLE BY REASON OF INTOXICATION CAUSED AGAINST HIS WILL
+Nothing is an offence which is done by a person who, at the time of doing it, by reason of intoxication, is incapable of knowing the nature of the act or that he is doing what is wrong, provided the intoxicant was administered without his knowledge or against his will.
+Procedure: Intoxication Defence
+
+BNS SECTION 24 - OFFENCE REQUIRING PARTICULAR INTENT OR KNOWLEDGE COMMITTED BY INTOXICATED PERSON
+A person who does an act in a state of intoxication shall be liable as if he had the same knowledge as he would have had if not intoxicated, unless the intoxicant was administered without his knowledge or against his will.
+Procedure: Intoxication Defence
+
+BNS SECTION 25 - ACT NOT INTENDED TO CAUSE DEATH OR GRIEVOUS HURT, DONE BY CONSENT
+Nothing which is not intended to cause death or grievous hurt, and which is not known to be likely to cause death or grievous hurt, is an offence by reason of any harm caused to any person above eighteen years of age who has given consent, express or implied, to suffer that harm.
+Procedure: Consent Defence
+
+BNS SECTION 26 - ACT NOT INTENDED TO CAUSE DEATH, DONE BY CONSENT IN GOOD FAITH FOR PERSON'S BENEFIT
+Nothing which is not intended to cause death is an offence by reason of any harm which it may cause to any person for whose benefit it is done in good faith, and who has given consent to suffer that harm or take the risk of that harm.
+Procedure: Medical Consent
+
+BNS SECTION 27 - ACT DONE IN GOOD FAITH FOR BENEFIT OF CHILD OR PERSON OF UNSOUND MIND BY CONSENT OF GUARDIAN
+Nothing done in good faith for the benefit of a person under twelve years of age or person of unsound mind, by or by consent of the guardian, is an offence by reason of any harm caused, except intentional causing of death or attempting to cause death, causing death for purposes other than preventing death or curing grievous disease, or voluntarily causing grievous hurt.
+Procedure: Guardian Consent
+
+BNS SECTION 28 - CONSENT KNOWN TO BE GIVEN UNDER FEAR OR MISCONCEPTION
+Consent is not valid if given by a person under fear of injury or under misconception of fact and the person doing the act knows of such fear or misconception, or if given by a person who from unsoundness of mind or intoxication is unable to understand the nature and consequence of that to which he gives consent, or if given by a person under twelve years of age.
+Procedure: Valid Consent
+
+BNS SECTION 29 - EXCLUSION OF ACTS WHICH ARE OFFENCES INDEPENDENTLY OF HARM CAUSED
+The exceptions in sections 25, 26 and 27 do not extend to acts which are offences independently of any harm they may cause to the person giving consent. Causing miscarriage is an offence independently of any harm to the woman, and consent does not justify the act.
+Procedure: Non-compoundable Offences
+
+BNS SECTION 30 - ACT DONE IN GOOD FAITH FOR BENEFIT OF A PERSON WITHOUT CONSENT
+Nothing is an offence by reason of any harm caused to a person for whose benefit it is done in good faith, without that person's consent, if it is impossible to signify consent or the person is incapable of giving consent and has no guardian, except intentional causing of death, causing death for purposes other than preventing death or curing grievous disease, or voluntary causing of hurt for purposes other than preventing death or hurt.
+Procedure: Emergency Medical Treatment
+
+BNS SECTION 31 - COMMUNICATION MADE IN GOOD FAITH
+No communication made in good faith is an offence by reason of any harm to the person to whom it is made, if it is made for the benefit of that person.
+Procedure: Good Faith Communication
+
+BNS SECTION 32 - ACT TO WHICH A PERSON IS COMPELLED BY THREATS
+Except murder and offences against the State punishable with death, nothing is an offence which is done by a person compelled to do it by threats which reasonably cause apprehension that instant death will otherwise be the consequence.
+Procedure: Duress Defence
+
+BNS SECTION 33 - ACT CAUSING SLIGHT HARM
+Nothing is an offence by reason that it causes harm so slight that no person of ordinary sense and temper would complain of such harm.
+Procedure: De Minimis Non Curat Lex
+
+BNS SECTION 34 - THINGS DONE IN PRIVATE DEFENCE
+Nothing is an offence which is done in the exercise of the right of private defence.
+Procedure: Private Defence
+
+BNS SECTION 35 - RIGHT OF PRIVATE DEFENCE OF BODY AND OF PROPERTY
+Every person has a right to defend his own body and the body of any other person against any offence affecting the human body, and the property of himself or any other person against theft, robbery, mischief, criminal trespass, or attempt to commit these offences.
+Procedure: Private Defence
+
+BNS SECTION 36 - RIGHT OF PRIVATE DEFENCE AGAINST ACT OF PERSON OF UNSOUND MIND
+When an act which would otherwise be an offence is not an offence by reason of youth, want of maturity of understanding, unsoundness of mind, intoxication, or misconception of the person doing that act, every person has the same right of private defence against that act as if the act were that offence.
+Procedure: Private Defence
+
+BNS SECTION 37 - ACTS AGAINST WHICH THERE IS NO RIGHT OF PRIVATE DEFENCE
+There is no right of private defence against an act which does not reasonably cause apprehension of death or grievous hurt, if done by a public servant acting in good faith under colour of his office, or by direction of such public servant. There is no right of private defence in cases where there is time to have recourse to public authorities. The right of private defence in no case extends to inflicting more harm than necessary for defence.
+Procedure: Limitations on Private Defence
+
+BNS SECTION 38 - WHEN RIGHT OF PRIVATE DEFENCE OF BODY EXTENDS TO CAUSING DEATH
+The right of private defence of the body extends to causing death or any other harm to the assailant if the offence is: assault causing apprehension of death, assault causing apprehension of grievous hurt, assault with intention of committing rape, assault with intention of gratifying unnatural lust, assault with intention of kidnapping or abducting, assault with intention of wrongfully confining a person where he cannot have recourse to public authorities, or act of throwing or administering acid causing apprehension of grievous hurt.
+Procedure: Private Defence
+
+BNS SECTION 39 - WHEN RIGHT OF PRIVATE DEFENCE EXTENDS TO CAUSING HARM OTHER THAN DEATH
+If the offence is not of the descriptions specified in section 38, the right of private defence of the body does not extend to voluntary causing of death, but extends to voluntary causing of any harm other than death.
+Procedure: Private Defence
+
+BNS SECTION 40 - COMMENCEMENT AND CONTINUANCE OF RIGHT OF PRIVATE DEFENCE OF BODY
+The right of private defence of the body commences as soon as a reasonable apprehension of danger to the body arises from an attempt or threat to commit the offence, and continues as long as such apprehension of danger continues.
+Procedure: Private Defence
+
+BNS SECTION 41 - WHEN RIGHT OF PRIVATE DEFENCE OF PROPERTY EXTENDS TO CAUSING DEATH
+The right of private defence of property extends to causing death or any other harm to the wrong-doer if the offence is robbery, house-breaking after sunset and before sunrise, mischief by fire or explosive substance on a building used as human dwelling or place for custody of property, or theft, mischief, or house-trespass causing apprehension that death or grievous hurt will be consequence if right of private defence is not exercised.
+Procedure: Private Defence of Property
+
+BNS SECTION 42 - WHEN RIGHT OF PRIVATE DEFENCE OF PROPERTY EXTENDS TO CAUSING HARM OTHER THAN DEATH
+If the offence is theft, mischief, or criminal trespass not of the descriptions specified in section 41, the right of private defence does not extend to causing death, but extends to causing any harm other than death.
+Procedure: Private Defence of Property
+
+BNS SECTION 43 - COMMENCEMENT AND CONTINUANCE OF RIGHT OF PRIVATE DEFENCE OF PROPERTY
+The right of private defence of property commences when reasonable apprehension of danger commences. Against theft, it continues till the offender has effected his retreat or property has been recovered. Against robbery, it continues as long as the offender causes or attempts to cause death, hurt, or wrongful restraint. Against criminal trespass or mischief, it continues as long as the offender continues in commission.
+Procedure: Private Defence of Property
+
+BNS SECTION 44 - RIGHT OF PRIVATE DEFENCE AGAINST DEADLY ASSAULT WITH RISK OF HARM TO INNOCENT PERSON
+If in the exercise of the right of private defence against an assault causing apprehension of death, the defender cannot exercise that right without risk of harm to an innocent person, his right of private defence extends to running that risk.
+Procedure: Private Defence
+
+BNS SECTION 45 - ABETMENT OF A THING
+A person abets the doing of a thing who instigates any person to do that thing, or engages with one or more persons in any conspiracy for doing that thing if an act or illegal omission takes place in pursuance of that conspiracy, or intentionally aids by any act or illegal omission the doing of that thing.
+Procedure: Abetment
+
+BNS SECTION 46 - ABETTOR
+A person abets an offence who abets either the commission of an offence or the commission of an act which would be an offence if committed by a person capable by law of committing an offence with the same intention or knowledge as that of the abettor. To constitute abetment, it is not necessary that the act abetted should be committed.
+Procedure: Abetment
+
+BNS SECTION 47 - ABETMENT IN INDIA OF OFFENCES OUTSIDE INDIA
+A person abets an offence who, in India, abets the commission of any act without and beyond India which would constitute an offence if committed in India.
+Procedure: Extraterritorial Abetment
+
+BNS SECTION 48 - ABETMENT OUTSIDE INDIA FOR OFFENCE IN INDIA
+A person abets an offence who, without and beyond India, abets the commission of any act in India which would constitute an offence if committed in India.
+Procedure: Extraterritorial Abetment
+
+BNS SECTION 49 - PUNISHMENT OF ABETMENT IF ACT ABETTED IS COMMITTED
+Whoever abets any offence shall, if the act abetted is committed in consequence of the abetment, and no express provision is made for punishment of such abetment, be punished with the punishment provided for the offence.
+Procedure: Abetment Punishment
+
+BNS SECTION 50 - PUNISHMENT OF ABETMENT IF PERSON ABETTED DOES ACT WITH DIFFERENT INTENTION
+Whoever abets the commission of an offence shall, if the person abetted does the act with a different intention or knowledge from that of the abettor, be punished with the punishment provided for the offence which would have been committed if the act had been done with the intention or knowledge of the abettor.
+Procedure: Abetment Punishment
+
+BNS SECTION 51 - LIABILITY OF ABETTOR WHEN ONE ACT ABETTED AND DIFFERENT ACT DONE
+When an act is abetted and a different act is done, the abettor is liable for the act done, if the act done was a probable consequence of the abetment and was committed under the influence of the instigation or in pursuance of the conspiracy.
+Procedure: Abetment Liability
+
+BNS SECTION 52 - ABETTOR LIABLE TO CUMULATIVE PUNISHMENT FOR ACT ABETTED AND FOR ACT DONE
+If the act for which the abettor is liable is committed in addition to the act abetted and constitutes a distinct offence, the abettor is liable to punishment for each of the offences.
+Procedure: Cumulative Punishment
+
+BNS SECTION 53 - LIABILITY OF ABETTOR FOR EFFECT CAUSED DIFFERENT FROM THAT INTENDED
+When an act is abetted with intention of causing a particular effect, and causes a different effect, the abettor is liable for the effect caused if he knew that the act abetted was likely to cause that effect.
+Procedure: Abetment Liability
+
+BNS SECTION 54 - ABETTOR PRESENT WHEN OFFENCE IS COMMITTED
+Whenever any person who would be liable to be punished as an abettor if absent, is present when the act or offence is committed, he shall be deemed to have committed such act or offence.
+Procedure: Abetment
+
+BNS SECTION 55 - ABETMENT OF OFFENCE PUNISHABLE WITH DEATH OR IMPRISONMENT FOR LIFE
+Whoever abets an offence punishable with death or imprisonment for life, if that offence is not committed, shall be punished with imprisonment up to seven years and fine. If hurt is caused, abettor shall be liable to imprisonment up to fourteen years and fine.
+Procedure: Abetment Punishment
+
+BNS SECTION 56 - ABETMENT OF OFFENCE PUNISHABLE WITH IMPRISONMENT
+Whoever abets an offence punishable with imprisonment, if that offence is not committed, shall be punished with imprisonment up to one-fourth of the longest term provided for that offence, or fine, or both. If the abettor is a public servant whose duty is to prevent the offence, he shall be punished with imprisonment up to one-half of the longest term.
+Procedure: Abetment Punishment
+
+BNS SECTION 57 - ABETTING COMMISSION OF OFFENCE BY PUBLIC OR MORE THAN TEN PERSONS
+Whoever abets the commission of an offence by the public generally or by any number or class of persons exceeding ten, shall be punished with imprisonment up to seven years and with fine.
+Procedure: Abetment Punishment
+
+BNS SECTION 58 - CONCEALING DESIGN TO COMMIT OFFENCE PUNISHABLE WITH DEATH OR IMPRISONMENT FOR LIFE
+Whoever intending to facilitate the commission of an offence punishable with death or imprisonment for life, voluntarily conceals the existence of a design to commit such offence, shall if the offence be committed be punished with imprisonment up to seven years, or if not committed with imprisonment up to three years, and shall also be liable to fine.
+Procedure: Concealment of Design
+
+BNS SECTION 59 - PUBLIC SERVANT CONCEALING DESIGN TO COMMIT OFFENCE WHICH IT IS HIS DUTY TO PREVENT
+Being a public servant, if the offence is committed, he shall be punished with imprisonment up to one-half of the longest term. If the offence is punishable with death or imprisonment for life, he shall be punished with imprisonment up to ten years. If the offence is not committed, he shall be punished with imprisonment up to one-fourth of the longest term.
+Procedure: Public Servant Concealment
+
+BNS SECTION 60 - CONCEALING DESIGN TO COMMIT OFFENCE PUNISHABLE WITH IMPRISONMENT
+Whoever conceals design to commit an offence punishable with imprisonment shall, if the offence be committed, be punished with imprisonment up to one-fourth, and if not committed up to one-eighth, of the longest term of imprisonment, or with fine, or with both.
+Procedure: Concealment of Design
+
+BNS SECTION 61 - CRIMINAL CONSPIRACY
+When two or more persons agree with the common object to do an illegal act, or an act which is not illegal by illegal means, such agreement is designated a criminal conspiracy. Whoever is party to a criminal conspiracy to commit an offence punishable with death, imprisonment for life, or rigorous imprisonment for two years or upwards, shall be punished in the same manner as if he had abetted such offence. Other criminal conspiracies shall be punished with imprisonment up to six months, or fine, or both.
+Procedure: Criminal Conspiracy
+
+BNS SECTION 62 - PUNISHMENT FOR ATTEMPTING TO COMMIT OFFENCES PUNISHABLE WITH IMPRISONMENT FOR LIFE OR OTHER IMPRISONMENT
+Whoever attempts to commit an offence punishable with imprisonment for life or imprisonment, and does any act towards the commission of the offence, shall be punished with imprisonment up to one-half of the imprisonment for life or one-half of the longest term of imprisonment provided for the offence, or with fine, or with both.
+Procedure: Attempt
+
+BNS SECTION 63 - RAPE
+A man is said to commit rape if he penetrates his penis to any extent into the vagina, mouth, urethra or anus of a woman or makes her to do so; inserts any object or part of the body not being the penis into the vagina, urethra or anus of a woman; manipulates any part of the body of a woman so as to cause penetration; or applies his mouth to the vagina, anus, urethra of a woman, under seven circumstances: against her will, without her consent, consent obtained by fear of death or hurt, consent given believing he is another man she is lawfully married to, consent given when she is unable to understand consequences due to unsoundness of mind or intoxication, with or without consent when she is under eighteen years, or when she is unable to communicate consent.
+Procedure: Sexual Offence
+
+BNS SECTION 64 - PUNISHMENT FOR RAPE
+Whoever commits rape shall be punished with rigorous imprisonment not less than ten years but which may extend to imprisonment for life, and shall also be liable to fine. Enhanced punishment applies to police officers, public servants, armed forces members, jail staff, hospital staff, relatives, guardians, teachers, persons in position of trust, during communal violence, when the woman is pregnant, incapable of giving consent, mentally or physically disabled, or when rape causes grievous bodily harm or is committed repeatedly on the same woman.
+Procedure: Rape Punishment
+
+BNS SECTION 65 - PUNISHMENT FOR RAPE IN CERTAIN CASES
+Whoever commits rape on a woman under sixteen years of age shall be punished with rigorous imprisonment not less than twenty years which may extend to imprisonment for life (remainder of natural life) and fine. Rape on a woman under twelve years of age shall be punished with rigorous imprisonment not less than twenty years which may extend to imprisonment for life or with death, and fine.
+Procedure: Rape of Minor
+
+BNS SECTION 66 - PUNISHMENT FOR CAUSING DEATH OR RESULTING IN PERSISTENT VEGETATIVE STATE OF VICTIM
+Whoever commits an offence punishable under section 64 and in the course of such commission inflicts an injury which causes the death of the woman or causes her to be in a persistent vegetative state, shall be punished with rigorous imprisonment not less than twenty years which may extend to imprisonment for life (remainder of natural life), or with death.
+Procedure: Rape Causing Death
+
+BNS SECTION 67 - SEXUAL INTERCOURSE BY HUSBAND UPON HIS WIFE DURING SEPARATION
+Whoever has sexual intercourse with his own wife, who is living separately, whether under a decree of separation or otherwise, without her consent, shall be punished with imprisonment not less than two years but which may extend to seven years, and shall also be liable to fine.
+Procedure: Marital Rape
+
+BNS SECTION 68 - SEXUAL INTERCOURSE BY A PERSON IN AUTHORITY
+Whoever being in a position of authority or fiduciary relationship, a public servant, superintendent or manager of a jail or institution, or on management of a hospital, abuses such position to induce or seduce any woman in his custody or under his charge to have sexual intercourse with him, not amounting to rape, shall be punished with rigorous imprisonment not less than five years but which may extend to ten years, and fine.
+Procedure: Sexual Offence by Authority Figure
+
+BNS SECTION 69 - SEXUAL INTERCOURSE BY EMPLOYING DECEITFUL MEANS
+Whoever, by deceitful means or by making promise to marry to a woman without any intention of fulfilling the same, has sexual intercourse with her, not amounting to rape, shall be punished with imprisonment up to ten years and fine. Deceitful means includes inducement for false promise of employment or promotion, or marrying by suppressing identity.
+Procedure: Sexual Offence by Deceit
+
+BNS SECTION 70 - GANG RAPE
+Where a woman is raped by one or more persons constituting a group or acting in furtherance of common intention, each of those persons shall be deemed to have committed rape and shall be punished with rigorous imprisonment not less than twenty years which may extend to imprisonment for life (remainder of natural life), and fine. Where a woman under eighteen years is gang raped, each person shall be punished with imprisonment for life (remainder of natural life) and fine, or death.
+Procedure: Gang Rape
+
+BNS SECTION 71 - PUNISHMENT FOR REPEAT OFFENDERS
+Whoever has been previously convicted of an offence punishable under section 64, 65, 66, or 70 and is subsequently convicted of an offence punishable under any of the said sections shall be punished with imprisonment for life (remainder of natural life), or with death.
+Procedure: Repeat Sexual Offender
+
+BNS SECTION 72 - DISCLOSURE OF IDENTITY OF VICTIM OF CERTAIN OFFENCES
+Whoever prints or publishes the name or any matter which may make known the identity of a person against whom an offence under sections 64 to 71 is alleged or found to have been committed, shall be punished with imprisonment up to two years and fine. Exceptions include publication by police for investigation, by the victim, or by next of kin of deceased or child victim to recognised welfare institutions.
+Procedure: Victim Identity Protection
+
+BNS SECTION 73 - PRINTING OR PUBLISHING ANY MATTER RELATING TO COURT PROCEEDINGS WITHOUT PERMISSION
+Whoever prints or publishes any matter in relation to any proceeding before a Court with respect to an offence referred to in section 72 without the previous permission of such Court shall be punished with imprisonment up to two years and fine. Printing of judgment of High Court or Supreme Court does not amount to an offence.
+Procedure: Court Proceedings Confidentiality
+
+BNS SECTION 74 - ASSAULT OR USE OF CRIMINAL FORCE TO WOMAN WITH INTENT TO OUTRAGE HER MODESTY
+Whoever assaults or uses criminal force to any woman, intending to outrage or knowing it to be likely that he will thereby outrage her modesty, shall be punished with imprisonment not less than one year but which may extend to five years, and fine.
+Procedure: Assault on Woman
+
+BNS SECTION 75 - SEXUAL HARASSMENT
+A man committing physical contact and advances involving unwelcome explicit sexual overtures, demand or request for sexual favours, showing pornography against the will of a woman, or making sexually coloured remarks, shall be guilty of sexual harassment. Punishment for overtures, demand for favours, or showing pornography is rigorous imprisonment up to three years, or fine, or both. Punishment for sexually coloured remarks is imprisonment up to one year, or fine, or both.
+Procedure: Sexual Harassment
+
+BNS SECTION 76 - ASSAULT OR USE OF CRIMINAL FORCE TO WOMAN WITH INTENT TO DISROBE
+Whoever assaults or uses criminal force to any woman or abets such act with the intention of disrobing or compelling her to be naked, shall be punished with imprisonment not less than three years but which may extend to seven years, and fine.
+Procedure: Assault to Disrobe
+
+BNS SECTION 77 - VOYEURISM
+Whoever watches or captures the image of a woman engaging in a private act where she would have expectation of not being observed, or disseminates such image, shall be punished on first conviction with imprisonment not less than one year but up to three years and fine, and on second or subsequent conviction with imprisonment not less than three years but up to seven years and fine.
+Procedure: Voyeurism
+
+BNS SECTION 78 - STALKING
+Any man who follows a woman and contacts or attempts to contact her repeatedly despite clear indication of disinterest, or monitors her use of internet, email or electronic communication, commits stalking. Exceptions include conduct for preventing or detecting crime by person entrusted with responsibility by State, under any law, or reasonable and justified circumstances. Punishment on first conviction is imprisonment up to three years and fine; on second or subsequent conviction up to five years and fine.
+Procedure: Stalking
+
+BNS SECTION 79 - WORD, GESTURE OR ACT INTENDED TO INSULT MODESTY OF A WOMAN
+Whoever, intending to insult the modesty of any woman, utters any words, makes any sound or gesture, exhibits any object, or intrudes upon her privacy, shall be punished with simple imprisonment up to three years and fine.
+Procedure: Insult to Modesty
+
+BNS SECTION 80 - DOWRY DEATH
+Where the death of a woman is caused by burns or bodily injury or occurs otherwise than under normal circumstances within seven years of her marriage and it is shown that soon before her death she was subjected to cruelty or harassment by her husband or any relative in connection with any demand for dowry, such death shall be called dowry death, and such husband or relative shall be deemed to have caused her death. Punishment is imprisonment not less than seven years but which may extend to imprisonment for life.
+Procedure: Dowry Death
+
+BNS SECTION 81 - COHABITATION CAUSED BY MAN DECEITFULLY INDUCING BELIEF OF LAWFUL MARRIAGE
+Every man who by deceit causes any woman who is not lawfully married to him to believe that she is lawfully married to him and to cohabit or have sexual intercourse with him in that belief, shall be punished with imprisonment up to ten years and fine.
+Procedure: Deceitful Cohabitation
+
+BNS SECTION 82 - MARRYING AGAIN DURING LIFETIME OF HUSBAND OR WIFE
+Whoever, having a husband or wife living, marries in any case in which such marriage is void by reason of taking place during the life of such husband or wife, shall be punished with imprisonment up to seven years and fine. If the offender concealed the former marriage from the person with whom the subsequent marriage is contracted, he shall be punished with imprisonment up to ten years and fine.
+Procedure: Bigamy
+
+BNS SECTION 83 - MARRIAGE CEREMONY FRAUDULENTLY GONE THROUGH WITHOUT LAWFUL MARRIAGE
+Whoever, dishonestly or with fraudulent intention, goes through the ceremony of being married, knowing that he is not thereby lawfully married, shall be punished with imprisonment up to seven years and fine.
+Procedure: Fraudulent Marriage
+
+BNS SECTION 84 - ENTICING OR TAKING AWAY OR DETAINING WITH CRIMINAL INTENT A MARRIED WOMAN
+Whoever takes or entices away any woman who is and whom he knows to be the wife of any other man, with intent that she may have illicit intercourse with any person, or conceals or detains with that intent any such woman, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Enticement of Married Woman
+
+BNS SECTION 85 - HUSBAND OR RELATIVE OF HUSBAND OF A WOMAN SUBJECTING HER TO CRUELTY
+Whoever, being the husband or the relative of the husband of a woman, subjects such woman to cruelty shall be punished with imprisonment up to three years and fine.
+Procedure: Matrimonial Cruelty
+
+BNS SECTION 86 - CRUELTY DEFINED
+Cruelty means any wilful conduct likely to drive the woman to commit suicide or cause grave injury or danger to life, limb or health of the woman, or harassment with a view to coercing her or any person related to her to meet any unlawful demand for any property or valuable security, or on account of failure to meet such demand.
+Procedure: Matrimonial Cruelty Definition
+
+BNS SECTION 87 - KIDNAPPING, ABDUCTING OR INDUCING WOMAN TO COMPEL HER MARRIAGE
+Whoever kidnaps or abducts any woman with intent that she may be compelled to marry any person against her will, or in order that she may be forced or seduced to illicit intercourse, shall be punished with imprisonment up to ten years and fine.
+Procedure: Kidnapping for Marriage
+
+BNS SECTION 88 - CAUSING MISCARRIAGE
+Whoever voluntarily causes a woman with child to miscarry, if such miscarriage is not caused in good faith for the purpose of saving the life of the woman, shall be punished with imprisonment up to three years, or fine, or both. If the woman is quick with child, he shall be punished with imprisonment up to seven years and fine. A woman who causes herself to miscarry is within the meaning of this section.
+Procedure: Miscarriage
+
+BNS SECTION 89 - CAUSING MISCARRIAGE WITHOUT WOMAN'S CONSENT
+Whoever causes miscarriage without the consent of the woman, whether the woman is quick with child or not, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Forced Miscarriage
+
+BNS SECTION 90 - DEATH CAUSED BY ACT DONE WITH INTENT TO CAUSE MISCARRIAGE
+Whoever, with intent to cause miscarriage of a woman with child, does any act which causes the death of such woman, shall be punished with imprisonment up to ten years and fine. Where the act is done without the consent of the woman, he shall be punishable with imprisonment for life or the punishment specified above.
+Procedure: Death from Miscarriage Attempt
+
+BNS SECTION 91 - ACT DONE WITH INTENT TO PREVENT CHILD BEING BORN ALIVE OR TO CAUSE TO DIE AFTER BIRTH
+Whoever before the birth of any child does any act with the intention of preventing that child from being born alive or causing it to die after its birth, and does by such act prevent the child from being born alive or causes it to die after its birth, if such act is not caused in good faith for the purpose of saving the life of the mother, shall be punished with imprisonment up to ten years, or fine, or both.
+Procedure: Infanticide
+
+BNS SECTION 92 - CAUSING DEATH OF QUICK UNBORN CHILD BY ACT AMOUNTING TO CULPABLE HOMICIDE
+Whoever does any act under such circumstances that if he thereby caused death he would be guilty of culpable homicide, and does by such act cause the death of a quick unborn child, shall be punished with imprisonment up to ten years and fine.
+Procedure: Death of Unborn Child
+
+BNS SECTION 93 - EXPOSURE AND ABANDONMENT OF CHILD UNDER TWELVE YEARS OF AGE
+Whoever being the father or mother of a child under twelve years of age, or having the care of such child, shall expose or leave such child in any place with the intention of wholly abandoning such child, shall be punished with imprisonment up to seven years, or fine, or both.
+Procedure: Child Abandonment
+
+BNS SECTION 94 - CONCEALMENT OF BIRTH BY SECRET DISPOSAL OF DEAD BODY
+Whoever, by secretly burying or otherwise disposing of the dead body of a child, intentionally conceals or endeavours to conceal the birth of such child, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Concealment of Birth
+
+BNS SECTION 95 - HIRING, EMPLOYING OR ENGAGING A CHILD TO COMMIT AN OFFENCE
+Whoever hires, employs or engages any child to commit an offence shall be punished with imprisonment not less than three years but which may extend to ten years, and fine. If the offence is committed, he shall also be punished with the punishment provided for that offence as if the offence has been committed by such person himself.
+Procedure: Child Exploitation
+
+BNS SECTION 96 - PROCURATION OF CHILD
+Whoever, by any means whatsoever, induces any child to go from any place or to do any act with intent that such child may be forced or seduced to illicit intercourse with another person, shall be punishable with imprisonment which may extend to ten years and fine.
+Procedure: Child Procuration
+
+BNS SECTION 97 - KIDNAPPING OR ABDUCTING CHILD UNDER TEN YEARS OF AGE WITH INTENT TO STEAL
+Whoever kidnaps or abducts any child under ten years of age with the intention of taking dishonestly any movable property from the person of such child, shall be punished with imprisonment up to seven years and fine.
+Procedure: Kidnapping Child for Theft
+
+BNS SECTION 98 - SELLING CHILD FOR PURPOSES OF PROSTITUTION
+Whoever sells, lets to hire, or otherwise disposes of any child with intent that such child shall at any age be employed or used for the purpose of prostitution or illicit intercourse, shall be punished with imprisonment up to ten years and fine.
+Procedure: Sale of Child for Prostitution
+
+BNS SECTION 99 - BUYING CHILD FOR PURPOSES OF PROSTITUTION
+Whoever buys, hires or otherwise obtains possession of any child with intent that such child shall at any age be employed or used for the purpose of prostitution or illicit intercourse, shall be punished with imprisonment not less than seven years but which may extend to fourteen years, and fine.
+Procedure: Purchase of Child for Prostitution
+
+BNS SECTION 100 - CULPABLE HOMICIDE
+Whoever causes death by doing an act with the intention of causing death, or with the intention of causing such bodily injury as is likely to cause death, or with the knowledge that he is likely by such act to cause death, commits the offence of culpable homicide.
+Procedure: Culpable Homicide
+
+BNS SECTION 101 - MURDER
+Culpable homicide is murder if the act by which death is caused is done with the intention of causing death, or with the intention of causing such bodily injury as the offender knows to be likely to cause death, or with the intention of causing bodily injury sufficient in the ordinary course of nature to cause death, or if the person knows that the act is so imminently dangerous that it must in all probability cause death or such injury as is likely to cause death.
+Procedure: Murder
+
+BNS SECTION 102 - CULPABLE HOMICIDE BY CAUSING DEATH OF PERSON OTHER THAN WHOSE DEATH WAS INTENDED
+If a person by doing anything which he intends or knows to be likely to cause death, commits culpable homicide by causing the death of any person whose death he neither intends nor knows himself to be likely to cause, the culpable homicide committed is of the description it would have been if he had caused the death of the person whose death he intended.
+Procedure: Transferred Intent
+
+BNS SECTION 103 - PUNISHMENT FOR MURDER
+Whoever commits murder shall be punished with death or imprisonment for life, and shall also be liable to fine. When a group of five or more persons acting in concert commits murder on the ground of race, caste, community, sex, place of birth, language, personal belief or any other similar ground, each member of such group shall be punished with death or imprisonment for life, and fine.
+Procedure: Murder Punishment
+
+BNS SECTION 104 - PUNISHMENT FOR MURDER BY LIFE-CONVICT
+Whoever, being under sentence of imprisonment for life, commits murder, shall be punished with death or with imprisonment for the remainder of that person's natural life.
+Procedure: Murder by Life Convict
+
+BNS SECTION 105 - PUNISHMENT FOR CULPABLE HOMICIDE NOT AMOUNTING TO MURDER
+Whoever commits culpable homicide not amounting to murder, if the act is done with intention of causing death or bodily injury likely to cause death, shall be punished with imprisonment for life, or imprisonment not less than five years but which may extend to ten years, and fine. If the act is done with knowledge that it is likely to cause death but without any intention to cause death, he shall be punished with imprisonment up to ten years and fine.
+Procedure: Culpable Homicide Punishment
+
+BNS SECTION 106 - CAUSING DEATH BY NEGLIGENCE
+Whoever causes death by doing any rash or negligent act not amounting to culpable homicide, shall be punished with imprisonment up to five years and fine. If such act is done by a registered medical practitioner while performing medical procedure, he shall be punished with imprisonment up to two years and fine. Whoever causes death by rash and negligent driving of vehicle and escapes without reporting it soon after the incident, shall be punished with imprisonment up to ten years and fine.
+Procedure: Negligent Death
+
+BNS SECTION 107 - ABETMENT OF SUICIDE OF CHILD OR PERSON OF UNSOUND MIND
+If any child, person of unsound mind, delirious person or person in a state of intoxication commits suicide, whoever abets such suicide shall be punished with death or imprisonment for life, or imprisonment not exceeding ten years, and fine.
+Procedure: Abetment of Suicide of Vulnerable Person
+
+BNS SECTION 108 - ABETMENT OF SUICIDE
+If any person commits suicide, whoever abets the commission of such suicide shall be punished with imprisonment up to ten years and fine.
+Procedure: Abetment of Suicide
+
+BNS SECTION 109 - ATTEMPT TO MURDER
+Whoever does any act with such intention or knowledge that if he caused death he would be guilty of murder, shall be punished with imprisonment up to ten years and fine. If hurt is caused to any person by such act, the offender shall be liable to imprisonment for life, or to such punishment as hereinbefore mentioned. When the offender is under sentence of imprisonment for life, he may, if hurt is caused, be punished with death or imprisonment for the remainder of his natural life.
+Procedure: Attempt to Murder
+
+BNS SECTION 110 - ATTEMPT TO COMMIT CULPABLE HOMICIDE
+Whoever does any act with such intention or knowledge that if he caused death he would be guilty of culpable homicide not amounting to murder, shall be punished with imprisonment up to three years, or fine, or both. If hurt is caused to any person, he shall be punished with imprisonment up to seven years, or fine, or both.
+Procedure: Attempt to Commit Culpable Homicide
+
+BNS SECTION 111 - ORGANISED CRIME
+Any continuing unlawful activity including kidnapping, robbery, vehicle theft, extortion, land grabbing, contract killing, economic offence, cyber-crimes, trafficking of persons, drugs, weapons or illicit goods, by any person or group acting in concert as member of an organised crime syndicate, using violence or threat to obtain material benefit, constitutes organised crime. Punishment if death results is death or imprisonment for life and fine not less than ten lakh rupees. In any other case, punishment is imprisonment not less than five years which may extend to imprisonment for life and fine not less than five lakh rupees.
+Procedure: Organised Crime
+
+BNS SECTION 112 - PETTY ORGANISED CRIME
+Whoever, being a member of a group or gang, commits any act of theft, snatching, cheating, unauthorised selling of tickets, unauthorised betting or gambling, selling of public examination question papers or any other similar criminal act, commits petty organised crime. Punishment is imprisonment not less than one year but which may extend to seven years and fine.
+Procedure: Petty Organised Crime
+
+BNS SECTION 113 - TERRORIST ACT
+Whoever does any act with intent to threaten the unity, integrity, sovereignty, security or economic security of India or to strike terror in the people, by using bombs, dynamite, explosive substances, firearms, lethal weapons, poisonous gases, or other hazardous substances causing death, injury, loss or damage to property, disruption of essential supplies, damage to monetary stability through counterfeit currency, or overawes by criminal force, or detains any person to compel government action, commits a terrorist act. Punishment if death results is death or imprisonment for life and fine. In any other case, imprisonment not less than five years which may extend to imprisonment for life and fine.
+Procedure: Terrorist Act
+
+BNS SECTION 114 - HURT
+Whoever causes bodily pain, disease or infirmity to any person is said to cause hurt.
+Procedure: Hurt Definition
+
+BNS SECTION 115 - VOLUNTARILY CAUSING HURT
+Whoever does any act with the intention of causing hurt to any person, or with the knowledge that he is likely thereby to cause hurt, and does thereby cause hurt, is said voluntarily to cause hurt. Punishment is imprisonment up to one year, or fine up to ten thousand rupees, or both.
+Procedure: Voluntarily Causing Hurt
+
+BNS SECTION 116 - GRIEVOUS HURT
+The following kinds of hurt are designated as grievous: emasculation, permanent privation of sight of either eye, permanent privation of hearing of either ear, privation of any member or joint, destruction or permanent impairing of powers of any member or joint, permanent disfiguration of head or face, fracture or dislocation of a bone or tooth, and any hurt which endangers life or causes severe bodily pain for fifteen days or inability to follow ordinary pursuits.
+Procedure: Grievous Hurt Definition
+
+BNS SECTION 117 - VOLUNTARILY CAUSING GRIEVOUS HURT
+Whoever voluntarily causes hurt which he intends or knows to be likely to cause grievous hurt, and causes grievous hurt, is said voluntarily to cause grievous hurt. Punishment is imprisonment up to seven years and fine. Where it causes permanent disability or persistent vegetative state, punishment is rigorous imprisonment not less than ten years which may extend to imprisonment for life (remainder of natural life). When a group of five or more persons acting in concert causes grievous hurt on ground of race, caste, community, sex, place of birth, language, or personal belief, each member shall be punished with imprisonment up to seven years and fine.
+Procedure: Voluntarily Causing Grievous Hurt
+
+BNS SECTION 118 - VOLUNTARILY CAUSING HURT OR GRIEVOUS HURT BY DANGEROUS WEAPONS OR MEANS
+Whoever voluntarily causes hurt by means of any instrument for shooting, stabbing or cutting, fire, heated substance, poison, corrosive substance, explosive substance, deleterious substance, or animal, shall be punished with imprisonment up to three years, or fine up to twenty thousand rupees, or both. Whoever voluntarily causes grievous hurt by such means shall be punished with imprisonment for life, or imprisonment not less than one year but which may extend to ten years, and fine.
+Procedure: Hurt by Dangerous Weapons
+
+BNS SECTION 119 - VOLUNTARILY CAUSING HURT OR GRIEVOUS HURT TO EXTORT PROPERTY OR CONSTRAIN TO ILLEGAL ACT
+Whoever voluntarily causes hurt for the purpose of extorting property or valuable security, or constraining to do anything illegal, shall be punished with imprisonment up to ten years and fine. Whoever voluntarily causes grievous hurt for such purpose shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Hurt for Extortion
+
+BNS SECTION 120 - VOLUNTARILY CAUSING HURT OR GRIEVOUS HURT TO EXTORT CONFESSION OR COMPEL RESTORATION OF PROPERTY
+Whoever voluntarily causes hurt to extort confession or information for detection of offence, or to compel restoration of property, shall be punished with imprisonment up to seven years and fine. Whoever voluntarily causes grievous hurt for such purpose shall be punished with imprisonment up to ten years and fine.
+Procedure: Hurt for Confession
+
+BNS SECTION 121 - VOLUNTARILY CAUSING HURT OR GRIEVOUS HURT TO DETER PUBLIC SERVANT FROM DUTY
+Whoever voluntarily causes hurt to a public servant in discharge of his duty, or to deter him from discharging his duty, shall be punished with imprisonment up to five years, or fine, or both. Whoever voluntarily causes grievous hurt to a public servant for such purpose shall be punished with imprisonment not less than one year but which may extend to ten years, and fine.
+Procedure: Hurt to Public Servant
+
+BNS SECTION 122 - VOLUNTARILY CAUSING HURT OR GRIEVOUS HURT ON PROVOCATION
+Whoever voluntarily causes hurt on grave and sudden provocation, if he neither intends nor knows himself to be likely to cause hurt to any person other than the person who gave provocation, shall be punished with imprisonment up to one month, or fine up to five thousand rupees, or both. Whoever voluntarily causes grievous hurt on grave and sudden provocation shall be punished with imprisonment up to five years, or fine up to ten thousand rupees, or both.
+Procedure: Hurt on Provocation
+
+BNS SECTION 123 - CAUSING HURT BY MEANS OF POISON WITH INTENT TO COMMIT OFFENCE
+Whoever administers to or causes to be taken by any person any poison or any stupefying, intoxicating or unwholesome drug with intent to cause hurt, or with intent to commit or facilitate commission of an offence, shall be punished with imprisonment up to ten years and fine.
+Procedure: Hurt by Poison
+
+BNS SECTION 124 - VOLUNTARILY CAUSING GRIEVOUS HURT BY USE OF ACID
+Whoever causes permanent or partial damage or deformity, or burns or maims or disfigures or disables any part of the body of a person, or causes grievous hurt by throwing or administering acid, shall be punished with imprisonment not less than ten years which may extend to imprisonment for life and fine. Whoever attempts to throw or administer acid shall be punished with imprisonment not less than five years but which may extend to seven years and fine.
+Procedure: Acid Attack
+
+BNS SECTION 125 - ACT ENDANGERING LIFE OR PERSONAL SAFETY OF OTHERS
+Whoever does any act so rashly or negligently as to endanger human life or personal safety of others, shall be punished with imprisonment up to three months or fine up to two thousand five hundred rupees, or both. Where hurt is caused, imprisonment up to six months or fine up to five thousand rupees, or both. Where grievous hurt is caused, imprisonment up to three years or fine up to ten thousand rupees, or both.
+Procedure: Rash or Negligent Act
+
+BNS SECTION 126 - WRONGFUL RESTRAINT
+Whoever voluntarily obstructs any person so as to prevent that person from proceeding in any direction in which he has a right to proceed, is said wrongfully to restrain that person. Punishment is simple imprisonment up to one month, or fine up to five thousand rupees, or both.
+Procedure: Wrongful Restraint
+
+BNS SECTION 127 - WRONGFUL CONFINEMENT
+Whoever wrongfully restrains any person preventing him from proceeding beyond certain circumscribing limits, is said wrongfully to confine that person. Punishment is imprisonment up to one year, or fine up to five thousand rupees, or both. For confinement for three days or more, imprisonment up to three years, or fine up to ten thousand rupees, or both. For ten days or more, imprisonment up to five years and fine not less than ten thousand rupees.
+Procedure: Wrongful Confinement
+
+BNS SECTION 128 - FORCE
+A person is said to use force to another if he causes motion, change of motion, or cessation of motion to that other, or causes any substance to come into contact with any part of that other's body, by his own bodily power, by disposing any substance, or by inducing any animal to move.
+Procedure: Force Definition
+
+BNS SECTION 129 - CRIMINAL FORCE
+Whoever intentionally uses force to any person without that person's consent, in order to commit any offence, or intending by such force to cause, or knowing it to be likely that he will cause injury, fear or annoyance, is said to use criminal force.
+Procedure: Criminal Force
+
+BNS SECTION 130 - ASSAULT
+Whoever makes any gesture or any preparation intending or knowing it to be likely that such gesture or preparation will cause any person present to apprehend that he is about to use criminal force to that person, is said to commit assault.
+Procedure: Assault
+
+BNS SECTION 131 - PUNISHMENT FOR ASSAULT OR CRIMINAL FORCE OTHERWISE THAN ON GRAVE PROVOCATION
+Whoever assaults or uses criminal force to any person otherwise than on grave and sudden provocation given by that person, shall be punished with imprisonment up to three months, or fine up to one thousand rupees, or both.
+Procedure: Assault Punishment
+
+BNS SECTION 132 - ASSAULT OR CRIMINAL FORCE TO DETER PUBLIC SERVANT FROM DISCHARGE OF HIS DUTY
+Whoever assaults or uses criminal force to any person being a public servant in the execution of his duty, or with intent to prevent or deter him from discharging his duty, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Assault on Public Servant
+
+BNS SECTION 133 - ASSAULT OR CRIMINAL FORCE WITH INTENT TO DISHONOUR PERSON
+Whoever assaults or uses criminal force to any person, intending thereby to dishonour that person, otherwise than on grave and sudden provocation given by that person, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Assault to Dishonour
+
+BNS SECTION 134 - ASSAULT OR CRIMINAL FORCE IN ATTEMPT TO COMMIT THEFT OF PROPERTY CARRIED BY A PERSON
+Whoever assaults or uses criminal force to any person, in attempting to commit theft on any property which that person is then wearing or carrying, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Assault for Theft
+
+BNS SECTION 135 - ASSAULT OR CRIMINAL FORCE IN ATTEMPT TO WRONGFULLY CONFINE A PERSON
+Whoever assaults or uses criminal force to any person, in attempting wrongfully to confine that person, shall be punished with imprisonment up to one year, or fine up to five thousand rupees, or both.
+Procedure: Assault for Wrongful Confinement
+
+BNS SECTION 136 - ASSAULT OR CRIMINAL FORCE ON GRAVE PROVOCATION
+Whoever assaults or uses criminal force to any person on grave and sudden provocation given by that person, shall be punished with simple imprisonment up to one month, or fine up to one thousand rupees, or both.
+Procedure: Assault on Provocation
+
+BNS SECTION 137 - KIDNAPPING
+Kidnapping is of two kinds: kidnapping from India (conveying any person beyond the limits of India without consent), and kidnapping from lawful guardianship (taking or enticing any child or person of unsound mind out of the keeping of lawful guardian without consent). Punishment is imprisonment up to seven years and fine.
+Procedure: Kidnapping
+
+BNS SECTION 138 - ABDUCTION
+Whoever by force compels, or by any deceitful means induces, any person to go from any place, is said to abduct that person.
+Procedure: Abduction
+
+BNS SECTION 139 - KIDNAPPING OR MAIMING A CHILD FOR PURPOSES OF BEGGING
+Whoever kidnaps any child or obtains custody of a child for employment in begging shall be punished with rigorous imprisonment not less than ten years which may extend to imprisonment for life, and fine. Whoever maims any child for such purpose shall be punished with imprisonment not less than twenty years which may extend to life imprisonment (remainder of natural life), and fine.
+Procedure: Kidnapping for Begging
+
+BNS SECTION 140 - KIDNAPPING OR ABDUCTING IN ORDER TO MURDER OR FOR RANSOM
+Whoever kidnaps or abducts any person in order that such person may be murdered shall be punished with imprisonment for life or rigorous imprisonment up to ten years, and fine. Whoever kidnaps or abducts any person and threatens to cause death or hurt, or causes hurt or death to compel any person to pay ransom, shall be punishable with death, or imprisonment for life, and fine.
+Procedure: Kidnapping for Murder or Ransom
+
+BNS SECTION 141 - IMPORTATION OF GIRL OR BOY FROM FOREIGN COUNTRY
+Whoever imports into India from any country outside India any girl under twenty-one years or any boy under eighteen years with intent that such girl or boy may be forced or seduced to illicit intercourse, shall be punishable with imprisonment which may extend to ten years and fine.
+Procedure: Importation of Minor
+
+BNS SECTION 142 - WRONGFULLY CONCEALING OR KEEPING IN CONFINEMENT KIDNAPPED OR ABDUCTED PERSON
+Whoever, knowing that any person has been kidnapped or abducted, wrongfully conceals or confines such person, shall be punished in the same manner as if he had kidnapped or abducted such person.
+Procedure: Concealing Kidnapped Person
+
+BNS SECTION 143 - TRAFFICKING OF PERSON
+Whoever for the purpose of exploitation recruits, transports, harbours, transfers, or receives a person by using threats, force, coercion, abduction, fraud, deception, abuse of power, or inducement, commits trafficking. Punishment is rigorous imprisonment not less than seven years but which may extend to ten years, and fine. Trafficking of more than one person: rigorous imprisonment not less than ten years which may extend to imprisonment for life, and fine. Trafficking of a child: rigorous imprisonment not less than ten years which may extend to imprisonment for life, and fine.
+Procedure: Human Trafficking
+
+BNS SECTION 144 - EXPLOITATION OF A TRAFFICKED PERSON
+Whoever knowingly engages a child who has been trafficked for sexual exploitation shall be punished with rigorous imprisonment not less than five years but which may extend to ten years, and fine. Whoever knowingly engages a trafficked person for sexual exploitation shall be punished with rigorous imprisonment not less than three years but which may extend to seven years, and fine.
+Procedure: Exploitation of Trafficked Person
+
+BNS SECTION 145 - HABITUAL DEALING IN SLAVES
+Whoever habitually imports, exports, removes, buys, sells, traffics or deals in slaves, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Slave Dealing
+
+BNS SECTION 146 - UNLAWFUL COMPULSORY LABOUR
+Whoever unlawfully compels any person to labour against the will of that person, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Forced Labour
+
+BNS SECTION 147 - WAGING OR ATTEMPTING TO WAGE WAR AGAINST GOVERNMENT OF INDIA
+Whoever wages war against the Government of India, or attempts to wage such war, or abets the waging of such war, shall be punished with death, or imprisonment for life, and shall also be liable to fine.
+Procedure: Waging War Against State
+
+BNS SECTION 148 - CONSPIRACY TO COMMIT OFFENCES PUNISHABLE BY SECTION 147
+Whoever within or without India conspires to commit any offence punishable under section 147, or conspires to overawe by criminal force the Central Government or any State Government, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Criminal Conspiracy Against State
+
+BNS SECTION 149 - COLLECTING ARMS WITH INTENTION OF WAGING WAR AGAINST GOVERNMENT OF INDIA
+Whoever collects men, arms or ammunition or otherwise prepares to wage war with the intention of waging war against the Government of India, shall be punished with imprisonment for life or imprisonment up to ten years, and fine.
+Procedure: Collecting Arms for War
+
+BNS SECTION 150 - CONCEALING WITH INTENT TO FACILITATE DESIGN TO WAGE WAR
+Whoever by any act or illegal omission conceals the existence of a design to wage war against the Government of India, intending to facilitate such war, shall be punished with imprisonment up to ten years and fine.
+Procedure: Concealing Design to Wage War
+
+BNS SECTION 151 - ASSAULTING PRESIDENT OR GOVERNOR WITH INTENT TO COMPEL EXERCISE OF LAWFUL POWER
+Whoever assaults or wrongfully restrains, or attempts to restrain, or overawes by criminal force the President of India or Governor of any State, with the intention of inducing or compelling them to exercise or refrain from exercising any lawful power, shall be punished with imprisonment up to seven years and fine.
+Procedure: Assault on Constitutional Authorities
+
+BNS SECTION 152 - ACT ENDANGERING SOVEREIGNTY, UNITY AND INTEGRITY OF INDIA
+Whoever purposely or knowingly by words, signs, visible representation, electronic communication, or otherwise, excites or attempts to excite secession, armed rebellion, subversive activities, or encourages separatist activities or endangers sovereignty or unity and integrity of India, shall be punished with imprisonment for life or imprisonment up to seven years, and fine.
+Procedure: Endangering Sovereignty
+
+BNS SECTION 153 - WAGING WAR AGAINST GOVERNMENT OF ANY FOREIGN STATE AT PEACE WITH GOVERNMENT OF INDIA
+Whoever wages war against the Government of any foreign State at peace with the Government of India, or attempts to wage such war, or abets the waging of such war, shall be punished with imprisonment for life, or imprisonment up to seven years, or fine.
+Procedure: War Against Friendly Foreign State
+
+BNS SECTION 154 - COMMITTING DEPREDATION ON TERRITORIES OF FOREIGN STATE AT PEACE WITH GOVERNMENT OF INDIA
+Whoever commits depredation or makes preparations to commit depredation on the territories of any foreign State at peace with the Government of India, shall be punished with imprisonment up to seven years, fine, and forfeiture of property used in committing such depredation.
+Procedure: Depredation Against Friendly Foreign State
+
+BNS SECTION 155 - RECEIVING PROPERTY TAKEN BY WAR OR DEPREDATION
+Whoever receives any property knowing the same to have been taken in commission of any offence mentioned in sections 153 and 154, shall be punished with imprisonment up to seven years, fine, and forfeiture of property so received.
+Procedure: Receiving War Booty
+
+BNS SECTION 156 - PUBLIC SERVANT VOLUNTARILY ALLOWING PRISONER OF STATE OR WAR TO ESCAPE
+Whoever, being a public servant having custody of any State prisoner or prisoner of war, voluntarily allows such prisoner to escape, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Allowing State Prisoner Escape
+
+BNS SECTION 157 - PUBLIC SERVANT NEGLIGENTLY SUFFERING SUCH PRISONER TO ESCAPE
+Whoever, being a public servant having custody of any State prisoner or prisoner of war, negligently suffers such prisoner to escape, shall be punished with simple imprisonment up to three years and fine.
+Procedure: Negligent Escape of State Prisoner
+
+BNS SECTION 158 - AIDING ESCAPE OF, RESCUING OR HARBOURING SUCH PRISONER
+Whoever knowingly aids or assists any State prisoner or prisoner of war in escaping from lawful custody, or rescues or attempts to rescue any such prisoner, or harbours or conceals any such prisoner who has escaped, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Aiding Escape of State Prisoner
+
+BNS SECTION 159 - ABETTING MUTINY OR ATTEMPTING TO SEDUCE SOLDIER, SAILOR OR AIRMAN FROM DUTY
+Whoever abets the committing of mutiny by any officer, soldier, sailor or airman in the Army, Navy or Air Force of India, or attempts to seduce any such person from his allegiance or duty, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Abetment of Mutiny
+
+BNS SECTION 160 - ABETMENT OF MUTINY IF MUTINY IS COMMITTED IN CONSEQUENCE THEREOF
+Whoever abets the committing of mutiny, if mutiny be committed in consequence of that abetment, shall be punished with death or imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Abetment of Mutiny with Mutiny
+
+BNS SECTION 161 - ABETMENT OF ASSAULT BY SOLDIER, SAILOR OR AIRMAN ON SUPERIOR OFFICER
+Whoever abets an assault by any officer, soldier, sailor or airman on any superior officer being in the execution of his office, shall be punished with imprisonment up to three years and fine.
+Procedure: Abetment of Assault on Superior Officer
+
+BNS SECTION 162 - ABETMENT OF SUCH ASSAULT IF ASSAULT COMMITTED
+Whoever abets an assault by any officer, soldier, sailor or airman on any superior officer being in the execution of his office, if such assault be committed in consequence of that abetment, shall be punished with imprisonment up to seven years and fine.
+Procedure: Abetment of Assault on Superior Officer with Assault
+
+BNS SECTION 163 - ABETMENT OF DESERTION OF SOLDIER, SAILOR OR AIRMAN
+Whoever abets the desertion of any officer, soldier, sailor or airman in the Army, Navy or Air Force of India, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Abetment of Desertion
+
+BNS SECTION 164 - HARBOURING DESERTER
+Whoever, knowing or having reason to believe that any officer, soldier, sailor or airman has deserted, harbours such person, shall be punished with imprisonment up to two years, or fine, or both. This provision does not extend to harbouring by the spouse of the deserter.
+Procedure: Harbouring Deserter
+
+BNS SECTION 165 - DESERTER CONCEALED ON BOARD MERCHANT VESSEL THROUGH NEGLIGENCE OF MASTER
+The master or person in charge of a merchant vessel, on board of which any deserter is concealed, shall be liable to a penalty not exceeding three thousand rupees, if he might have known of such concealment but for some neglect of his duty.
+Procedure: Deserter on Merchant Vessel
+
+BNS SECTION 166 - ABETMENT OF ACT OF INSUBORDINATION BY SOLDIER, SAILOR OR AIRMAN
+Whoever abets what he knows to be an act of insubordination, if such act of insubordination be committed in consequence of that abetment, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Abetment of Insubordination
+
+BNS SECTION 167 - PERSONS SUBJECT TO CERTAIN ACTS
+No person subject to the Air Force Act, 1950, the Army Act, 1950, or the Navy Act, 1957, shall be subject to punishment under this Sanhita for any of the offences defined in Chapter VIII.
+Procedure: Persons Subject to Service Laws
+
+BNS SECTION 168 - WEARING GARB OR CARRYING TOKEN USED BY SOLDIER, SAILOR OR AIRMAN
+Whoever, not being a soldier, sailor or airman in the service of India, wears any garb or carries any token resembling that used by such person with intention that it may be believed that he is such soldier, sailor or airman, shall be punished with imprisonment up to three months, or fine up to two thousand rupees, or both.
+Procedure: Impersonating Armed Forces Personnel
+
+BNS SECTION 169 - CANDIDATE, ELECTORAL RIGHT DEFINED
+Candidate means a person who has been nominated as a candidate at any election. Electoral right means the right of a person to stand, or not to stand as, or to withdraw from being, a candidate, or to vote or refrain from voting at an election.
+Procedure: Election Definitions
+
+BNS SECTION 170 - BRIBERY
+Whoever gives a gratification to any person with the object of inducing him to exercise any electoral right, or accepts any gratification as a reward for exercising any such right, commits bribery. A declaration of public policy or a promise of public action shall not be an offence.
+Procedure: Election Bribery
+
+BNS SECTION 171 - UNDUE INFLUENCE AT ELECTIONS
+Whoever voluntarily interferes or attempts to interfere with the free exercise of any electoral right commits undue influence. Threatening any candidate or voter with injury, or inducing a candidate or voter to believe he will be rendered an object of Divine displeasure, shall be deemed interference.
+Procedure: Undue Influence
+
+BNS SECTION 172 - PERSONATION AT ELECTIONS
+Whoever at an election applies for a voting paper in the name of any other person, whether living or dead, or in a fictitious name, or having voted once applies again for a voting paper in his own name, commits personation.
+Procedure: Personation at Election
+
+BNS SECTION 173 - PUNISHMENT FOR BRIBERY
+Whoever commits bribery shall be punished with imprisonment up to one year, or fine, or both. Bribery by treating (where gratification consists of food, drink, entertainment, or provision) shall be punished with fine only.
+Procedure: Bribery Punishment
+
+BNS SECTION 174 - PUNISHMENT FOR UNDUE INFLUENCE OR PERSONATION AT AN ELECTION
+Whoever commits undue influence or personation at an election shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Undue Influence/Punishment
+
+BNS SECTION 175 - FALSE STATEMENT IN CONNECTION WITH AN ELECTION
+Whoever with intent to affect the result of an election makes or publishes any false statement of fact in relation to the personal character or conduct of any candidate, shall be punished with fine.
+Procedure: False Election Statement
+
+BNS SECTION 176 - ILLEGAL PAYMENTS IN CONNECTION WITH AN ELECTION
+Whoever without authority in writing of a candidate incurs expenses on account of holding any public meeting or upon any advertisement for the purpose of promoting the election of such candidate, shall be punished with fine up to ten thousand rupees.
+Procedure: Illegal Election Payments
+
+BNS SECTION 177 - FAILURE TO KEEP ELECTION ACCOUNTS
+Whoever being required by law to keep accounts of expenses incurred at or in connection with an election fails to keep such accounts, shall be punished with fine up to five thousand rupees.
+Procedure: Election Accounts
+
+BNS SECTION 178 - COUNTERFEITING COIN, GOVERNMENT STAMPS, CURRENCY-NOTES OR BANK-NOTES
+Whoever counterfeits any coin, stamp issued by Government for revenue, currency-note or bank-note, or knowingly performs any part of the process of counterfeiting, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Counterfeiting
+
+BNS SECTION 179 - USING AS GENUINE FORGED OR COUNTERFEIT COIN, GOVERNMENT STAMP, CURRENCY-NOTES OR BANK-NOTES
+Whoever imports or exports, sells or delivers, buys or receives, or otherwise traffics or uses as genuine any forged or counterfeit coin, stamp, currency-note or bank-note, knowing or having reason to believe the same to be forged or counterfeit, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Using Counterfeit Currency
+
+BNS SECTION 180 - POSSESSION OF FORGED OR COUNTERFEIT COIN, GOVERNMENT STAMP, CURRENCY-NOTES OR BANK-NOTES
+Whoever has in his possession any forged or counterfeit coin, stamp, currency-note or bank-note, knowing or having reason to believe the same to be forged or counterfeit and intending to use the same as genuine, shall be punished with imprisonment up to seven years, or fine, or both.
+Procedure: Possession of Counterfeit Currency
+
+BNS SECTION 181 - MAKING OR POSSESSING INSTRUMENTS OR MATERIALS FOR FORGING OR COUNTERFEITING
+Whoever makes, mends, buys, sells, disposes of, or has in his possession any machinery, die, instrument or material for the purpose of being used for forging or counterfeiting any coin, stamp, currency-note or bank-note, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Possessing Counterfeiting Instruments
+
+BNS SECTION 182 - MAKING OR USING DOCUMENTS RESEMBLING CURRENCY-NOTES OR BANK-NOTES
+Whoever makes, causes to be made, uses, or delivers any document resembling a currency-note or bank-note so as to deceive, shall be punished with fine up to three hundred rupees.
+Procedure: Making Fake Currency Documents
+
+BNS SECTION 183 - EFFACING WRITING FROM SUBSTANCE BEARING GOVERNMENT STAMP
+Whoever fraudulently or with intent to cause loss to Government removes or effaces from any substance bearing a Government stamp any writing or document for which such stamp has been used, or removes a stamp to use for a different document, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Misuse of Government Stamps
+
+BNS SECTION 184 - USING GOVERNMENT STAMP KNOWN TO HAVE BEEN BEFORE USED
+Whoever fraudulently or with intent to cause loss to Government uses a Government stamp which he knows to have been before used, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Reusing Government Stamps
+
+BNS SECTION 185 - ERASURE OF MARK DENOTING THAT STAMP HAS BEEN USED
+Whoever fraudulently or with intent to cause loss to Government erases or removes from a Government stamp any mark denoting that the same has been used, or knowingly has in his possession any such stamp from which such mark has been erased, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Removing Stamp Marks
+
+BNS SECTION 186 - PROHIBITION OF FICTITIOUS STAMPS
+Whoever makes, utters, deals in, sells, or uses any fictitious stamp, or has in his possession any fictitious stamp without lawful excuse, or makes or possesses any die, plate or materials for making fictitious stamps, shall be punished with fine up to two hundred rupees.
+Procedure: Fictitious Stamps
+
+BNS SECTION 187 - PERSON EMPLOYED IN MINT CAUSING COIN TO BE OF DIFFERENT WEIGHT OR COMPOSITION
+Whoever, being employed in any mint lawfully established in India, does any act or omits what he is legally bound to do, with the intention of causing any coin issued from that mint to be of a different weight or composition from that fixed by law, shall be punished with imprisonment up to seven years and fine.
+Procedure: Mint Offences
+
+BNS SECTION 188 - UNLAWFULLY TAKING COINING INSTRUMENT FROM MINT
+Whoever, without lawful authority, takes out of any mint any coining tool or instrument, shall be punished with imprisonment up to seven years and fine.
+Procedure: Taking Coining Instruments
+
+BNS SECTION 189 - UNLAWFUL ASSEMBLY
+An assembly of five or more persons is designated an unlawful assembly if the common object is to overawe government by criminal force, resist execution of law, commit mischief or criminal trespass, take possession of property by criminal force, or compel any person to do what he is not legally bound to do. Whoever joins or continues in an unlawful assembly shall be punished with imprisonment up to six months, or fine, or both.
+Procedure: Unlawful Assembly
+
+BNS SECTION 190 - EVERY MEMBER OF UNLAWFUL ASSEMBLY GUILTY OF OFFENCE COMMITTED IN PROSECUTION OF COMMON OBJECT
+If an offence is committed by any member of an unlawful assembly in prosecution of the common object, every person who at the time of committing that offence is a member of the same assembly, is guilty of that offence.
+Procedure: Constructive Liability
+
+BNS SECTION 191 - RIOTING
+Whenever force or violence is used by an unlawful assembly in prosecution of its common object, every member of such assembly is guilty of rioting. Punishment is imprisonment up to two years, or fine, or both. If armed with a deadly weapon, imprisonment up to five years, or fine, or both.
+Procedure: Rioting
+
+BNS SECTION 192 - WANTONLY GIVING PROVOCATION WITH INTENT TO CAUSE RIOT
+Whoever malignantly or wantonly gives provocation intending or knowing it to be likely to cause rioting, if rioting be committed, shall be punished with imprisonment up to one year, or fine, or both; if rioting not committed, imprisonment up to six months, or fine, or both.
+Procedure: Provocation to Riot
+
+BNS SECTION 193 - LIABILITY OF OWNER, OCCUPIER OF LAND ON WHICH UNLAWFUL ASSEMBLY OR RIOT TAKES PLACE
+The owner or occupier of land upon which an unlawful assembly or riot takes place shall be punishable with fine not exceeding one thousand rupees, if knowing of the offence, he does not give earliest notice to police and does not use lawful means to prevent it.
+Procedure: Liability for Riot on Premises
+
+BNS SECTION 194 - AFFRAY
+When two or more persons, by fighting in a public place, disturb the public peace, they commit an affray. Punishment is imprisonment up to one month, or fine up to one thousand rupees, or both.
+Procedure: Affray
+
+BNS SECTION 195 - ASSAULTING OR OBSTRUCTING PUBLIC SERVANT WHEN SUPPRESSING RIOT
+Whoever assaults or obstructs any public servant endeavouring to disperse an unlawful assembly or suppress a riot, shall be punished with imprisonment up to three years, or fine not less than twenty-five thousand rupees, or both.
+Procedure: Assault on Public Servant Suppressing Riot
+
+BNS SECTION 196 - PROMOTING ENMITY BETWEEN DIFFERENT GROUPS ON GROUNDS OF RELIGION, RACE, LANGUAGE
+Whoever promotes disharmony or feelings of enmity between different groups on grounds of religion, race, place of birth, residence, language, caste or community, or commits any act prejudicial to maintenance of harmony, shall be punished with imprisonment up to three years, or fine, or both. If committed in a place of worship, imprisonment up to five years and fine.
+Procedure: Promoting Enmity
+
+BNS SECTION 197 - IMPUTATIONS, ASSERTIONS PREJUDICIAL TO NATIONAL INTEGRATION
+Whoever makes or publishes any imputation that any class of persons cannot bear true faith and allegiance to the Constitution, or asserts that any class shall be deprived of their rights as citizens, or makes false or misleading information jeopardising sovereignty, unity and integrity of India, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Prejudicial to National Integration
+
+BNS SECTION 198 - PUBLIC SERVANT DISOBEYING LAW WITH INTENT TO CAUSE INJURY
+Whoever, being a public servant, knowingly disobeys any direction of law as to the way in which he is to conduct himself, intending to cause injury to any person, shall be punished with simple imprisonment up to one year, or fine, or both.
+Procedure: Public Servant Disobedience
+
+BNS SECTION 199 - PUBLIC SERVANT DISOBEYING DIRECTION UNDER LAW
+Whoever, being a public servant, knowingly disobeys any direction of law which prohibits him from requiring attendance of any person for investigation, or fails to record information given under section 173 of BNSS in relation to cognizable offences under various sections, shall be punished with rigorous imprisonment not less than six months but which may extend to two years, and fine.
+Procedure: Public Servant Disobeying Direction
+
+BNS SECTION 200 - PUNISHMENT FOR NON-TREATMENT OF VICTIM
+Whoever, being in charge of a hospital, public or private, contravenes provisions of section 397 of BNSS for treatment of victims, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Non-Treatment of Victim
+
+BNS SECTION 201 - PUBLIC SERVANT FRAMING INCORRECT DOCUMENT WITH INTENT TO CAUSE INJURY
+Whoever, being a public servant charged with preparation or translation of any document, frames or translates it incorrectly, intending to cause injury, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Public Servant Framing Incorrect Document
+
+BNS SECTION 202 - PUBLIC SERVANT UNLAWFULLY ENGAGING IN TRADE
+Whoever, being a public servant legally bound not to engage in trade, engages in trade, shall be punished with simple imprisonment up to one year, or fine, or both, or with community service.
+Procedure: Public Servant Trading
+
+BNS SECTION 203 - PUBLIC SERVANT UNLAWFULLY BUYING OR BIDDING FOR PROPERTY
+Whoever, being a public servant legally bound not to purchase or bid for certain property, purchases or bids for that property, shall be punished with simple imprisonment up to two years, or fine, or both; and the property, if purchased, shall be confiscated.
+Procedure: Public Servant Bidding for Property
+
+BNS SECTION 204 - PERSONATING A PUBLIC SERVANT
+Whoever pretends to hold any particular office as a public servant, knowing that he does not hold such office, or falsely personates any other person holding such office, and in such assumed character does any act under colour of such office, shall be punished with imprisonment not less than six months but which may extend to three years and fine.
+Procedure: Personating Public Servant
+
+BNS SECTION 205 - WEARING GARB OR CARRYING TOKEN USED BY PUBLIC SERVANT WITH FRAUDULENT INTENT
+Whoever, not belonging to a certain class of public servants, wears any garb or carries any token resembling that used by that class, with intention that it may be believed that he belongs to that class, shall be punished with imprisonment up to three months, or fine up to five thousand rupees, or both.
+Procedure: Impersonating Public Servant
+
+BNS SECTION 206 - ABSCONDING TO AVOID SERVICE OF SUMMONS
+Whoever absconds to avoid being served with a summons, notice or order from a public servant, shall be punished with simple imprisonment up to one month, or fine up to five thousand rupees, or both. Where the summons is to attend in Court, imprisonment up to six months, or fine up to ten thousand rupees, or both.
+Procedure: Absconding to Avoid Summons
+
+BNS SECTION 207 - PREVENTING SERVICE OF SUMMONS
+Whoever intentionally prevents the serving on himself or on any other person of any summons, notice or order, or intentionally prevents lawful affixing of such summons, or intentionally removes such summons, shall be punished with simple imprisonment up to one month, or fine up to five thousand rupees, or both. Where the summons is to attend in Court, imprisonment up to six months, or fine up to ten thousand rupees, or both.
+Procedure: Preventing Summons Service
+
+BNS SECTION 208 - NON-ATTENDANCE IN OBEDIENCE TO ORDER FROM PUBLIC SERVANT
+Whoever, being legally bound to attend at a certain place and time in obedience to a summons, notice, order or proclamation, intentionally omits to attend, shall be punished with simple imprisonment up to one month, or fine up to five thousand rupees, or both. Where the summons is to attend in Court, imprisonment up to six months, or fine up to ten thousand rupees, or both.
+Procedure: Non-Attendance
+
+BNS SECTION 209 - NON-APPEARANCE IN RESPONSE TO PROCLAMATION
+Whoever fails to appear as required by a proclamation under section 84 of BNSS, shall be punished with imprisonment up to three years, or fine, or both, or with community service. Where declared as a proclaimed offender, imprisonment up to seven years and fine.
+Procedure: Non-Appearance to Proclamation
+
+BNS SECTION 210 - OMISSION TO PRODUCE DOCUMENT TO PUBLIC SERVANT
+Whoever, being legally bound to produce or deliver up any document or electronic record to a public servant, intentionally omits to do so, shall be punished with simple imprisonment up to one month, or fine up to five thousand rupees, or both. Where the document is to be produced to a Court, imprisonment up to six months, or fine up to ten thousand rupees, or both.
+Procedure: Omission to Produce Document
+
+BNS SECTION 211 - OMISSION TO GIVE NOTICE OR INFORMATION TO PUBLIC SERVANT
+Whoever, being legally bound to give any notice or information to any public servant, intentionally omits to give such notice, shall be punished with simple imprisonment up to one month, or fine up to five thousand rupees, or both. Where the information respects commission of an offence, imprisonment up to six months, or fine up to ten thousand rupees, or both.
+Procedure: Omission to Give Information
+
+BNS SECTION 212 - FURNISHING FALSE INFORMATION
+Whoever, being legally bound to furnish information to any public servant, furnishes false information, shall be punished with simple imprisonment up to six months, or fine up to five thousand rupees, or both. Where the information respects commission of an offence, imprisonment up to two years, or fine, or both.
+Procedure: Furnishing False Information
+
+BNS SECTION 213 - REFUSING OATH OR AFFIRMATION
+Whoever refuses to bind himself by an oath or affirmation to state the truth, when required to do so by a public servant legally competent to require that he shall so bind himself, shall be punished with simple imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Refusing Oath
+
+BNS SECTION 214 - REFUSING TO ANSWER PUBLIC SERVANT AUTHORISED TO QUESTION
+Whoever, being legally bound to state the truth on any subject to any public servant, refuses to answer any question demanded of him by such public servant, shall be punished with simple imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Refusing to Answer
+
+BNS SECTION 215 - REFUSING TO SIGN STATEMENT
+Whoever refuses to sign any statement made by him, when required to sign that statement by a public servant legally competent to require that he shall sign that statement, shall be punished with simple imprisonment up to three months, or fine up to three thousand rupees, or both.
+Procedure: Refusing to Sign Statement
+
+BNS SECTION 216 - FALSE STATEMENT ON OATH OR AFFIRMATION TO PUBLIC SERVANT
+Whoever, being legally bound by an oath or affirmation to state the truth to any public servant, makes any false statement, shall be punished with imprisonment up to three years and fine.
+Procedure: False Statement on Oath
+
+BNS SECTION 217 - FALSE INFORMATION TO CAUSE PUBLIC SERVANT TO USE POWER TO INJURY OF ANOTHER
+Whoever gives to any public servant any false information, intending to cause such public servant to use his lawful power to the injury or annoyance of any person, shall be punished with imprisonment up to one year, or fine up to ten thousand rupees, or both.
+Procedure: False Information to Injure Another
+
+BNS SECTION 218 - RESISTANCE TO TAKING OF PROPERTY BY LAWFUL AUTHORITY OF PUBLIC SERVANT
+Whoever offers any resistance to the taking of any property by the lawful authority of any public servant, knowing that he is such public servant, shall be punished with imprisonment up to six months, or fine up to ten thousand rupees, or both.
+Procedure: Resistance to Property Seizure
+
+BNS SECTION 219 - OBSTRUCTING SALE OF PROPERTY OFFERED FOR SALE BY AUTHORITY OF PUBLIC SERVANT
+Whoever intentionally obstructs any sale of property offered for sale by the lawful authority of any public servant, shall be punished with imprisonment up to one month, or fine up to five thousand rupees, or both.
+Procedure: Obstructing Court Sale
+
+BNS SECTION 220 - ILLEGAL PURCHASE OR BID FOR PROPERTY OFFERED FOR SALE BY AUTHORITY OF PUBLIC SERVANT
+Whoever purchases or bids for any property at a sale by lawful authority of a public servant on account of any person whom he knows to be under legal incapacity to purchase, or bids not intending to perform obligations, shall be punished with imprisonment up to one month, or fine up to two hundred rupees, or both.
+Procedure: Illegal Purchase at Court Sale
+
+BNS SECTION 221 - OBSTRUCTING PUBLIC SERVANT IN DISCHARGE OF PUBLIC FUNCTIONS
+Whoever voluntarily obstructs any public servant in the discharge of his public functions, shall be punished with imprisonment up to three months, or fine up to two thousand five hundred rupees, or both.
+Procedure: Obstructing Public Servant
+
+BNS SECTION 222 - OMISSION TO ASSIST PUBLIC SERVANT WHEN BOUND BY LAW
+Whoever, being bound by law to render assistance to any public servant, intentionally omits to give such assistance, shall be punished with simple imprisonment up to one month, or fine up to two thousand five hundred rupees, or both. Where assistance is demanded for executing process or preventing offence or suppressing riot or apprehending offender, imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Omission to Assist Public Servant
+
+BNS SECTION 223 - DISOBEDIENCE TO ORDER DULY PROMULGATED BY PUBLIC SERVANT
+Whoever, knowing that by an order promulgated by a public servant he is directed to abstain from a certain act, disobeys such direction, if such disobedience causes obstruction, annoyance or injury, shall be punished with simple imprisonment up to six months, or fine up to two thousand five hundred rupees, or both. If such disobedience causes danger to human life, health or safety, or causes a riot, imprisonment up to one year, or fine up to five thousand rupees, or both.
+Procedure: Disobedience to Order
+
+BNS SECTION 224 - THREAT OF INJURY TO PUBLIC SERVANT
+Whoever holds out any threat of injury to any public servant, or to any person in whom he believes that public servant to be interested, for the purpose of inducing that public servant to do any act connected with his public functions, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Threat to Public Servant
+
+BNS SECTION 225 - THREAT OF INJURY TO INDUCE PERSON TO REFRAIN FROM APPLYING FOR PROTECTION TO PUBLIC SERVANT
+Whoever holds out any threat of injury to any person for the purpose of inducing that person to refrain from making a legal application for protection to a public servant, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Threat to Refrain from Legal Application
+
+BNS SECTION 226 - ATTEMPT TO COMMIT SUICIDE TO COMPEL OR RESTRAIN EXERCISE OF LAWFUL POWER
+Whoever attempts to commit suicide with the intent to compel or restrain any public servant from discharging his official duty shall be punished with simple imprisonment up to one year, or fine, or both, or with community service.
+Procedure: Attempt to Commit Suicide
+
+BNS SECTION 227 - GIVING FALSE EVIDENCE
+Whoever, being legally bound by an oath or by law to state the truth, makes any statement which is false, and which he either knows or believes to be false or does not believe to be true, is said to give false evidence.
+Procedure: False Evidence
+
+BNS SECTION 228 - FABRICATING FALSE EVIDENCE
+Whoever causes any circumstance to exist or makes any false entry in any book or record, or makes any document containing a false statement, intending that such circumstance or false entry may appear in evidence in a judicial proceeding and cause any person to form an erroneous opinion, is said to fabricate false evidence.
+Procedure: Fabricating False Evidence
+
+BNS SECTION 229 - PUNISHMENT FOR FALSE EVIDENCE
+Whoever intentionally gives false evidence in any judicial proceeding, or fabricates false evidence for use in any judicial proceeding, shall be punished with imprisonment up to seven years, and fine up to ten thousand rupees. In any other case, imprisonment up to three years, and fine up to five thousand rupees.
+Procedure: Punishment for False Evidence
+
+BNS SECTION 230 - GIVING OR FABRICATING FALSE EVIDENCE WITH INTENT TO PROCURE CONVICTION OF CAPITAL OFFENCE
+Whoever gives or fabricates false evidence intending to cause any person to be convicted of a capital offence, shall be punished with imprisonment for life, or rigorous imprisonment up to ten years, and fine up to fifty thousand rupees. If an innocent person is convicted and executed in consequence, the person who gives such false evidence shall be punished either with death or the punishment specified above.
+Procedure: False Evidence for Capital Offence
+
+BNS SECTION 231 - GIVING OR FABRICATING FALSE EVIDENCE WITH INTENT TO PROCURE CONVICTION FOR IMPRISONMENT FOR LIFE OR IMPRISONMENT
+Whoever gives or fabricates false evidence intending to cause any person to be convicted of an offence punishable with imprisonment for life or imprisonment for seven years or upwards, shall be punished as a person convicted of that offence would be liable to be punished.
+Procedure: False Evidence for Serious Offence
+
+BNS SECTION 232 - THREATENING ANY PERSON TO GIVE FALSE EVIDENCE
+Whoever threatens another with any injury with intent to cause that person to give false evidence, shall be punished with imprisonment up to seven years, or fine, or both. If innocent person is convicted and sentenced in consequence with death or imprisonment for more than seven years, the person who threatens shall be punished with the same punishment.
+Procedure: Threatening to Give False Evidence
+
+BNS SECTION 233 - USING EVIDENCE KNOWN TO BE FALSE
+Whoever corruptly uses or attempts to use as true or genuine evidence any evidence which he knows to be false or fabricated, shall be punished in the same manner as if he gave or fabricated false evidence.
+Procedure: Using False Evidence
+
+BNS SECTION 234 - ISSUING OR SIGNING FALSE CERTIFICATE
+Whoever issues or signs any certificate required by law to be given or signed, knowing or believing that such certificate is false in any material point, shall be punished in the same manner as if he gave false evidence.
+Procedure: Issuing False Certificate
+
+BNS SECTION 235 - USING AS TRUE A CERTIFICATE KNOWN TO BE FALSE
+Whoever corruptly uses or attempts to use any false certificate as true, knowing the same to be false in any material point, shall be punished in the same manner as if he gave false evidence.
+Procedure: Using False Certificate
+
+BNS SECTION 236 - FALSE STATEMENT MADE IN DECLARATION RECEIVABLE AS EVIDENCE
+Whoever in any declaration which any Court or public servant is bound or authorised by law to receive as evidence, makes any false statement, touching any point material to the object for which the declaration is made or used, shall be punished in the same manner as if he gave false evidence.
+Procedure: False Declaration
+
+BNS SECTION 237 - USING AS TRUE SUCH DECLARATION KNOWING IT TO BE FALSE
+Whoever corruptly uses or attempts to use as true any false declaration, knowing the same to be false in any material point, shall be punished in the same manner as if he gave false evidence.
+Procedure: Using False Declaration
+
+BNS SECTION 238 - CAUSING DISAPPEARANCE OF EVIDENCE OF OFFENCE OR GIVING FALSE INFORMATION TO SCREEN OFFENDER
+Whoever causes any evidence of the commission of an offence to disappear, with the intention of screening the offender, or with that intention gives false information, shall if the offence is punishable with death, be punished with imprisonment up to seven years and fine; if punishable with imprisonment for life or imprisonment up to ten years, imprisonment up to three years and fine; if punishable with imprisonment less than ten years, imprisonment up to one-fourth of the longest term, or fine, or both.
+Procedure: Causing Disappearance of Evidence
+
+BNS SECTION 239 - INTENTIONAL OMISSION TO GIVE INFORMATION OF OFFENCE BY PERSON BOUND TO INFORM
+Whoever, knowing that an offence has been committed, intentionally omits to give any information which he is legally bound to give, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Omission to Inform
+
+BNS SECTION 240 - GIVING FALSE INFORMATION RESPECTING AN OFFENCE COMMITTED
+Whoever, knowing that an offence has been committed, gives any false information respecting that offence, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: False Information about Offence
+
+BNS SECTION 241 - DESTRUCTION OF DOCUMENT OR ELECTRONIC RECORD TO PREVENT ITS PRODUCTION AS EVIDENCE
+Whoever secretes or destroys any document or electronic record which he may be lawfully compelled to produce as evidence, with the intention of preventing the same from being produced or used as evidence, shall be punished with imprisonment up to three years, or fine up to five thousand rupees, or both.
+Procedure: Destruction of Document
+
+BNS SECTION 242 - FALSE PERSONATION FOR PURPOSE OF ACT OR PROCEEDING IN SUIT OR PROSECUTION
+Whoever falsely personates another, and in such assumed character makes any admission or statement, or confesses judgment, or causes any process to be issued or becomes bail or security, in any suit or criminal prosecution, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: False Personation
+
+BNS SECTION 243 - FRAUDULENT REMOVAL OR CONCEALMENT OF PROPERTY TO PREVENT ITS SEIZURE AS FORFEITED OR IN EXECUTION
+Whoever fraudulently removes, conceals, transfers or delivers any property, intending to prevent that property from being taken as a forfeiture or in satisfaction of a fine or in execution of a decree, shall be punished with imprisonment up to three years, or fine up to five thousand rupees, or both.
+Procedure: Fraudulent Removal of Property
+
+BNS SECTION 244 - FRAUDULENT CLAIM TO PROPERTY TO PREVENT ITS SEIZURE AS FORFEITED OR IN EXECUTION
+Whoever fraudulently accepts, receives or claims any property, knowing that he has no right or rightful claim to such property, intending to prevent that property from being taken as a forfeiture or in satisfaction of a fine or in execution of a decree, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Fraudulent Claim to Property
+
+BNS SECTION 245 - FRAUDULENTLY SUFFERING DECREE FOR SUM NOT DUE
+Whoever fraudulently causes or suffers a decree or order to be passed against him for a sum not due or for a larger sum than is due, or fraudulently causes or suffers a decree to be executed against him after it has been satisfied, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Fraudulent Decree
+
+BNS SECTION 246 - DISHONESTLY MAKING FALSE CLAIM IN COURT
+Whoever fraudulently or dishonestly, or with intent to injure or annoy any person, makes in a Court any claim which he knows to be false, shall be punished with imprisonment up to two years and fine.
+Procedure: False Claim in Court
+
+BNS SECTION 247 - FRAUDULENTLY OBTAINING DECREE FOR SUM NOT DUE
+Whoever fraudulently obtains a decree or order against any person for a sum not due, or for a larger sum than is due, or fraudulently causes a decree to be executed against any person after it has been satisfied, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Fraudulently Obtaining Decree
+
+BNS SECTION 248 - FALSE CHARGE OF OFFENCE MADE WITH INTENT TO INJURE
+Whoever, with intent to cause injury to any person, institutes criminal proceeding against that person, or falsely charges any person with having committed an offence, knowing that there is no just or lawful ground for such proceeding or charge, shall be punished with imprisonment up to five years, or fine up to two lakh rupees, or both. If the charge is of an offence punishable with death, imprisonment for life, or imprisonment for ten years or upwards, imprisonment up to ten years and fine.
+Procedure: False Charge
+
+BNS SECTION 249 - HARBOURING OFFENDER
+Whenever an offence has been committed, whoever harbours or conceals a person whom he knows to be the offender, with the intention of screening him from legal punishment, shall if the offence is punishable with death, be punished with imprisonment up to five years and fine; if with imprisonment for life or up to ten years, imprisonment up to three years and fine; if with imprisonment up to one year, imprisonment up to one-fourth of the longest term, or fine, or both.
+Procedure: Harbouring Offender
+
+BNS SECTION 250 - TAKING GIFT TO SCREEN AN OFFENDER FROM PUNISHMENT
+Whoever accepts or agrees to accept any gratification for himself or any other person, in consideration of his concealing an offence or screening any person from legal punishment, shall if the offence is punishable with death, be punished with imprisonment up to seven years and fine; if with imprisonment for life or up to ten years, imprisonment up to three years and fine; if with imprisonment not extending to ten years, imprisonment up to one-fourth of the longest term, or fine, or both.
+Procedure: Taking Gift to Screen Offender
+
+BNS SECTION 251 - OFFERING GIFT OR RESTORATION OF PROPERTY IN CONSIDERATION OF SCREENING OFFENDER
+Whoever gives or offers to give any gratification to any person, in consideration of that person's concealing an offence or screening any person from legal punishment, shall be punished with imprisonment up to seven years and fine if the offence is punishable with death; if with imprisonment for life or up to ten years, imprisonment up to three years and fine; if with imprisonment not extending to ten years, imprisonment up to one-fourth of the longest term, or fine, or both.
+Procedure: Offering Gift to Screen Offender
+
+BNS SECTION 252 - TAKING GIFT TO HELP TO RECOVER STOLEN PROPERTY
+Whoever takes or agrees to take any gratification under pretence of helping any person to recover any movable property of which he has been deprived by an offence, shall, unless he uses all means in his power to cause the offender to be apprehended and convicted, be punished with imprisonment up to two years, or fine, or both.
+Procedure: Taking Gift to Recover Stolen Property
+
+BNS SECTION 253 - HARBOURING OFFENDER WHO HAS ESCAPED FROM CUSTODY
+Whenever any person convicted of or charged with an offence escapes from lawful custody, or whenever a public servant orders a certain person to be apprehended for an offence, whoever harbours that person to prevent him from being apprehended, shall if the offence is punishable with death, be punished with imprisonment up to seven years and fine; if with imprisonment for life or ten years, imprisonment up to three years with or without fine; if with imprisonment up to one year, imprisonment up to one-fourth of the longest term, or fine, or both.
+Procedure: Harbouring Escaped Offender
+
+BNS SECTION 254 - PENALTY FOR HARBOURING ROBBERS OR DACOITS
+Whoever, knowing or having reason to believe that any persons are about to commit or have recently committed robbery or dacoity, harbours them with the intention of facilitating the commission of such robbery or dacoity or of screening them from punishment, shall be punished with rigorous imprisonment up to seven years and fine.
+Procedure: Harbouring Robbers or Dacoits
+
+BNS SECTION 255 - PUBLIC SERVANT DISOBEYING DIRECTION OF LAW WITH INTENT TO SAVE PERSON FROM PUNISHMENT
+Whoever, being a public servant, knowingly disobeys any direction of law, intending thereby to save any person from legal punishment, or subject him to a less punishment, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Public Servant Disobeying Law to Save Punishment
+
+BNS SECTION 256 - PUBLIC SERVANT FRAMING INCORRECT RECORD WITH INTENT TO SAVE PERSON FROM PUNISHMENT
+Whoever, being a public servant charged with the preparation of any record, frames that record in a manner which he knows to be incorrect, with intent to save any person from legal punishment or to save any property from forfeiture, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Public Servant Framing Incorrect Record
+
+BNS SECTION 257 - PUBLIC SERVANT IN JUDICIAL PROCEEDING CORRUPTLY MAKING REPORT CONTRARY TO LAW
+Whoever, being a public servant, corruptly or maliciously makes or pronounces in any stage of a judicial proceeding any report, order, verdict, or decision which he knows to be contrary to law, shall be punished with imprisonment up to seven years, or fine, or both.
+Procedure: Public Servant Making Corrupt Report
+
+BNS SECTION 258 - COMMITMENT FOR TRIAL OR CONFINEMENT BY PERSON HAVING AUTHORITY KNOWING HE IS ACTING CONTRARY TO LAW
+Whoever, being in any office which gives him legal authority to commit persons for trial or to confinement, corruptly or maliciously commits any person for trial or to confinement, knowing that in so doing he is acting contrary to law, shall be punished with imprisonment up to seven years, or fine, or both.
+Procedure: Unlawful Commitment
+
+BNS SECTION 259 - INTENTIONAL OMISSION TO APPREHEND ON PART OF PUBLIC SERVANT BOUND TO APPREHEND
+Whoever, being a public servant legally bound to apprehend or to keep in confinement any person charged with an offence, intentionally omits to apprehend such person, or intentionally suffers such person to escape, shall if the person was charged with an offence punishable with death, be punished with imprisonment up to seven years with or without fine; if with imprisonment for life or up to ten years, imprisonment up to three years with or without fine; if with imprisonment less than ten years, imprisonment up to two years with or without fine.
+Procedure: Public Servant Omission to Apprehend
+
+BNS SECTION 260 - INTENTIONAL OMISSION TO APPREHEND PERSON UNDER SENTENCE OR LAWFULLY COMMITTED
+Whoever, being a public servant legally bound to apprehend or keep in confinement any person under sentence of a Court or lawfully committed to custody, intentionally omits to apprehend such person or suffers him to escape, shall if the person is under sentence of death, be punished with imprisonment for life or imprisonment up to fourteen years with or without fine; if subject to imprisonment for life or ten years or upwards, imprisonment up to seven years with or without fine; if subject to imprisonment not extending to ten years or lawfully committed, imprisonment up to three years, or fine, or both.
+Procedure: Public Servant Omission to Apprehend Sentenced Person
+
+BNS SECTION 261 - ESCAPE FROM CONFINEMENT OR CUSTODY NEGLIGENTLY SUFFERED BY PUBLIC SERVANT
+Whoever, being a public servant legally bound to keep in confinement any person charged with or convicted of any offence or lawfully committed to custody, negligently suffers such person to escape, shall be punished with simple imprisonment up to two years, or fine, or both.
+Procedure: Negligent Escape
+
+BNS SECTION 262 - RESISTANCE OR OBSTRUCTION BY A PERSON TO HIS LAWFUL APPREHENSION
+Whoever intentionally offers any resistance or illegal obstruction to the lawful apprehension of himself for any offence, or escapes or attempts to escape from any custody in which he is lawfully detained, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Resisting Apprehension
+
+BNS SECTION 263 - RESISTANCE OR OBSTRUCTION TO LAWFUL APPREHENSION OF ANOTHER PERSON
+Whoever intentionally offers any resistance or illegal obstruction to the lawful apprehension of any other person for an offence, or rescues or attempts to rescue any other person from custody, shall be punished with imprisonment up to two years, or fine, or both. If the person to be apprehended is charged with an offence punishable with imprisonment for life or up to ten years, imprisonment up to three years and fine. If charged with an offence punishable with death, imprisonment up to seven years and fine. If under sentence of death, imprisonment for life or imprisonment up to ten years and fine.
+Procedure: Resisting Apprehension of Another
+
+BNS SECTION 264 - OMISSION TO APPREHEND ON PART OF PUBLIC SERVANT IN CASES NOT OTHERWISE PROVIDED FOR
+Whoever, being a public servant legally bound to apprehend or to keep in confinement any person in any case not provided for, omits to apprehend that person or suffers him to escape, if he does so intentionally, shall be punished with imprisonment up to three years, or fine, or both; if negligently, with simple imprisonment up to two years, or fine, or both.
+Procedure: Omission to Apprehend
+
+BNS SECTION 265 - RESISTANCE OR OBSTRUCTION TO LAWFUL APPREHENSION OR ESCAPE IN CASES NOT OTHERWISE PROVIDED FOR
+Whoever, in any case not provided for, intentionally offers any resistance or illegal obstruction to the lawful apprehension of himself or of any other person, or escapes or attempts to escape from custody, or rescues or attempts to rescue any other person from custody, shall be punished with imprisonment up to six months, or fine, or both.
+Procedure: Resisting Apprehension
+
+BNS SECTION 266 - VIOLATION OF CONDITION OF REMISSION OF PUNISHMENT
+Whoever, having accepted any conditional remission of punishment, knowingly violates any condition on which such remission was granted, shall be punished with the punishment to which he was originally sentenced, if he has already suffered no part of that punishment, and if he has suffered any part, then with so much of that punishment as he has not already suffered.
+Procedure: Violation of Remission
+
+BNS SECTION 267 - INTENTIONAL INSULT OR INTERRUPTION TO PUBLIC SERVANT SITTING IN JUDICIAL PROCEEDING
+Whoever intentionally offers any insult or causes any interruption to any public servant while such public servant is sitting in any stage of a judicial proceeding, shall be punished with simple imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Contempt of Court
+
+BNS SECTION 268 - PERSONATION OF ASSESSOR
+Whoever by personation intentionally causes or knowingly suffers himself to be returned, empanelled or sworn as an assessor in any case in which he knows that he is not entitled by law to be so returned, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Personating Assessor
+
+BNS SECTION 269 - FAILURE BY PERSON RELEASED ON BAIL BOND OR BOND TO APPEAR IN COURT
+Whoever, having been charged with an offence and released on bail bond or on bond, fails without sufficient cause to appear in Court in accordance with the terms of the bail or bond, shall be punished with imprisonment up to one year, or fine, or both. This punishment is in addition to the punishment for the offence with which he has been charged.
+Procedure: Failure to Appear on Bail
+
+BNS SECTION 270 - PUBLIC NUISANCE
+A person is guilty of a public nuisance who does any act or is guilty of an illegal omission which causes any common injury, danger or annoyance to the public or to the people in general who dwell or occupy property in the vicinity, or which must necessarily cause injury, obstruction, danger or annoyance to persons who may have occasion to use any public right.
+Procedure: Public Nuisance
+
+BNS SECTION 271 - NEGLIGENT ACT LIKELY TO SPREAD INFECTION OF DISEASE DANGEROUS TO LIFE
+Whoever unlawfully or negligently does any act which is likely to spread the infection of any disease dangerous to life, shall be punished with imprisonment up to six months, or fine, or both.
+Procedure: Spreading Disease
+
+BNS SECTION 272 - MALIGNANT ACT LIKELY TO SPREAD INFECTION OF DISEASE DANGEROUS TO LIFE
+Whoever malignantly does any act which is likely to spread the infection of any disease dangerous to life, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Malignant Spreading of Disease
+
+BNS SECTION 273 - DISOBEDIENCE TO QUARANTINE RULE
+Whoever knowingly disobeys any rule made by the Government for putting any mode of transport into quarantine, shall be punished with imprisonment up to six months, or fine, or both.
+Procedure: Disobedience to Quarantine
+
+BNS SECTION 274 - ADULTERATION OF FOOD OR DRINK INTENDED FOR SALE
+Whoever adulterates any article of food or drink so as to make it noxious, intending to sell such article as food or drink, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Adulteration of Food
+
+BNS SECTION 275 - SALE OF NOXIOUS FOOD OR DRINK
+Whoever sells or offers for sale as food or drink any article which has become noxious, knowing that the same is noxious as food or drink, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Sale of Noxious Food
+
+BNS SECTION 276 - ADULTERATION OF DRUGS
+Whoever adulterates any drug or medical preparation in such manner as to lessen its efficacy or change its operation, intending that it shall be sold or used for any medicinal purpose as if it had not undergone adulteration, shall be punished with imprisonment up to one year, or fine up to five thousand rupees, or both.
+Procedure: Adulteration of Drugs
+
+BNS SECTION 277 - SALE OF ADULTERATED DRUGS
+Whoever sells any drug or medical preparation knowing the same to have been adulterated so as to lessen its efficacy or render it noxious, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Sale of Adulterated Drugs
+
+BNS SECTION 278 - SALE OF DRUG AS A DIFFERENT DRUG OR PREPARATION
+Whoever knowingly sells any drug or medical preparation as a different drug or medical preparation, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Sale of Drug as Different Drug
+
+BNS SECTION 279 - FOULING WATER OF PUBLIC SPRING OR RESERVOIR
+Whoever voluntarily corrupts or fouls the water of any public spring or reservoir, so as to render it less fit for the purpose for which it is ordinarily used, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Fouling Public Water
+
+BNS SECTION 280 - MAKING ATMOSPHERE NOXIOUS TO HEALTH
+Whoever voluntarily vitiates the atmosphere in any place so as to make it noxious to the health of persons in general dwelling in the neighbourhood, shall be punished with fine up to one thousand rupees.
+Procedure: Making Atmosphere Noxious
+
+BNS SECTION 281 - RASH DRIVING OR RIDING ON A PUBLIC WAY
+Whoever drives any vehicle or rides on any public way in a manner so rash or negligent as to endanger human life, or to be likely to cause hurt or injury to any other person, shall be punished with imprisonment up to six months, or fine up to one thousand rupees, or both.
+Procedure: Rash Driving
+
+BNS SECTION 282 - RASH NAVIGATION OF VESSEL
+Whoever navigates any vessel in a manner so rash or negligent as to endanger human life, or to be likely to cause hurt or injury to any other person, shall be punished with imprisonment up to six months, or fine up to ten thousand rupees, or both.
+Procedure: Rash Navigation
+
+BNS SECTION 283 - EXHIBITION OF FALSE LIGHT, MARK OR BUOY
+Whoever exhibits any false light, mark or buoy, intending that such exhibition will mislead any navigator, shall be punished with imprisonment up to seven years, and fine not less than ten thousand rupees.
+Procedure: False Navigation Mark
+
+BNS SECTION 284 - CONVEYING PERSON BY WATER FOR HIRE IN UNSAFE OR OVERLOADED VESSEL
+Whoever knowingly or negligently conveys for hire any person by water in any vessel which is in such state or so loaded as to endanger the life of that person, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Unsafe Vessel
+
+BNS SECTION 285 - DANGER OR OBSTRUCTION IN PUBLIC WAY OR LINE OF NAVIGATION
+Whoever, by doing any act or by omitting to take order with any property in his possession, causes danger, obstruction or injury to any person in any public way or public line of navigation, shall be punished with fine up to five thousand rupees.
+Procedure: Danger in Public Way
+
+BNS SECTION 286 - NEGLIGENT CONDUCT WITH RESPECT TO POISONOUS SUBSTANCE
+Whoever does any act with any poisonous substance so rashly or negligently as to endanger human life, or knowingly or negligently omits to take order with any poisonous substance in his possession as is sufficient to guard against any probable danger to human life, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Negligent Conduct with Poison
+
+BNS SECTION 287 - NEGLIGENT CONDUCT WITH RESPECT TO FIRE OR COMBUSTIBLE MATTER
+Whoever does any act with fire or any combustible matter so rashly or negligently as to endanger human life, or knowingly or negligently omits to take order with any fire or combustible matter in his possession as is sufficient to guard against any probable danger to human life, shall be punished with imprisonment up to six months, or fine up to two thousand rupees, or both.
+Procedure: Negligent Conduct with Fire
+
+BNS SECTION 288 - NEGLIGENT CONDUCT WITH RESPECT TO EXPLOSIVE SUBSTANCE
+Whoever does any act with any explosive substance so rashly or negligently as to endanger human life, or knowingly or negligently omits to take order with any explosive substance in his possession as is sufficient to guard against any probable danger to human life, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Negligent Conduct with Explosives
+
+BNS SECTION 289 - NEGLIGENT CONDUCT WITH RESPECT TO MACHINERY
+Whoever does any act with any machinery so rashly or negligently as to endanger human life, or knowingly or negligently omits to take order with any machinery in his possession as is sufficient to guard against any probable danger to human life, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Negligent Conduct with Machinery
+
+BNS SECTION 290 - NEGLIGENT CONDUCT WITH RESPECT TO PULLING DOWN, REPAIRING OR CONSTRUCTING BUILDINGS
+Whoever, in pulling down, repairing or constructing any building, knowingly or negligently omits to take such measures as is sufficient to guard against any probable danger to human life from the fall of that building, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Negligent Building Construction
+
+BNS SECTION 291 - NEGLIGENT CONDUCT WITH RESPECT TO ANIMAL
+Whoever knowingly or negligently omits to take such measures with any animal in his possession as is sufficient to guard against any probable danger to human life or any probable danger of grievous hurt from such animal, shall be punished with imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Negligent Conduct with Animal
+
+BNS SECTION 292 - PUNISHMENT FOR PUBLIC NUISANCE IN CASES NOT OTHERWISE PROVIDED FOR
+Whoever commits a public nuisance in any case not otherwise punishable by this Sanhita shall be punished with fine up to one thousand rupees.
+Procedure: Public Nuisance
+
+BNS SECTION 293 - CONTINUANCE OF NUISANCE AFTER INJUNCTION TO DISCONTINUE
+Whoever repeats or continues a public nuisance, having been enjoined by any public servant having lawful authority not to repeat or continue such nuisance, shall be punished with simple imprisonment up to six months, or fine up to five thousand rupees, or both.
+Procedure: Continuance of Nuisance
+
+BNS SECTION 294 - SALE OF OBSCENE BOOKS
+A book, pamphlet, paper, writing, drawing, painting, representation, figure or any other object including display of any content in electronic form shall be deemed obscene if it is lascivious or appeals to the prurient interest or tends to deprave and corrupt persons. Whoever sells, distributes, publicly exhibits, or has in possession any obscene object, shall be punished on first conviction with imprisonment up to two years and fine up to five thousand rupees; on second or subsequent conviction, imprisonment up to five years and fine up to ten thousand rupees.
+Procedure: Sale of Obscene Books
+
+BNS SECTION 295 - SALE OF OBSCENE OBJECTS TO CHILD
+Whoever sells, lets to hire, distributes, exhibits or circulates to any child any obscene object, shall be punished on first conviction with imprisonment up to three years and fine up to two thousand rupees; on second or subsequent conviction, imprisonment up to seven years and fine up to five thousand rupees.
+Procedure: Sale of Obscene Objects to Child
+
+BNS SECTION 296 - OBSCENE ACTS AND SONGS
+Whoever to the annoyance of others does any obscene act in any public place, or sings, recites or utters any obscene song, ballad or words in or near any public place, shall be punished with imprisonment up to three months, or fine up to one thousand rupees, or both.
+Procedure: Obscene Acts and Songs
+
+BNS SECTION 297 - KEEPING LOTTERY OFFICE
+Whoever keeps any office or place for the purpose of drawing any lottery not being a State lottery or a lottery authorised by the State Government, shall be punished with imprisonment up to six months, or fine, or both.
+Procedure: Keeping Lottery Office
+
+BNS SECTION 298 - INJURING OR DEFILING PLACE OF WORSHIP WITH INTENT TO INSULT RELIGION
+Whoever destroys, damages or defiles any place of worship or any object held sacred by any class of persons with the intention of insulting the religion of any class, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Injuring Place of Worship
+
+BNS SECTION 299 - DELIBERATE AND MALICIOUS ACTS INTENDED TO OUTRAGE RELIGIOUS FEELINGS
+Whoever with deliberate and malicious intention of outraging the religious feelings of any class of citizens of India, insults or attempts to insult the religion or the religious beliefs of that class, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Outraging Religious Feelings
+
+BNS SECTION 300 - DISTURBING RELIGIOUS ASSEMBLY
+Whoever voluntarily causes disturbance to any assembly lawfully engaged in the performance of religious worship or religious ceremonies, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Disturbing Religious Assembly
+
+BNS SECTION 301 - TRESPASSING ON BURIAL PLACES
+Whoever commits any trespass in any place of worship or on any place of sepulchre, or offers any indignity to any human corpse, or causes disturbance to any persons assembled for the performance of funeral ceremonies, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Trespassing on Burial Places
+
+BNS SECTION 302 - UTTERING WORDS WITH DELIBERATE INTENT TO WOUND RELIGIOUS FEELINGS
+Whoever with the deliberate intention of wounding the religious feelings of any person, utters any word or makes any sound in the hearing of that person or makes any gesture or places any object in the sight of that person, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Wounding Religious Feelings
+
+BNS SECTION 303 - THEFT
+Whoever, intending to take dishonestly any movable property out of the possession of any person without that person's consent, moves that property in order to such taking, commits theft. Punishment is imprisonment up to three years, or fine, or both. On second or subsequent conviction, rigorous imprisonment not less than one year but which may extend to five years and fine. Where the value of stolen property is less than five thousand rupees and convicted for the first time, upon return of the property, he shall be punished with community service.
+Procedure: Theft
+
+BNS SECTION 304 - SNATCHING
+Theft is snatching if, in order to commit theft, the offender suddenly or quickly or forcibly seizes or grabs or takes away from any person any movable property. Punishment is imprisonment up to three years and fine.
+Procedure: Snatching
+
+BNS SECTION 305 - THEFT IN A DWELLING HOUSE, MEANS OF TRANSPORTATION OR PLACE OF WORSHIP
+Whoever commits theft in any building, tent or vessel used as a human dwelling or for custody of property, or of any means of transport, or of idol or icon in any place of worship, or of any property of the Government or local authority, shall be punished with imprisonment up to seven years and fine.
+Procedure: Theft in Dwelling House
+
+BNS SECTION 306 - THEFT BY CLERK OR SERVANT OF PROPERTY IN POSSESSION OF MASTER
+Whoever, being a clerk or servant, commits theft in respect of any property in the possession of his master or employer, shall be punished with imprisonment up to seven years and fine.
+Procedure: Theft by Clerk or Servant
+
+BNS SECTION 307 - THEFT AFTER PREPARATION MADE FOR CAUSING DEATH, HURT OR RESTRAINT
+Whoever commits theft having made preparation for causing death, hurt or restraint to any person in order to commit such theft or to effect his escape, shall be punished with rigorous imprisonment up to ten years and fine.
+Procedure: Theft with Preparation
+
+BNS SECTION 308 - EXTORTION
+Whoever intentionally puts any person in fear of any injury to that person or to any other, and thereby dishonestly induces the person so put in fear to deliver to any person any property or valuable security, commits extortion. Punishment is imprisonment up to seven years, or fine, or both. Putting a person in fear of death or grievous hurt to commit extortion: imprisonment up to ten years and fine.
+Procedure: Extortion
+
+BNS SECTION 309 - ROBBERY
+Theft is robbery if in order to commit theft the offender voluntarily causes or attempts to cause death, hurt or wrongful restraint. Extortion is robbery if the offender puts the person in fear of instant death, instant hurt, or instant wrongful restraint. Punishment for robbery is rigorous imprisonment up to ten years and fine. If committed on highway between sunset and sunrise, imprisonment up to fourteen years. Attempt to commit robbery: rigorous imprisonment up to seven years and fine. If hurt is caused in committing or attempting robbery: imprisonment for life or rigorous imprisonment up to ten years and fine.
+Procedure: Robbery
+
+BNS SECTION 310 - DACOITY
+When five or more persons conjointly commit or attempt to commit robbery, every person so committing, attempting or aiding, is said to commit dacoity. Punishment is imprisonment for life or rigorous imprisonment up to ten years and fine. If any one of five or more persons committing dacoity commits murder, every one shall be punished with death, or imprisonment for life, or rigorous imprisonment not less than ten years, and fine.
+Procedure: Dacoity
+
+BNS SECTION 311 - ROBBERY OR DACOITY WITH ATTEMPT TO CAUSE DEATH OR GRIEVOUS HURT
+If at the time of committing robbery or dacoity the offender uses any deadly weapon, or causes grievous hurt to any person, or attempts to cause death or grievous hurt, the imprisonment shall not be less than seven years.
+Procedure: Robbery with Attempt to Cause Death
+
+BNS SECTION 312 - ATTEMPT TO COMMIT ROBBERY OR DACOITY WHEN ARMED WITH DEADLY WEAPON
+If at the time of attempting to commit robbery or dacoity the offender is armed with any deadly weapon, the imprisonment shall not be less than seven years.
+Procedure: Attempt to Commit Robbery with Weapon
+
+BNS SECTION 313 - PUNISHMENT FOR BELONGING TO GANG OF ROBBERS
+Whoever belongs to any gang of persons associated in habitually committing theft or robbery, and not being a gang of dacoits, shall be punished with rigorous imprisonment up to seven years and fine.
+Procedure: Belonging to Gang of Robbers
+
+BNS SECTION 314 - DISHONEST MISAPPROPRIATION OF PROPERTY
+Whoever dishonestly misappropriates or converts to his own use any movable property, shall be punished with imprisonment not less than six months but which may extend to two years and fine.
+Procedure: Criminal Misappropriation
+
+BNS SECTION 315 - DISHONEST MISAPPROPRIATION OF PROPERTY POSSESSED BY DECEASED PERSON
+Whoever dishonestly misappropriates any property which was in the possession of a deceased person at the time of his death, and has not since been in the possession of any person legally entitled, shall be punished with imprisonment up to three years and fine. If the offender was employed by the deceased as a clerk or servant, the imprisonment may extend to seven years.
+Procedure: Misappropriation from Deceased
+
+BNS SECTION 316 - CRIMINAL BREACH OF TRUST
+Whoever, being in any manner entrusted with property or with any dominion over property, dishonestly misappropriates or converts to his own use that property, or dishonestly uses or disposes of that property in violation of any direction of law, commits criminal breach of trust. Punishment is imprisonment up to five years, or fine, or both. For carriers, wharfingers or warehouse-keepers: imprisonment up to seven years and fine. For clerks or servants: imprisonment up to seven years and fine. For public servants, bankers, merchants, factors, brokers, attorneys or agents: imprisonment for life or imprisonment up to ten years and fine.
+Procedure: Criminal Breach of Trust
+
+BNS SECTION 317 - STOLEN PROPERTY
+Property the possession of which has been transferred by theft, extortion, robbery, cheating, criminal misappropriation or criminal breach of trust is designated as stolen property. Whoever dishonestly receives or retains any stolen property, knowing or having reason to believe it to be stolen, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Receiving Stolen Property
+
+BNS SECTION 318 - CHEATING
+Whoever, by deceiving any person, fraudulently or dishonestly induces the person so deceived to deliver any property to any person, or intentionally induces the person so deceived to do or omit to do anything which causes damage or harm to that person, is said to cheat. Punishment is imprisonment up to three years, or fine, or both. If cheating induces delivery of property, imprisonment up to seven years and fine.
+Procedure: Cheating
+
+BNS SECTION 319 - CHEATING BY PERSONATION
+A person is said to cheat by personation if he cheats by pretending to be some other person, or by knowingly substituting one person for another. Punishment is imprisonment up to five years, or fine, or both.
+Procedure: Cheating by Personation
+
+BNS SECTION 320 - DISHONEST OR FRAUDULENT REMOVAL OR CONCEALMENT OF PROPERTY TO PREVENT DISTRIBUTION AMONG CREDITORS
+Whoever dishonestly or fraudulently removes, conceals or delivers to any person any property, intending to prevent distribution of that property among his creditors, shall be punished with imprisonment not less than six months but which may extend to two years, or fine, or both.
+Procedure: Fraudulent Transfer to Defeat Creditors
+
+BNS SECTION 321 - DISHONESTLY OR FRAUDULENTLY PREVENTING DEBT BEING AVAILABLE FOR CREDITORS
+Whoever dishonestly or fraudulently prevents any debt or demand due to himself from being made available for payment of his debts, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Preventing Debt from Creditors
+
+BNS SECTION 322 - DISHONEST OR FRAUDULENT EXECUTION OF DEED OF TRANSFER CONTAINING FALSE STATEMENT OF CONSIDERATION
+Whoever dishonestly or fraudulently signs, executes or becomes a party to any deed or instrument which purports to transfer any property, and which contains any false statement relating to the consideration for such transfer, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: False Statement in Deed
+
+BNS SECTION 323 - DISHONEST OR FRAUDULENT REMOVAL OR CONCEALMENT OF PROPERTY
+Whoever dishonestly or fraudulently conceals or removes any property of himself or any other person, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Dishonest Removal of Property
+
+BNS SECTION 324 - MISCHIEF
+Whoever with intent to cause wrongful loss or damage to the public or to any person, causes the destruction of any property, or any change in any property which destroys or diminishes its value or utility, commits mischief. Punishment is imprisonment up to six months, or fine, or both. If loss or damage is twenty thousand rupees or more but less than one lakh rupees, imprisonment up to two years, or fine, or both. If loss or damage is one lakh rupees or upwards, imprisonment up to five years, or fine, or both.
+Procedure: Mischief
+
+BNS SECTION 325 - MISCHIEF BY KILLING OR MAIMING ANIMAL
+Whoever commits mischief by killing, poisoning, maiming or rendering useless any animal shall be punished with imprisonment up to five years, or fine, or both.
+Procedure: Killing or Maiming Animal
+
+BNS SECTION 326 - MISCHIEF BY INJURY, INUNDATION, FIRE OR EXPLOSIVE SUBSTANCE
+Whoever commits mischief by fire or any explosive substance intending to cause damage to any property, shall be punished with imprisonment up to seven years and fine. If the destruction is of any building ordinarily used as a place of worship or human dwelling or place for custody of property, imprisonment for life or imprisonment up to ten years and fine.
+Procedure: Mischief by Fire
+
+BNS SECTION 327 - MISCHIEF WITH INTENT TO DESTROY OR MAKE UNSAFE A RAIL, AIRCRAFT OR VESSEL
+Whoever commits mischief to any rail, aircraft, or vessel of twenty tons burden or upwards, intending to destroy or render unsafe the same, shall be punished with imprisonment up to ten years and fine. If committed by fire or explosive substance, imprisonment for life or imprisonment up to ten years and fine.
+Procedure: Mischief to Transport
+
+BNS SECTION 328 - PUNISHMENT FOR INTENTIONALLY RUNNING VESSEL AGROUND WITH INTENT TO COMMIT THEFT
+Whoever intentionally runs any vessel aground or ashore, intending to commit theft of any property contained therein, shall be punished with imprisonment up to ten years and fine.
+Procedure: Running Vessel Aground
+
+BNS SECTION 329 - CRIMINAL TRESPASS AND HOUSE-TRESPASS
+Whoever enters into or upon property in possession of another with intent to commit an offence or to intimidate, insult or annoy any person in possession, is said to commit criminal trespass. Punishment is imprisonment up to three months, or fine up to five thousand rupees, or both. House-trespass is committing criminal trespass into any building used as a human dwelling or place of worship. Punishment is imprisonment up to one year, or fine up to five thousand rupees, or both.
+Procedure: Criminal Trespass
+
+BNS SECTION 330 - HOUSE-TRESPASS AND HOUSE-BREAKING
+Whoever commits house-trespass having taken precautions to conceal it is said to commit lurking house-trespass. A person commits house-breaking if he effects entrance through passage made by himself, through passage not intended for human entrance, by opening any lock, by using criminal force, or by any passage which he knows to have been fastened. Punishment for lurking house-trespass or house-breaking is imprisonment up to two years and fine.
+Procedure: House-Breaking
+
+BNS SECTION 331 - PUNISHMENT FOR HOUSE-TRESPASS OR HOUSE-BREAKING
+Whoever commits lurking house-trespass or house-breaking after sunset and before sunrise shall be punished with imprisonment up to three years and fine. If in order to commit an offence punishable with imprisonment, imprisonment up to three years and fine. If the offence intended is theft, imprisonment may extend to ten years. If causes hurt or attempts to cause death, imprisonment for life or imprisonment up to ten years and fine.
+Procedure: House-Trespass Punishment
+
+BNS SECTION 332 - HOUSE-TRESPASS IN ORDER TO COMMIT OFFENCE
+Whoever commits house-trespass in order to commit an offence punishable with death, shall be punished with imprisonment for life or rigorous imprisonment up to ten years and fine. If punishable with imprisonment for life, imprisonment up to ten years and fine. If punishable with imprisonment, imprisonment up to two years and fine.
+Procedure: House-Trespass to Commit Offence
+
+BNS SECTION 333 - HOUSE-TRESPASS AFTER PREPARATION FOR HURT, ASSAULT OR WRONGFUL RESTRAINT
+Whoever commits house-trespass having made preparation for causing hurt or assaulting any person, shall be punished with imprisonment up to seven years and fine.
+Procedure: House-Trespass with Preparation
+
+BNS SECTION 334 - DISHONESTLY BREAKING OPEN RECEPTACLE CONTAINING PROPERTY
+Whoever dishonestly or with intent to commit mischief breaks open any closed receptacle which contains property, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Breaking Open Receptacle
+
+BNS SECTION 335 - MAKING A FALSE DOCUMENT
+A person is said to make a false document who dishonestly or fraudulently makes, signs, seals or executes a document with the intention of causing it to be believed that it was made by a person by whom he knows it was not made, or who without lawful authority alters a document in any material part, or who causes any person to sign a document knowing that such person does not know the contents.
+Procedure: Making False Document
+
+BNS SECTION 336 - FORGERY
+Whoever makes any false document with intent to cause damage or injury to the public or to any person, or to support any claim or title, or to cause any person to part with property, or with intent to commit fraud, commits forgery. Punishment is imprisonment up to two years, or fine, or both. If intended to be used for cheating, imprisonment up to seven years and fine.
+Procedure: Forgery
+
+BNS SECTION 337 - FORGERY OF RECORD OF COURT OR OF PUBLIC REGISTER
+Whoever forges a document purporting to be a record or proceeding of a Court, or an identity document issued by Government including voter identity card or Aadhaar Card, or a register of birth, marriage or burial, or a power of attorney, shall be punished with imprisonment up to seven years and fine.
+Procedure: Forgery of Court Record
+
+BNS SECTION 338 - FORGERY OF VALUABLE SECURITY, WILL
+Whoever forges a document which purports to be a valuable security or a will, or an authority to adopt a son, shall be punished with imprisonment for life, or imprisonment up to ten years, and fine.
+Procedure: Forgery of Valuable Security
+
+BNS SECTION 339 - HAVING POSSESSION OF FORGED DOCUMENT
+Whoever has in his possession any forged document described in section 337 or 338, knowing it to be forged and intending to use it as genuine, shall be punished with imprisonment up to seven years and fine, or if under section 338, with imprisonment for life or imprisonment up to seven years and fine.
+Procedure: Possession of Forged Document
+
+BNS SECTION 340 - FORGED DOCUMENT AND USING IT AS GENUINE
+A false document made wholly or in part by forgery is designated a forged document. Whoever fraudulently or dishonestly uses as genuine any forged document, shall be punished in the same manner as if he had forged such document.
+Procedure: Using Forged Document
+
+BNS SECTION 341 - MAKING OR POSSESSING COUNTERFEIT SEAL
+Whoever makes or counterfeits any seal, plate or other instrument for making an impression, intending that it shall be used for committing forgery punishable under section 338, shall be punished with imprisonment for life, or imprisonment up to seven years, and fine.
+Procedure: Making Counterfeit Seal
+
+BNS SECTION 342 - COUNTERFEITING DEVICE OR MARK USED FOR AUTHENTICATING DOCUMENTS
+Whoever counterfeits any device or mark used for authenticating any document described in section 338, intending that such device or mark shall be used for giving appearance of authenticity to any forged document, shall be punished with imprisonment for life, or imprisonment up to seven years, and fine.
+Procedure: Counterfeiting Authentication Device
+
+BNS SECTION 343 - FRAUDULENT CANCELLATION, DESTRUCTION OF WILL OR VALUABLE SECURITY
+Whoever fraudulently or dishonestly cancels, destroys or defaces any document which is or purports to be a will, or an authority to adopt a son, or any valuable security, shall be punished with imprisonment for life, or imprisonment up to seven years, and fine.
+Procedure: Destruction of Will
+
+BNS SECTION 344 - FALSIFICATION OF ACCOUNTS
+Whoever, being a clerk, officer or servant, wilfully and with intent to defraud, destroys, alters, mutilates or falsifies any book, electronic record, paper, valuable security or account which belongs to his employer, shall be punished with imprisonment up to seven years, or fine, or both.
+Procedure: Falsification of Accounts
+
+BNS SECTION 345 - PROPERTY MARK
+A mark used for denoting that movable property belongs to a particular person is called a property mark. Whoever uses any false property mark shall, unless he proves that he acted without intent to defraud, be punished with imprisonment up to one year, or fine, or both.
+Procedure: Property Mark
+
+BNS SECTION 346 - TAMPERING WITH PROPERTY MARK WITH INTENT TO CAUSE INJURY
+Whoever removes, destroys, defaces or adds to any property mark, intending to cause injury to any person, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Tampering with Property Mark
+
+BNS SECTION 347 - COUNTERFEITING A PROPERTY MARK
+Whoever counterfeits any property mark used by any other person shall be punished with imprisonment up to two years, or fine, or both. If it is a property mark used by a public servant, imprisonment up to three years and fine.
+Procedure: Counterfeiting Property Mark
+
+BNS SECTION 348 - MAKING OR POSSESSION OF INSTRUMENT FOR COUNTERFEITING A PROPERTY MARK
+Whoever makes or has in his possession any die, plate or other instrument for the purpose of counterfeiting a property mark, shall be punished with imprisonment up to three years, or fine, or both.
+Procedure: Possessing Property Mark Counterfeiting Instrument
+
+BNS SECTION 349 - SELLING GOODS MARKED WITH A COUNTERFEIT PROPERTY MARK
+Whoever sells or has in possession for sale any goods with a counterfeit property mark affixed, shall, unless he proves he had no reason to suspect the genuineness of the mark and gave all information about the source, be punished with imprisonment up to one year, or fine, or both.
+Procedure: Selling Counterfeit Goods
+
+BNS SECTION 350 - MAKING A FALSE MARK UPON ANY RECEPTACLE CONTAINING GOODS
+Whoever makes any false mark upon any case, package or other receptacle containing goods, calculated to cause any person to believe that it contains goods which it does not contain, or that the goods are of different nature or quality, shall, unless he proves that he acted without intent to defraud, be punished with imprisonment up to three years, or fine, or both.
+Procedure: False Mark on Receptacle
+
+BNS SECTION 351 - CRIMINAL INTIMIDATION
+Whoever threatens another with any injury to his person, reputation or property, with intent to cause alarm to that person, or to cause that person to do any act which he is not legally bound to do, commits criminal intimidation. Punishment is imprisonment up to two years, or fine, or both. If threat is to cause death or grievous hurt, or to cause destruction of property by fire, or to impute unchastity to a woman, imprisonment up to seven years, or fine, or both.
+Procedure: Criminal Intimidation
+
+BNS SECTION 352 - INTENTIONAL INSULT WITH INTENT TO PROVOKE BREACH OF PEACE
+Whoever intentionally insults in any manner, and thereby gives provocation to any person, intending or knowing it to be likely that such provocation will cause him to break the public peace, shall be punished with imprisonment up to two years, or fine, or both.
+Procedure: Intentional Insult
+
+BNS SECTION 353 - STATEMENTS CONDUCING TO PUBLIC MISCHIEF
+Whoever makes, publishes or circulates any statement, false information, rumour or report with intent to cause any officer to mutiny, or to cause fear or alarm to the public, or to incite any class of persons to commit an offence, shall be punished with imprisonment up to three years, or fine, or both. If committed in place of worship, imprisonment up to five years and fine.
+Procedure: Public Mischief
+
+BNS SECTION 354 - ACT CAUSED BY INDUCING PERSON TO BELIEVE HE WILL BE RENDERED AN OBJECT OF DIVINE DISPLEASURE
+Whoever voluntarily causes or attempts to cause any person to do anything which that person is not legally bound to do, by inducing that person to believe that he will become an object of Divine displeasure if he does not do that thing, shall be punished with imprisonment up to one year, or fine, or both.
+Procedure: Inducing Divine Displeasure
+
+BNS SECTION 355 - MISCONDUCT IN PUBLIC BY A DRUNKEN PERSON
+Whoever, in a state of intoxication, appears in any public place and conducts himself in such a manner as to cause annoyance to any person, shall be punished with simple imprisonment up to twenty-four hours, or fine up to one thousand rupees, or both, or with community service.
+Procedure: Drunken Misconduct
+
+BNS SECTION 356 - DEFAMATION
+Whoever, by words either spoken or intended to be read, or by signs or by visible representations, makes or publishes any imputation concerning any person intending to harm the reputation of such person, is said to defame that person. Exceptions: truth for public good, opinion on public servant's conduct, opinion on any public question, substantially true report of court proceedings, opinion on merits of any case, opinion on merits of any performance, censure by person having authority over another, good faith accusation, good faith caution. Punishment is simple imprisonment up to two years, or fine, or both, or with community service.
+Procedure: Defamation
+
+BNS SECTION 357 - BREACH OF CONTRACT TO ATTEND ON AND SUPPLY WANTS OF HELPLESS PERSON
+Whoever, being bound by a lawful contract to attend on or to supply the wants of any person who by reason of youth, unsoundness of mind, disease or bodily weakness is helpless or incapable of providing for his own safety, voluntarily omits so to do, shall be punished with imprisonment up to three months, or fine up to five thousand rupees, or both.
+Procedure: Breach of Contract to Attend Helpless Person
+
+BNS SECTION 358 - REPEAL AND SAVINGS
+The Indian Penal Code (45 of 1860) is hereby repealed. The repeal does not affect the previous operation of the Code or anything duly done thereunder, or any right, privilege, obligation or liability acquired, accrued or incurred under the Code, or any penalty or punishment incurred in respect of any offences committed against the Code, or any investigation or remedy in respect of such penalty or punishment. Any proceeding may be instituted, continued or enforced as if the Code had not been repealed.
+Procedure: Repeal and Savings
