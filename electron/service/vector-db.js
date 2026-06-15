@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 let sectionsStore = [];
+let casesStore = [];
 
 function getStorePath() {
   const dbDir = path.join(__dirname, '..', '..', 'database');
@@ -14,6 +15,14 @@ function getStorePath() {
     fs.mkdirSync(dbDir, { recursive: true });
   }
   return path.join(dbDir, 'sections.json');
+}
+
+function getCasesPath() {
+  const dbDir = path.join(__dirname, '..', '..', 'database');
+  if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+  }
+  return path.join(dbDir, 'cases.json');
 }
 
 function cosineSimilarity(a, b) {
@@ -38,6 +47,16 @@ export async function initVectorStore() {
       sectionsStore = [];
     }
   }
+
+  const casesPath = getCasesPath();
+  if (fs.existsSync(casesPath)) {
+    try {
+      casesStore = JSON.parse(fs.readFileSync(casesPath, 'utf-8'));
+      console.log(`[VectorDB] Loaded ${casesStore.length} cases`);
+    } catch (err) {
+      casesStore = [];
+    }
+  }
 }
 
 export async function rebuildCache() {
@@ -50,6 +69,74 @@ export async function rebuildCache() {
       console.error('[VectorDB] Cache rebuild failed:', err.message);
       sectionsStore = [];
     }
+  }
+
+  const casesPath = getCasesPath();
+  if (fs.existsSync(casesPath)) {
+    try {
+      casesStore = JSON.parse(fs.readFileSync(casesPath, 'utf-8'));
+      console.log(`[VectorDB] Cases rebuilt: ${casesStore.length} cases`);
+    } catch (err) {
+      casesStore = [];
+    }
+  }
+}
+
+export async function indexCaseData(caseData) {
+  const casesPath = getCasesPath();
+
+  if (fs.existsSync(casesPath)) {
+    try { casesStore = JSON.parse(fs.readFileSync(casesPath, 'utf-8')); }
+    catch { casesStore = []; }
+  }
+
+  const text = `FIR ${caseData.fir_number || ''}: ${caseData.description || ''}. Location: ${caseData.incident_location || ''}. Date: ${caseData.incident_date || ''}. Type: ${caseData.case_type || ''}. Sections: ${Array.isArray(caseData.sections_applied) ? caseData.sections_applied.join(', ') : caseData.sections_applied || ''}`;
+
+  try {
+    const embedding = await getEmbedding(text);
+    if (embedding && embedding.length === 768) {
+      casesStore.push({
+        id: caseData.id,
+        fir_number: caseData.fir_number,
+        description: caseData.description,
+        incident_location: caseData.incident_location,
+        incident_date: caseData.incident_date,
+        case_type: caseData.case_type,
+        sections_applied: caseData.sections_applied || [],
+        embedding
+      });
+      fs.writeFileSync(casesPath, JSON.stringify(casesStore));
+      console.log(`[VectorDB] Case indexed: ${caseData.fir_number} (Total cases: ${casesStore.length})`);
+    }
+  } catch (err) {
+    console.log(`[VectorDB] Failed to index case: ${err.message}`);
+  }
+}
+
+export async function searchSimilarCases(query, limit = 5) {
+  if (casesStore.length === 0) return [];
+
+  try {
+    const queryEmbedding = await getEmbedding(query);
+    if (!queryEmbedding || queryEmbedding.length !== 768) return [];
+
+    const scored = casesStore
+      .filter(c => c.embedding && c.embedding.length === 768)
+      .map(c => ({
+        score: Math.round(cosineSimilarity(queryEmbedding, c.embedding) * 100),
+        fir_number: c.fir_number,
+        description: c.description,
+        incident_location: c.incident_location,
+        incident_date: c.incident_date,
+        case_type: c.case_type,
+        sections_applied: c.sections_applied
+      }));
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, limit);
+  } catch (err) {
+    console.error('[VectorDB] Case search error:', err.message);
+    return [];
   }
 }
 
@@ -137,6 +224,7 @@ export async function searchLaws(query, limit = 5) {
     return [];
   }
 }
+
 const SEARCH_QUERY_PROMPT = `You are a legal search expert for Indian criminal law. You know the three new laws:
 
 BNS (Bharatiya Nyaya Sanhita 2023) = Crimes and punishments
@@ -167,6 +255,7 @@ Examples:
 - "dowry death what section" → "dowry death bns section 80"
 
 Return ONLY the search query. Nothing else.`;
+
 const FINAL_ANSWER_PROMPT = `You are CrimeGPT, a senior legal advisor for Indian police officers.
 You specialize in BNS 2023, BNSS 2023, and BSA 2023.
 
@@ -175,6 +264,8 @@ The officer asked: "{{QUERY}}"
 We searched our legal database and found these relevant sections:
 
 {{CONTEXT}}
+
+{{SIMILAR_CASES}}
 
 Your job: Read the question and references. Give a complete, accurate answer.
 
@@ -227,7 +318,9 @@ export async function getLegalOpinion(query) {
     results = await searchLaws(query, 5);
   }
 
-  console.log(` Retrieved: ${results.length} sections`);
+  const similarCases = await searchSimilarCases(query, 3);
+
+  console.log(` Retrieved: ${results.length} sections, ${similarCases.length} similar cases`);
   results.forEach((r, i) => {
     console.log(`  ${i + 1}. ${r.law.toUpperCase()} §${r.section} - "${r.title}" (${r.score}%)`);
   });
@@ -251,11 +344,69 @@ export async function getLegalOpinion(query) {
     }
   });
 
+  let similarCasesText = '';
+  if (similarCases.length > 0) {
+    similarCasesText += '\n--- SIMILAR PAST CASES FROM THIS STATION ---\n';
+    similarCases.forEach((c, i) => {
+      similarCasesText += `\nCASE ${i + 1}: ${c.fir_number} (${c.score}% similar)\n`;
+      similarCasesText += `Description: ${c.description}\n`;
+      similarCasesText += `Location: ${c.incident_location} | Date: ${c.incident_date}\n`;
+      if (c.sections_applied && c.sections_applied.length > 0) {
+        similarCasesText += `Sections Applied: ${Array.isArray(c.sections_applied) ? c.sections_applied.join(', ') : c.sections_applied}\n`;
+      }
+    });
+  }
+
   const finalPrompt = FINAL_ANSWER_PROMPT
     .replace('{{CONTEXT}}', context)
+    .replace('{{SIMILAR_CASES}}', similarCasesText)
     .replace('{{QUERY}}', query);
 
   const answer = await askOllama(finalPrompt);
   console.log('═══════════════════════════════════\n');
   return answer;
+}
+const SECTION_SUGGESTION_PROMPT = `You are a legal section finder for Indian police.
+
+Officer query: "{{QUERY}}"
+
+Relevant sections from database:
+{{CONTEXT}}
+
+List ONLY the section numbers and titles. One per line. Nothing else.
+
+Example:
+BNS Section 303 - Theft
+BNS Section 331 - House Trespass
+BNSS Section 173 - FIR Registration`;
+
+export async function suggestSections(query) {
+  console.log('\n=== SECTION SUGGESTION ===');
+  console.log(` Query: "${query}"`);
+
+  const searchPrompt = SEARCH_QUERY_PROMPT.replace('{{QUERY}}', query);
+  let searchQuery = query;
+
+  try {
+    const response = await askOllama(searchPrompt);
+    searchQuery = response.trim().substring(0, 300);
+  } catch {}
+
+  let results = await searchLaws(searchQuery, 5);
+  if (results.length === 0) results = await searchLaws(query, 5);
+
+  if (results.length === 0) return 'No matching sections found.';
+
+  let context = '';
+  results.forEach((r, i) => {
+    context += `${r.law.toUpperCase()} Section ${r.section} - ${r.title}\n`;
+  });
+
+  const finalPrompt = SECTION_SUGGESTION_PROMPT
+    .replace('{{CONTEXT}}', context)
+    .replace('{{QUERY}}', query);
+
+  const answer = await askOllama(finalPrompt);
+  console.log('=== SUGGESTION COMPLETE ===\n');
+  return answer.trim();
 }

@@ -16,23 +16,36 @@ export default function Dashboard() {
   const [activeView, setActiveView] = useState('dashboard');
   const [selectedCase, setSelectedCase] = useState(null);
 
-  useEffect(() => { loadDashboard(); }, []);
+  useEffect(() => { loadDashboard(); }, [activeView]);
 
   const loadDashboard = async () => {
-    const s = await window.crimeGPT.getStats();
-    setStats(s);
-    const cases = await window.crimeGPT.getAllCases();
-    setRecentCases(cases.slice(0, 5));
+    try {
+      const s = await window.crimeGPT.getStats();
+      setStats(s);
+      const cases = await window.crimeGPT.getAllCases();
+      setRecentCases(cases.slice(0, 5));
+    } catch (err) {
+      console.error('Dashboard load failed:', err);
+    }
   };
 
   const handleSearch = async (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      const results = await window.crimeGPT.searchCases(searchQuery);
-      setRecentCases(results);
+      try {
+        const results = await window.crimeGPT.searchCases(searchQuery);
+        setRecentCases(results);
+      } catch (err) {
+        console.error('Search failed:', err);
+      }
     } else {
       loadDashboard();
     }
+  };
+
+  const handleCaseClick = async (caseId) => {
+    setSelectedCase(caseId);
+    setActiveView('case-detail');
   };
 
   if (activeView === 'chat') {
@@ -61,15 +74,6 @@ export default function Dashboard() {
     return <CaseDetail onNavigate={setActiveView} caseId={selectedCase} />;
   }
 
-  if (activeView === 'diary') {
-    return (
-      <SearchCases 
-        onNavigate={setActiveView} 
-        onViewCase={(id) => { setSelectedCase(id); setActiveView('case-detail'); }} 
-      />
-    );
-  }
-
   return (
     <div className="flex h-screen bg-white">
       <Sidebar user={user} activeView={activeView} onNavigate={setActiveView} onLogout={logout} />
@@ -83,7 +87,13 @@ export default function Dashboard() {
             </div>
             <form onSubmit={handleSearch} className="relative">
               <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" />
-              <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search cases..." className="pl-11 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 w-72 transition-all" />
+              <input 
+                type="text" 
+                value={searchQuery} 
+                onChange={(e) => setSearchQuery(e.target.value)} 
+                placeholder="Search FIR number or keywords..." 
+                className="pl-11 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-gray-800 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 w-72 transition-all" 
+              />
             </form>
           </div>
         </header>
@@ -92,7 +102,7 @@ export default function Dashboard() {
           <div className="grid grid-cols-3 gap-5 mb-8">
             <StatCard icon={<AlertCircle size={20} />} color="orange" value={stats.activeCases} label="Active Cases" />
             <StatCard icon={<FileText size={20} />} color="green" value={stats.totalCases} label="Total Cases" />
-            <StatCard icon={<FileText size={20} />} color="orange" value={stats.documentsGenerated} label="Documents" />
+            <StatCard icon={<FileText size={20} />} color="orange" value={stats.documentsGenerated} label="Documents Generated" />
           </div>
 
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm">
@@ -106,25 +116,32 @@ export default function Dashboard() {
               {recentCases.length === 0 ? (
                 <div className="px-6 py-16 text-center">
                   <FileText size={40} className="mx-auto mb-3 text-gray-200" />
-                  <p className="text-gray-400 font-medium">No cases found</p>
+                  <p className="text-gray-400 font-medium">No cases filed yet</p>
                   <button onClick={() => setActiveView('new-case')} className="mt-3 text-sm text-orange-500 hover:text-orange-600 font-medium">
-                    Create your first case
+                    Register your first FIR
                   </button>
                 </div>
               ) : (
                 recentCases.map((c) => (
                   <div 
                     key={c.id} 
-                    onClick={() => { setSelectedCase(c.id); setActiveView('case-detail'); }}
+                    onClick={() => handleCaseClick(c.id)}
                     className="px-6 py-4 flex items-center justify-between hover:bg-orange-50/30 transition cursor-pointer"
                   >
                     <div>
-                      <p className="font-medium text-gray-800 text-sm">{c.fir_number}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="font-semibold text-gray-800 text-sm">{c.fir_number}</p>
+                        <span className="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-[10px] font-medium">{c.case_type}</span>
+                      </div>
                       <p className="text-xs text-gray-400 truncate max-w-md mt-0.5">{c.description}</p>
                       <p className="text-[11px] text-gray-300 mt-1">{c.incident_date} • {c.incident_location}</p>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-[11px] font-medium ${c.status === 'ACTIVE' ? 'bg-orange-50 text-orange-600 border border-orange-100' : 'bg-green-50 text-green-600 border border-green-100'}`}>
-                      {c.status}
+                    <span className={`px-3 py-1 rounded-full text-[11px] font-medium ${
+                      c.status === 'ACTIVE' ? 'bg-orange-50 text-orange-600 border border-orange-100' : 
+                      c.status === 'CHARGE_SHEET_FILED' ? 'bg-green-50 text-green-600 border border-green-100' :
+                      'bg-gray-100 text-gray-500 border border-gray-200'
+                    }`}>
+                      {c.status?.replace('_', ' ') || 'ACTIVE'}
                     </span>
                   </div>
                 ))

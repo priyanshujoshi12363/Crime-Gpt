@@ -4,29 +4,17 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { initDatabase, getDatabase, closeDatabase } from './database/connection.js';
 import { hasUsers, setupAdmin, authenticateUser } from './auth.js';
-import { v4 as uuidv4 } from 'uuid';
 import {
-  isOllamaInstalled,
-  isOllamaRunning,
-  getInstalledModels,
-  startOllamaProcess,
-  getDeviceSpecs,
-  getQwenModel,
-  checkDiskSpace,
-  downloadOllamaInstaller,
-  downloadQwenModel,
-  downloadEmbedModel,
-  askOllama,
-  getEmbedding,
-  getLegalSuggestion
+  isOllamaInstalled, isOllamaRunning, getInstalledModels, startOllamaProcess,
+  getDeviceSpecs, getQwenModel, checkDiskSpace, downloadOllamaInstaller,
+  downloadQwenModel, downloadEmbedModel, askOllama, getEmbedding, getLegalSuggestion
 } from './service/ai-setup.js';
 import {
-  initVectorStore,
-  indexLawFile,
-  searchLaws,
-  getLegalOpinion,
-  rebuildCache
+  initVectorStore, indexLawFile, searchLaws, getLegalOpinion,
+  rebuildCache, indexCaseData, searchSimilarCases, suggestSections
 } from './service/vector-db.js';
+import { registerCase, getFullCase, addDiaryEntry, generateFIRNumber } from './service/case-manager.js';
+import { getDocumentsForCase, getRequiredDocuments, saveDocumentRecord, generateDocumentForCase, generateAndSavePDF } from './service/document-manager.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,315 +24,143 @@ let dataIndexed = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1400,
-    height: 900,
-    minWidth: 1024,
-    minHeight: 768,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.cjs'),
-      contextIsolation: true,
-      nodeIntegration: false
-    },
-    title: 'CrimeGPT',
-    show: false,
-    autoHideMenuBar: true,
+    width: 1400, height: 900, minWidth: 1024, minHeight: 768,
+    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false },
+    title: 'CrimeGPT', show: false, autoHideMenuBar: true,
     icon: path.join(__dirname, '../public/logo1.png')
   });
-
   mainWindow.setMenuBarVisibility(false);
   Menu.setApplicationMenu(null);
-
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
-    if (process.env.VITE_DEV_SERVER_URL) {
-      mainWindow.webContents.openDevTools();
-    }
+    if (process.env.VITE_DEV_SERVER_URL) mainWindow.webContents.openDevTools();
   });
-
-  if (process.env.VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
-  } else {
-    mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
-  }
+  if (process.env.VITE_DEV_SERVER_URL) mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
+  else mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
 }
 
 async function indexAllLegalData() {
   const storePath = path.join(__dirname, '..', 'database', 'sections.json');
-
-  if (fs.existsSync(storePath)) {
-    const stats = fs.statSync(storePath);
-    const fileSizeKB = stats.size / 1024;
-    console.log(`[Index] Existing store size: ${fileSizeKB.toFixed(2)} KB`);
-
-    if (fileSizeKB > 100) {
-      console.log('[Index] Store already populated — skipping indexing');
-      await rebuildCache();
-      dataIndexed = true;
-      return;
-    }
+  if (fs.existsSync(storePath) && (fs.statSync(storePath).size / 1024) > 100) {
+    console.log('[Index] Store already populated — skipping');
+    await rebuildCache();
+    dataIndexed = true;
+    return;
   }
-
-  console.log('[Index] Starting fresh legal data indexing...');
-
+  console.log('[Index] Starting fresh indexing...');
   const dataPath = path.join(__dirname, '..', 'data');
-
-  const lawFiles = [
+  for (const file of [
     { path: path.join(dataPath, 'BNS1.txt'), name: 'BNS' },
     { path: path.join(dataPath, 'BNSS.txt'), name: 'BNSS' },
     { path: path.join(dataPath, 'BSA.txt'), name: 'BSA' },
     { path: path.join(dataPath, 'special.txt'), name: 'SPECIAL' },
-  ];
-
-  for (const file of lawFiles) {
+  ]) {
     if (fs.existsSync(file.path)) {
-      console.log(`[Index] Processing ${file.name}...`);
-      try {
-        await indexLawFile(file.path, file.name);
-      } catch (err) {
-        console.error(`[Index] Failed to index ${file.name}: ${err.message}`);
-      }
-    } else {
-      console.warn(`[Index] File not found: ${file.path}`);
+      try { await indexLawFile(file.path, file.name); }
+      catch (err) { console.error(`[Index] Failed ${file.name}:`, err.message); }
     }
   }
-
   await rebuildCache();
   dataIndexed = true;
-  console.log('[Index] Legal data indexing complete');
+}
+
+function queryAll(stmt, params = []) {
+  if (params.length) stmt.bind(params);
+  const results = [];
+  while (stmt.step()) results.push(stmt.getAsObject());
+  stmt.free();
+  return results;
+}
+
+function queryOne(stmt, params = []) {
+  if (params.length) stmt.bind(params);
+  const result = stmt.step() ? stmt.getAsObject() : null;
+  stmt.free();
+  return result;
+}
+
+function queryCount(sql, params = []) {
+  const db = getDatabase();
+  const stmt = db.prepare(sql);
+  if (params.length) stmt.bind(params);
+  const count = stmt.step() ? stmt.getAsObject().count : 0;
+  stmt.free();
+  return count;
 }
 
 app.whenReady().then(async () => {
   try {
-    console.log('[Startup] Initializing database...');
     await initDatabase();
-
-    console.log('[Startup] Initializing vector store...');
     await initVectorStore();
-
-    console.log('[Startup] Indexing legal data...');
     await indexAllLegalData();
-
     const ollama = isOllamaInstalled();
-    if (ollama.installed) {
-      const running = await isOllamaRunning();
-      if (!running) {
-        console.log('[Startup] Starting Ollama...');
-        startOllamaProcess();
-      }
-    }
-
+    if (ollama.installed && !(await isOllamaRunning())) startOllamaProcess();
     createWindow();
     console.log('[Startup] CrimeGPT ready');
-  } catch (err) {
-    console.error('[Startup] Fatal error:', err);
-  }
+  } catch (err) { console.error('[Startup] Fatal error:', err); }
 });
 
-ipcMain.handle('auth:check-setup', () => {
-  return { needsSetup: !hasUsers() };
-});
-
-ipcMain.handle('auth:setup-admin', (_, username, password) => {
-  return setupAdmin(username, password);
-});
-
-ipcMain.handle('auth:login', (_, username, password) => {
-  return authenticateUser(username, password);
-});
+ipcMain.handle('auth:check-setup', () => ({ needsSetup: !hasUsers() }));
+ipcMain.handle('auth:setup-admin', (_, u, p) => setupAdmin(u, p));
+ipcMain.handle('auth:login', (_, u, p) => authenticateUser(u, p));
 
 ipcMain.handle('ai:check-setup', async () => {
-  const device = getDeviceSpecs();
-  const qwenModel = getQwenModel();
-  const ollama = isOllamaInstalled();
+  const device = getDeviceSpecs(), qwenModel = getQwenModel(), ollama = isOllamaInstalled();
   const running = ollama.installed ? await isOllamaRunning() : false;
   const models = ollama.installed && running ? getInstalledModels() : [];
-  const qwenReady = models.some(m => m.name.toLowerCase().includes('qwen'));
-  const embedReady = models.some(m => m.name.toLowerCase().includes('nomic-embed'));
-  const diskSpace = checkDiskSpace();
-
-  return {
-    ready: ollama.installed && running && qwenReady && embedReady,
-    installed: ollama.installed,
-    running,
-    qwenReady,
-    embedReady,
-    modelReady: qwenReady && embedReady,
-    device,
-    qwenModel,
-    models,
-    diskSpace
-  };
+  return { ready: ollama.installed && running && models.some(m => m.name.includes('qwen')) && models.some(m => m.name.includes('nomic-embed')), installed: ollama.installed, running, device, qwenModel, models, qwenReady: models.some(m => m.name.includes('qwen')), embedReady: models.some(m => m.name.includes('nomic-embed')), diskSpace: checkDiskSpace() };
 });
+ipcMain.handle('ai:install-ollama', async () => await downloadOllamaInstaller(mainWindow));
+ipcMain.handle('ai:download-model', async () => await downloadQwenModel(mainWindow));
+ipcMain.handle('ai:download-embed-model', async () => await downloadEmbedModel(mainWindow));
+ipcMain.handle('ai:start-ollama', async () => await startOllamaProcess());
+ipcMain.handle('ai:chat', async (_, m) => await askOllama(m));
+ipcMain.handle('ai:legal-suggestion', async (_, d) => await getLegalSuggestion(d));
+ipcMain.handle('ai:embedding', async (_, t) => await getEmbedding(t));
+ipcMain.handle('ai:suggest-sections', async (_, q) => await suggestSections(q));
 
-ipcMain.handle('ai:install-ollama', async () => {
-  return await downloadOllamaInstaller(mainWindow);
-});
+ipcMain.handle('rag:search-laws', async (_, q) => dataIndexed ? await searchLaws(q) : []);
+ipcMain.handle('rag:legal-suggestion', async (_, q) => dataIndexed ? await getLegalOpinion(q) : 'Legal database loading...');
+ipcMain.handle('rag:search-similar-cases', async (_, q) => await searchSimilarCases(q));
+ipcMain.handle('rag:index-status', () => ({ ready: dataIndexed }));
 
-ipcMain.handle('ai:download-model', async () => {
-  return await downloadQwenModel(mainWindow);
-});
-
-ipcMain.handle('ai:download-embed-model', async () => {
-  return await downloadEmbedModel(mainWindow);
-});
-
-ipcMain.handle('ai:start-ollama', async () => {
-  return await startOllamaProcess();
-});
-
-ipcMain.handle('ai:chat', async (_, message) => {
-  return await askOllama(message);
-});
-
-ipcMain.handle('ai:legal-suggestion', async (_, firDescription) => {
-  return await getLegalSuggestion(firDescription);
-});
-
-ipcMain.handle('ai:embedding', async (_, text) => {
-  return await getEmbedding(text);
-});
-
-ipcMain.handle('rag:search-laws', async (_, query) => {
-  if (!dataIndexed) return [];
-  return await searchLaws(query);
-});
-
-ipcMain.handle('rag:legal-suggestion', async (_, firDescription) => {
-  if (!dataIndexed) return 'Legal database is still loading. Please wait.';
-  return await getLegalOpinion(firDescription);
-});
-
-ipcMain.handle('rag:index-status', () => {
-  return { ready: dataIndexed };
-});
-
-ipcMain.handle('case:create', async (_, data) => {
-  const db = getDatabase();
-  const id = uuidv4();
-
-  db.run(
-    `INSERT INTO cases (
-      id, fir_number, incident_date, incident_time, incident_location,
-      description, description_lang, complainant_name, complainant_address,
-      complainant_phone, complainant_id_type, complainant_id_number,
-      officer_name, officer_badge
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [
-      id, data.fir_number, data.incident_date, data.incident_time || null,
-      data.incident_location, data.description, data.description_lang || 'en',
-      data.complainant_name, data.complainant_address || null,
-      data.complainant_phone || null, data.complainant_id_type || null,
-      data.complainant_id_number || null, data.officer_name || null,
-      data.officer_badge || null
-    ]
-  );
-
-  return { success: true, caseId: id };
-});
-
-ipcMain.handle('case:get-all', () => {
-  const db = getDatabase();
-  const results = [];
-  const stmt = db.prepare('SELECT * FROM cases ORDER BY created_at DESC');
-  while (stmt.step()) results.push(stmt.getAsObject());
-  stmt.free();
-  return results;
-});
-
-ipcMain.handle('case:get', (_, id) => {
-  const db = getDatabase();
-  const stmt = db.prepare('SELECT * FROM cases WHERE id = ?');
-  stmt.bind([id]);
-  if (stmt.step()) {
-    const result = stmt.getAsObject();
-    stmt.free();
-    return result;
+ipcMain.handle('case:register', async (_, data) => {
+  const result = await registerCase(data);
+  if (result.success) {
+    await indexCaseData({ id: result.caseId, fir_number: result.fir_number, description: data.description, incident_location: data.incident_location, incident_date: data.incident_date, case_type: data.case_type, sections_applied: (data.sections || []).map(s => `${s.law || 'BNS'} ${s.section}`) });
   }
-  stmt.free();
-  return null;
+  return result;
 });
+ipcMain.handle('case:get-full', async (_, id) => await getFullCase(id));
+ipcMain.handle('case:generate-fir-number', () => ({ fir_number: generateFIRNumber() }));
+ipcMain.handle('case:get-all', () => queryAll(getDatabase().prepare('SELECT * FROM cases ORDER BY created_at DESC')));
+ipcMain.handle('case:search', (_, q) => queryAll(getDatabase().prepare('SELECT * FROM cases WHERE fir_number LIKE ? OR description LIKE ? OR incident_location LIKE ? ORDER BY created_at DESC'), [`%${q}%`, `%${q}%`, `%${q}%`]));
 
-ipcMain.handle('case:search', (_, query) => {
-  const db = getDatabase();
-  const results = [];
-  const stmt = db.prepare(
-    `SELECT * FROM cases
-     WHERE fir_number LIKE ? OR description LIKE ?
-        OR complainant_name LIKE ? OR incident_location LIKE ?
-     ORDER BY created_at DESC`
-  );
-  const like = `%${query}%`;
-  stmt.bind([like, like, like, like]);
-  while (stmt.step()) results.push(stmt.getAsObject());
-  stmt.free();
-  return results;
-});
-
-ipcMain.handle('case:update-field', (_, id, field, value) => {
-  const db = getDatabase();
-  const allowedFields = [
-    'fir_number', 'incident_date', 'incident_time', 'incident_location',
-    'description', 'complainant_name', 'complainant_address', 'complainant_phone',
-    'complainant_id_type', 'complainant_id_number', 'officer_name', 'officer_badge',
-    'status', 'sections_applied', 'notes'
-  ];
-  if (!allowedFields.includes(field)) {
-    return { success: false, error: `Field "${field}" is not allowed` };
-  }
-  db.run(
-    `UPDATE cases SET ${field} = ?, updated_at = datetime('now', 'localtime') WHERE id = ?`,
-    [value, id]
-  );
-  return { success: true };
-});
-
-ipcMain.handle('dashboard:stats', () => {
-  const db = getDatabase();
-
-  const getCount = (sql, params = []) => {
-    const stmt = db.prepare(sql);
-    if (params.length) stmt.bind(params);
-    const count = stmt.step() ? stmt.getAsObject().count : 0;
+ipcMain.handle('diary:add', async (_, data) => {
+  const result = await addDiaryEntry(data.case_id, data);
+  if (result.success) {
+    const db = getDatabase();
+    const stmt = db.prepare('SELECT * FROM cases WHERE id = ?');
+    stmt.bind([data.case_id]);
+    const cd = stmt.step() ? stmt.getAsObject() : null;
     stmt.free();
-    return count;
-  };
-
-  return {
-    activeCases: getCount(`SELECT COUNT(*) as count FROM cases WHERE status = ?`, ['ACTIVE']),
-    totalCases: getCount(`SELECT COUNT(*) as count FROM cases`),
-    documentsGenerated: getCount(`SELECT COUNT(*) as count FROM documents`),
-  };
+    await indexCaseData({ id: result.entryId, fir_number: cd?.fir_number, description: data.description, incident_location: cd?.incident_location, incident_date: data.entry_date, case_type: 'DIARY_ENTRY', sections_applied: [] });
+  }
+  return result;
 });
+ipcMain.handle('diary:get', (_, cid) => queryAll(getDatabase().prepare('SELECT * FROM case_diary WHERE case_id = ? ORDER BY entry_date DESC, entry_time DESC'), [cid]));
 
-ipcMain.handle('diary:add', (_, data) => {
-  const db = getDatabase();
-  const id = uuidv4();
-  db.run(
-    `INSERT INTO case_diary (id, case_id, entry_date, entry_time, event_type, title, description, officer_name)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-    [id, data.case_id, data.entry_date, data.entry_time || null,
-     data.event_type, data.title, data.description || null, data.officer_name || null]
-  );
-  return { success: true, id };
-});
+ipcMain.handle('dashboard:stats', () => ({
+  activeCases: queryCount('SELECT COUNT(*) as count FROM cases WHERE status = ?', ['ACTIVE']),
+  totalCases: queryCount('SELECT COUNT(*) as count FROM cases'),
+  documentsGenerated: queryCount('SELECT COUNT(*) as count FROM documents'),
+}));
 
-ipcMain.handle('diary:get', (_, caseId) => {
-  const db = getDatabase();
-  const results = [];
-  const stmt = db.prepare(
-    'SELECT * FROM case_diary WHERE case_id = ? ORDER BY entry_date DESC, entry_time DESC'
-  );
-  stmt.bind([caseId]);
-  while (stmt.step()) results.push(stmt.getAsObject());
-  stmt.free();
-  return results;
-});
+ipcMain.handle('doc:get-for-case', (_, cid) => getDocumentsForCase(cid));
+ipcMain.handle('doc:get-required', (_, ct) => getRequiredDocuments(ct));
+ipcMain.handle('doc:save-record', (_, cid, dt, dn, dp) => saveDocumentRecord(cid, dt, dn, dp));
+ipcMain.handle('doc:generate', async (_, cid, dk, cd) => await generateDocumentForCase(cid, dk, cd));
+ipcMain.handle('doc:save-as-pdf', async (_, html, fn) => await generateAndSavePDF(html, fn));
 
-app.on('window-all-closed', () => {
-  closeDatabase();
-  if (process.platform !== 'darwin') app.quit();
-});
-
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) createWindow();
-});
+app.on('window-all-closed', () => { closeDatabase(); if (process.platform !== 'darwin') app.quit(); });
+app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
