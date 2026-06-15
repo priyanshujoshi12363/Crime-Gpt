@@ -1,143 +1,261 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { getEmbedding } from './ai-setup.js';
+import { getEmbedding, askOllama } from './ai-setup.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-let VectraLocalIndex;
-let lawIndex = null;
-let caseIndex = null;
+let sectionsStore = [];
 
-async function getVectra() {
-  if (!VectraLocalIndex) {
-    const vectra = await import('vectra');
-    VectraLocalIndex = vectra.LocalIndex;
+function getStorePath() {
+  const dbDir = path.join(__dirname, '..', '..', 'database');
+  if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
   }
-  return VectraLocalIndex;
+  return path.join(dbDir, 'sections.json');
 }
 
-function getBasePath() {
-  const dbPath = path.join(__dirname, '..', '..', 'database', 'vectra');
-  if (!fs.existsSync(dbPath)) fs.mkdirSync(dbPath, { recursive: true });
-  return dbPath;
+function cosineSimilarity(a, b) {
+  let dot = 0, magA = 0, magB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    magA += a[i] * a[i];
+    magB += b[i] * b[i];
+  }
+  if (magA === 0 || magB === 0) return 0;
+  return dot / (Math.sqrt(magA) * Math.sqrt(magB));
 }
 
 export async function initVectorStore() {
-  const basePath = getBasePath();
-  if (!fs.existsSync(basePath)) fs.mkdirSync(basePath, { recursive: true });
-
-  const Index = await getVectra();
-  lawIndex = new Index(path.join(basePath, 'laws'));
-  caseIndex = new Index(path.join(basePath, 'cases'));
-
-  if (!await lawIndex.isIndexCreated()) await lawIndex.createIndex();
-  if (!await caseIndex.isIndexCreated()) await caseIndex.createIndex();
-
-  console.log('Vector store ready at:', basePath);
-}
-
-function chunkText(text, maxChunkSize = 500) {
-  const sentences = text.split(/(?<=[.!?])\s+/);
-  const chunks = [];
-  let current = '';
-
-  for (const sentence of sentences) {
-    if ((current + sentence).length > maxChunkSize && current.length > 0) {
-      chunks.push(current.trim());
-      current = sentence;
-    } else {
-      current += ' ' + sentence;
+  const storePath = getStorePath();
+  if (fs.existsSync(storePath)) {
+    try {
+      sectionsStore = JSON.parse(fs.readFileSync(storePath, 'utf-8'));
+      console.log(`[VectorDB] Loaded ${sectionsStore.length} sections`);
+    } catch (err) {
+      console.error('[VectorDB] Failed to load store:', err.message);
+      sectionsStore = [];
     }
   }
-  if (current.trim()) chunks.push(current.trim());
-  return chunks;
+}
+
+export async function rebuildCache() {
+  const storePath = getStorePath();
+  if (fs.existsSync(storePath)) {
+    try {
+      sectionsStore = JSON.parse(fs.readFileSync(storePath, 'utf-8'));
+      console.log(`[VectorDB] Cache rebuilt: ${sectionsStore.length} sections`);
+    } catch (err) {
+      console.error('[VectorDB] Cache rebuild failed:', err.message);
+      sectionsStore = [];
+    }
+  }
+}
+
+function parseSections(content, lawName) {
+  content = content.toLowerCase();
+  const sections = [];
+  const regex = /(?:bns|bnss|bsa|special act)\s*(?:section)?\s*(\d+)?\s*[-–]*\s*([^\n]+)\n([\s\S]*?)(?=(?:bns|bnss|bsa|special act)\s|$)/gi;
+  let match;
+
+  while ((match = regex.exec(content)) !== null) {
+    const sectionNumber = match[1] || '';
+    const title = match[2].trim().substring(0, 200);
+    const body = match[3].trim();
+
+    const coreMatch = body.match(/(?:core content|covers):?\s*([\s\S]*?)(?=(?:procedure|punishment|bail|investigation):|(?:illustration):|$)/i);
+    const procMatch = body.match(/(?:procedure):?\s*([\s\S]*?)(?=(?:illustration):|$)/i);
+    const illusMatch = body.match(/(?:illustration):?\s*([\s\S]*?)$/i);
+
+    const coreContent = coreMatch ? coreMatch[1].trim() : body;
+    const procedure = procMatch ? procMatch[1].trim() : '';
+    const illustration = illusMatch ? illusMatch[1].trim() : '';
+
+    if (coreContent.length > 10) {
+      sections.push({ law: lawName, section: sectionNumber, title, coreContent, procedure, illustration });
+    }
+  }
+
+  if (sections.length === 0) {
+    const chunks = content.split(/\n\n+/).filter(c => c.trim().length > 50);
+    for (const chunk of chunks) {
+      const titleMatch = chunk.match(/^(.+?)(?:\n|$)/);
+      sections.push({ law: lawName, section: '', title: titleMatch ? titleMatch[1].trim().substring(0, 200) : '', coreContent: chunk, procedure: '', illustration: '' });
+    }
+  }
+
+  return sections;
 }
 
 export async function indexLawFile(filePath, lawName) {
-  if (!lawIndex) throw new Error('Vector store not initialized');
   const content = fs.readFileSync(filePath, 'utf-8');
-  const chunks = chunkText(content);
+  const sections = parseSections(content, lawName);
+  console.log(`[VectorDB] Indexing ${lawName}: ${sections.length} sections`);
 
-  for (let i = 0; i < chunks.length; i++) {
-    const embedding = await getEmbedding(chunks[i]);
-    await lawIndex.insertItem({
-      vector: embedding,
-      metadata: { law: lawName, type: 'chunk', index: i, text: chunks[i].substring(0, 500) }
-    });
+  let indexed = 0, skipped = 0;
+
+  for (const s of sections) {
+    const text = `${s.law} section ${s.section} ${s.title} ${s.coreContent.substring(0, 2000)}`;
+    try {
+      const embedding = await getEmbedding(text);
+      if (embedding && embedding.length === 768) {
+        s.embedding = embedding;
+        sectionsStore.push(s);
+        indexed++;
+      } else {
+        skipped++;
+      }
+    } catch (err) {
+      skipped++;
+    }
   }
-  console.log(`Indexed ${lawName}: ${chunks.length} chunks`);
-}
 
-export async function indexCaseJSON(caseData) {
-  if (!caseIndex) throw new Error('Vector store not initialized');
-  const text = `FIR ${caseData.fir_number}: ${caseData.description}. Location: ${caseData.incident_location}. Sections: ${(caseData.sections_applied || []).join(', ')}`;
-  const embedding = await getEmbedding(text);
-  await caseIndex.insertItem({
-    vector: embedding,
-    metadata: { type: 'case', fir_number: caseData.fir_number, description: caseData.description, location: caseData.incident_location, date: caseData.incident_date, sections: caseData.sections_applied || [] }
-  });
+  fs.writeFileSync(getStorePath(), JSON.stringify(sectionsStore));
+  console.log(`[VectorDB] ${lawName} done. Indexed: ${indexed}, Skipped: ${skipped}, Total: ${sectionsStore.length}`);
 }
 
 export async function searchLaws(query, limit = 5) {
-  if (!lawIndex) {
-    console.log('ERROR: lawIndex is null');
-    return [];
-  }
-  
-  console.log('Searching for:', query);
-  
+  if (sectionsStore.length === 0) return [];
+
   try {
-    const embedding = await getEmbedding(query);
-    console.log('Embedding received, length:', embedding?.length);
-    
-    if (!embedding || embedding.length === 0) {
-      console.log('ERROR: Empty embedding');
-      return [];
-    }
-    
-    const results = await lawIndex.queryItems(embedding, limit);
-    console.log('Raw results:', results?.length || 0);
-    
-    if (!results || results.length === 0) {
-      console.log('No results from Vectra');
-      return [];
-    }
-    
-    return results.map(r => ({ 
-      score: Math.round(r.score * 100), 
-      ...r.item.metadata 
-    }));
-  } catch (error) {
-    console.error('Search error:', error);
+    const queryEmbedding = await getEmbedding(query);
+    if (!queryEmbedding || queryEmbedding.length !== 768) return [];
+
+    const scored = sectionsStore
+      .filter(s => s.embedding && s.embedding.length === 768)
+      .map(s => ({
+        score: Math.round(cosineSimilarity(queryEmbedding, s.embedding) * 100),
+        law: s.law, section: s.section, title: s.title,
+        coreContent: s.coreContent, procedure: s.procedure, illustration: s.illustration
+      }));
+
+    scored.sort((a, b) => b.score - a.score);
+    return scored.slice(0, limit);
+  } catch (err) {
+    console.error('[VectorDB] Search error:', err.message);
     return [];
   }
 }
+const SEARCH_QUERY_PROMPT = `You are a legal search expert for Indian criminal law. You know the three new laws:
 
-export async function searchCases(query, limit = 3) {
-  if (!caseIndex) return [];
-  const embedding = await getEmbedding(query);
-  const results = await caseIndex.queryItems(embedding, limit);
-  return results.map(r => ({ score: Math.round(r.score * 100), ...r.item.metadata }));
-}
+BNS (Bharatiya Nyaya Sanhita 2023) = Crimes and punishments
+- Examples: theft (303), murder (101), rape (63), robbery (309), assault, kidnapping, fraud, dowry death (80), house trespass (331)
 
-export function buildLegalContext(laws, cases) {
+BNSS (Bharatiya Nagarik Suraksha Sanhita 2023) = Police procedures
+- Examples: FIR registration (173), arrest without warrant (35), search (97), remand (187), charge sheet (193)
+
+BSA (Bharatiya Sakshya Adhiniyam 2023) = Evidence rules
+- Examples: electronic evidence (61, 63), confessions (22, 23), burden of proof (105), witness testimony (124)
+
+A police officer asked: "{{QUERY}}"
+
+Your job: Write ONE short search query that will find the exact legal sections needed.
+
+Rules:
+- Use the crime name + any important details (night, weapon, dwelling, consent, etc.)
+- Use BNS for crime questions, BNSS for procedure questions, BSA for evidence questions
+- Maximum 10 words
+- No filler words like "sections under" or "what is" or "tell me about"
+- Just the keywords
+
+Examples:
+- "theft at night" → "theft night house breaking dwelling bns"
+- "how to arrest without warrant" → "arrest without warrant procedure bnss"
+- "what evidence needed for murder" → "murder evidence collection bsa"
+- "rape complaint procedure" → "rape fir medical evidence procedure bnss"
+- "dowry death what section" → "dowry death bns section 80"
+
+Return ONLY the search query. Nothing else.`;
+const FINAL_ANSWER_PROMPT = `You are CrimeGPT, a senior legal advisor for Indian police officers.
+You specialize in BNS 2023, BNSS 2023, and BSA 2023.
+
+The officer asked: "{{QUERY}}"
+
+We searched our legal database and found these relevant sections:
+
+{{CONTEXT}}
+
+Your job: Read the question and references. Give a complete, accurate answer.
+
+Structure your response:
+
+1. RELEVANT LEGAL SECTIONS
+   List each section with exact number and title from the references.
+
+2. LEGAL EXPLANATION
+   Explain what each section means in simple terms.
+
+3. PROCEDURE TO FOLLOW
+   Step-by-step what the officer should do.
+
+4. EVIDENCE TO COLLECT
+   What evidence is needed and how to collect it.
+
+5. KEY POINTS
+   Bail status, urgency, victim protection, or important cautions.
+
+Rules:
+- Only cite section numbers from the REFERENCES above
+- If references don't cover something, say so honestly
+- Be direct and actionable
+- Respond in the same language as the officer's question`;
+
+export async function getLegalOpinion(query) {
+  console.log('\n═══════════════════════════════════');
+  console.log(' RAG PIPELINE');
+  console.log('═══════════════════════════════════');
+  console.log(` Officer Query: "${query}"`);
+
+  console.log('\n[Step 1] Qwen writing search query...');
+  const searchPrompt = SEARCH_QUERY_PROMPT.replace('{{QUERY}}', query);
+  let searchQuery = query;
+
+  try {
+    const response = await askOllama(searchPrompt);
+    searchQuery = response.trim().substring(0, 300);
+    console.log(' Search query:', searchQuery);
+  } catch {
+    console.log(' Using raw query as fallback');
+  }
+
+  console.log('\n[Step 2] Nomic searching database...');
+  let results = await searchLaws(searchQuery, 5);
+
+  if (results.length === 0) {
+    console.log(' No results, trying original query...');
+    results = await searchLaws(query, 5);
+  }
+
+  console.log(` Retrieved: ${results.length} sections`);
+  results.forEach((r, i) => {
+    console.log(`  ${i + 1}. ${r.law.toUpperCase()} §${r.section} - "${r.title}" (${r.score}%)`);
+  });
+
+  if (results.length === 0) {
+    return 'No matching legal sections found in the database. Please try rephrasing your question.';
+  }
+
+  console.log('\n[Step 3] Qwen generating answer...');
   let context = '';
+  results.forEach((r, i) => {
+    context += `\n--- REFERENCE ${i + 1} ---\n`;
+    context += `LAW: ${r.law.toUpperCase()} | SECTION: ${r.section} | TITLE: ${r.title}\n`;
+    context += `SCORE: ${r.score}% match\n`;
+    context += `CONTENT: ${r.coreContent?.substring(0, 1500)}\n`;
+    if (r.procedure && r.procedure.length > 5) {
+      context += `PROCEDURE: ${r.procedure.substring(0, 800)}\n`;
+    }
+    if (r.illustration && r.illustration.length > 5) {
+      context += `EXAMPLE: ${r.illustration.substring(0, 600)}\n`;
+    }
+  });
 
-  if (laws.length > 0) {
-    context += 'LEGAL SECTIONS FROM DATABASE:\n';
-    laws.forEach((l, i) => {
-      context += `${i + 1}. [${l.law}] ${l.text}\n\n`;
-    });
-  }
+  const finalPrompt = FINAL_ANSWER_PROMPT
+    .replace('{{CONTEXT}}', context)
+    .replace('{{QUERY}}', query);
 
-  if (cases.length > 0) {
-    context += 'SIMILAR PAST CASES:\n';
-    cases.forEach((c, i) => {
-      context += `${i + 1}. ${c.fir_number || 'Case'}: ${c.text || c.description}\n\n`;
-    });
-  }
-
-  return context;
+  const answer = await askOllama(finalPrompt);
+  console.log('═══════════════════════════════════\n');
+  return answer;
 }
