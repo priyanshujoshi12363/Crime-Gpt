@@ -150,14 +150,31 @@
 
 ## 📸 Screenshots
 
-> **📁 All screenshots are placed in `docs/screenshots/`.** Drop your 4 images into that folder with the filenames below and they will render here automatically.
+> **📁 All screenshots are placed in `docs/screenshots/`.** Drop your 4 images into that folder and they will render here automatically.
 
-| Screenshot | File Path | Highlights |
-|---|---|---|
-| 🛡️ **Login** | `docs/screenshots/crime.png` | Multilingual login (EN / हिन्दी / ગુજરાતી) with secure local authentication |
-| 📊 **Dashboard** | `docs/screenshots/crime1.png` | Active cases, totals, documents generated, recent activity |
-| 🤖 **New FIR — AI Analysis** | `docs/screenshots/crime2.png` | 3-step FIR wizard with **AI-suggested BNS/BNSS/BSA sections** |
-| 🌐 **BharatPol Network** | `docs/screenshots/crime3.png` | National criminal lookup, case sync, inter-state case sharing |
+### 🛡️ Login — Multilingual Authentication
+**File:** `docs/screenshots/crime.png`  
+**Highlights:** Secure local login (EN / हिन्दी / ગુજરાતી), SHA-256 password hashing, first-time admin setup wizard
+
+![Login Screen](docs/screenshots/crime.png)
+
+### 📊 Dashboard — Case Overview
+**File:** `docs/screenshots/crime1.png`  
+**Highlights:** Active cases, total cases, documents generated counters, recent activity feed
+
+![Dashboard](docs/screenshots/crime1.png)
+
+### 🤖 New FIR — AI Section Analysis
+**File:** `docs/screenshots/crime2.png`  
+**Highlights:** 3-step FIR wizard with **AI-suggested BNS/BNSS/BSA sections**, one-click auto-fill, multilingual input
+
+![New FIR AI Analysis](docs/screenshots/crime2.png)
+
+### 🌐 BharatPol Network — National Integration
+**File:** `docs/screenshots/crime3.png`  
+**Highlights:** National criminal lookup, case sync, inter-state case sharing via the BharatPol network
+
+![BharatPol Network](docs/screenshots/crime3.png)
 
 ### UI Preview (ASCII)
 
