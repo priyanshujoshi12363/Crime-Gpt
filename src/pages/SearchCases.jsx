@@ -181,7 +181,8 @@ export default function SearchCases({ onNavigate, onViewCase }) {
                     onChange={handleSearchInputChange}
                     onKeyDown={handleKeyDown}
                     placeholder="Search by FIR number, case type, location, description, or officer name..."
-                    className="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-300 transition"
+                    className="w-full pl-12 pr-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition font-medium"
+                    style={{ color: '#111827', caretColor: '#f97316' }}
                   />
                 </div>
                 <button 

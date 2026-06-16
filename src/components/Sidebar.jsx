@@ -43,7 +43,7 @@ export default function Sidebar({ user, activeView, onNavigate, onLogout }) {
         <NavButton 
           icon={<Clock size={18} />} 
           label="Case Diary" 
-          active={activeView === 'diary'} 
+          active={activeView === 'search'} 
           onClick={() => onNavigate('search')} 
         />
         <NavButton 

@@ -607,106 +607,130 @@ export default function CaseDetail({ onNavigate, caseId }) {
           </div>
         </div>
 
-        {/* ============================================ */}
-        {/* DIARY ENTRY MODAL — WITH IMAGE UPLOAD        */}
-        {/* ============================================ */}
-        {showDiaryForm && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
-              <div className="flex items-center justify-between mb-4 sticky top-0 bg-white pb-2">
-                <h3 className="text-lg font-semibold text-gray-800">Add Diary Entry</h3>
-                <button onClick={() => { setShowDiaryForm(false); diaryImages.forEach(img => { if (img.preview) URL.revokeObjectURL(img.preview); }); setDiaryImages([]); }} className="p-2 hover:bg-gray-100 rounded-xl"><X size={20} /></button>
-              </div>
+      {/* ============================================ */}
+{/* DIARY ENTRY MODAL — WITH IMAGE UPLOAD        */}
+{/* ============================================ */}
+{showDiaryForm && (
+  <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
+      <div className="flex items-center justify-between mb-4 sticky top-0 bg-white pb-2">
+        <h3 className="text-lg font-semibold text-gray-800">Add Diary Entry</h3>
+        <button onClick={() => { setShowDiaryForm(false); diaryImages.forEach(img => { if (img.preview) URL.revokeObjectURL(img.preview); }); setDiaryImages([]); }} className="p-2 hover:bg-gray-100 rounded-xl"><X size={20} /></button>
+      </div>
 
-              <div className="space-y-4">
-                {/* Event Type */}
-                <div>
-                  <label className="text-xs font-medium text-gray-500 mb-1 block">Event Type</label>
-                  <select value={newDiaryEntry.event_type} onChange={(e) => setNewDiaryEntry(p => ({ ...p, event_type: e.target.value }))}
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/40">
-                    {EVENT_TYPES.map(et => <option key={et.value} value={et.value}>{et.label}</option>)}
-                  </select>
-                </div>
+      <div className="space-y-4">
+        {/* Event Type */}
+        <div>
+          <label className="text-xs font-medium text-gray-500 mb-1 block">Event Type</label>
+          <select 
+            value={newDiaryEntry.event_type} 
+            onChange={(e) => setNewDiaryEntry(p => ({ ...p, event_type: e.target.value }))}
+            className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition font-medium"
+            style={{ color: '#111827' }}
+          >
+            {EVENT_TYPES.map(et => <option key={et.value} value={et.value} style={{color: '#111827'}}>{et.label}</option>)}
+          </select>
+        </div>
 
-                {/* Title */}
-                <div>
-                  <label className="text-xs font-medium text-gray-500 mb-1 block">Title *</label>
-                  <input type="text" value={newDiaryEntry.title} onChange={(e) => setNewDiaryEntry(p => ({ ...p, title: e.target.value }))}
-                    placeholder="Brief title for this entry" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/40" />
-                </div>
+        {/* Title */}
+        <div>
+          <label className="text-xs font-medium text-gray-500 mb-1 block">Title *</label>
+          <input 
+            type="text" 
+            value={newDiaryEntry.title} 
+            onChange={(e) => setNewDiaryEntry(p => ({ ...p, title: e.target.value }))}
+            placeholder="Brief title for this entry" 
+            className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition font-medium"
+            style={{ color: '#111827', caretColor: '#f97316' }}
+          />
+        </div>
 
-                {/* Date & Time */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div><label className="text-xs font-medium text-gray-500 mb-1 block">Date</label><input type="date" value={newDiaryEntry.entry_date} onChange={(e) => setNewDiaryEntry(p => ({ ...p, entry_date: e.target.value }))} className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/40" /></div>
-                  <div><label className="text-xs font-medium text-gray-500 mb-1 block">Time</label><input type="time" value={newDiaryEntry.entry_time} onChange={(e) => setNewDiaryEntry(p => ({ ...p, entry_time: e.target.value }))} className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/40" /></div>
-                </div>
-
-                {/* Location */}
-                <div>
-                  <label className="text-xs font-medium text-gray-500 mb-1 block">Location</label>
-                  <input type="text" value={newDiaryEntry.location} onChange={(e) => setNewDiaryEntry(p => ({ ...p, location: e.target.value }))}
-                    placeholder="Where this took place (optional)" className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/40" />
-                </div>
-
-                {/* Description */}
-                <div>
-                  <label className="text-xs font-medium text-gray-500 mb-1 block">Description</label>
-                  <textarea rows={3} value={newDiaryEntry.description} onChange={(e) => setNewDiaryEntry(p => ({ ...p, description: e.target.value }))}
-                    placeholder="Details of what happened..." className="w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/40 resize-none" />
-                </div>
-
-                {/* ─── IMAGE UPLOAD SECTION ─── */}
-                <div>
-                  <label className="text-xs font-medium text-gray-500 mb-2 block">Attach Photos</label>
-                  
-                  {/* Selected images preview */}
-                  {diaryImages.length > 0 && (
-                    <div className="grid grid-cols-3 gap-2 mb-3">
-                      {diaryImages.map((img) => (
-                        <div key={img.id} className="relative aspect-square bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group">
-                          <img src={img.preview} alt={img.name} className="w-full h-full object-cover" />
-                          <button
-                            onClick={() => removeDiaryImage(img.id)}
-                            className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg"
-                          >
-                            <X size={12} />
-                          </button>
-                          <p className="absolute bottom-0 left-0 right-0 text-[9px] text-white bg-black/50 px-1.5 py-0.5 truncate">{img.name}</p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Upload button */}
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    onChange={handleDiaryImageSelect}
-                    className="hidden"
-                    id="diary-image-upload"
-                  />
-                  <label
-                    htmlFor="diary-image-upload"
-                    className="flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-sm text-gray-500 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50/30 transition cursor-pointer"
-                  >
-                    <Upload size={16} />
-                    {diaryImages.length > 0 ? `Add More Photos (${diaryImages.length} selected)` : 'Click to Upload Photos'}
-                  </label>
-                  <p className="text-[10px] text-gray-400 mt-1">Supports JPG, PNG — max 10MB each</p>
-                </div>
-
-                {/* Submit */}
-                <button onClick={handleAddDiaryEntry} disabled={savingDiary || !newDiaryEntry.title.trim()}
-                  className="w-full py-3 bg-gradient-to-r from-orange-400 to-green-500 text-white rounded-xl font-medium hover:from-orange-500 hover:to-green-600 transition shadow-lg shadow-orange-200 disabled:opacity-50 flex items-center justify-center gap-2">
-                  {savingDiary ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />}
-                  {savingDiary ? 'Saving...' : 'Add Entry'}
-                </button>
-              </div>
-            </div>
+        {/* Date & Time */}
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Date</label>
+            <input 
+              type="date" 
+              value={newDiaryEntry.entry_date} 
+              onChange={(e) => setNewDiaryEntry(p => ({ ...p, entry_date: e.target.value }))} 
+              className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition font-medium"
+              style={{ color: '#111827' }}
+            />
           </div>
-        )}
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Time</label>
+            <input 
+              type="time" 
+              value={newDiaryEntry.entry_time} 
+              onChange={(e) => setNewDiaryEntry(p => ({ ...p, entry_time: e.target.value }))} 
+              className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition font-medium"
+              style={{ color: '#111827' }}
+            />
+          </div>
+        </div>
+
+        {/* Location */}
+        <div>
+          <label className="text-xs font-medium text-gray-500 mb-1 block">Location</label>
+          <input 
+            type="text" 
+            value={newDiaryEntry.location} 
+            onChange={(e) => setNewDiaryEntry(p => ({ ...p, location: e.target.value }))}
+            placeholder="Where this took place (optional)" 
+            className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 transition font-medium"
+            style={{ color: '#111827', caretColor: '#f97316' }}
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="text-xs font-medium text-gray-500 mb-1 block">Description</label>
+          <textarea 
+            rows={3} 
+            value={newDiaryEntry.description} 
+            onChange={(e) => setNewDiaryEntry(p => ({ ...p, description: e.target.value }))}
+            placeholder="Details of what happened..." 
+            className="w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-2.5 text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 resize-none transition font-medium"
+            style={{ color: '#111827', caretColor: '#f97316' }}
+          />
+        </div>
+
+        {/* IMAGE UPLOAD SECTION — no changes needed, already visible */}
+        <div>
+          <label className="text-xs font-medium text-gray-500 mb-2 block">Attach Photos</label>
+          
+          {diaryImages.length > 0 && (
+            <div className="grid grid-cols-3 gap-2 mb-3">
+              {diaryImages.map((img) => (
+                <div key={img.id} className="relative aspect-square bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group">
+                  <img src={img.preview} alt={img.name} className="w-full h-full object-cover" />
+                  <button onClick={() => removeDiaryImage(img.id)} className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-lg">
+                    <X size={12} />
+                  </button>
+                  <p className="absolute bottom-0 left-0 right-0 text-[9px] text-white bg-black/50 px-1.5 py-0.5 truncate">{img.name}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleDiaryImageSelect} className="hidden" id="diary-image-upload" />
+          <label htmlFor="diary-image-upload" className="flex items-center justify-center gap-2 w-full py-3 border-2 border-dashed border-gray-300 rounded-xl text-sm text-gray-500 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50/30 transition cursor-pointer">
+            <Upload size={16} />
+            {diaryImages.length > 0 ? `Add More Photos (${diaryImages.length} selected)` : 'Click to Upload Photos'}
+          </label>
+          <p className="text-[10px] text-gray-400 mt-1">Supports JPG, PNG — max 10MB each</p>
+        </div>
+
+        {/* Submit */}
+        <button onClick={handleAddDiaryEntry} disabled={savingDiary || !newDiaryEntry.title.trim()}
+          className="w-full py-3 bg-gradient-to-r from-orange-400 to-green-500 text-white rounded-xl font-medium hover:from-orange-500 hover:to-green-600 transition shadow-lg shadow-orange-200 disabled:opacity-50 flex items-center justify-center gap-2">
+          {savingDiary ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />}
+          {savingDiary ? 'Saving...' : 'Add Entry'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
         {/* IMAGE VIEWER MODAL */}
         {viewingImage && (
