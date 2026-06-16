@@ -68,7 +68,16 @@ CREATE TABLE IF NOT EXISTS case_diary (
   officer_name TEXT,
   created_at TEXT DEFAULT (datetime('now', 'localtime'))
 );
+CREATE TABLE IF NOT EXISTS diary_images (
+  id TEXT PRIMARY KEY,
+  diary_entry_id TEXT NOT NULL REFERENCES case_diary(id),
+  file_path TEXT NOT NULL,
+  file_name TEXT NOT NULL,
+  file_size INTEGER,
+  created_at TEXT DEFAULT (datetime('now', 'localtime'))
+);
 
+CREATE INDEX IF NOT EXISTS idx_diary_images_entry ON diary_images(diary_entry_id);
 CREATE INDEX IF NOT EXISTS idx_cases_fir ON cases(fir_number);
 CREATE INDEX IF NOT EXISTS idx_cases_status ON cases(status);
 CREATE INDEX IF NOT EXISTS idx_evidence_case ON evidence_files(case_id);

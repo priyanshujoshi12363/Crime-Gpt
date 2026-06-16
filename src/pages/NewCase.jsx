@@ -79,10 +79,22 @@ export default function NewCase({ onNavigate }) {
         return { originalName: f.name, buffer: base64, size: f.size, description: 'Evidence image' };
       }));
 
-      const sections = [];
-      if (aiSections?.bns_sections) aiSections.bns_sections.forEach(s => sections.push({ law: 'BNS', section: s.section, title: s.title, confidence: s.confidence, reasoning: s.reasoning }));
-      if (aiSections?.bnss_sections) aiSections.bnss_sections.forEach(s => sections.push({ law: 'BNSS', section: s.section, title: s.title }));
-
+     const sections = [];
+if (aiSections?.summary && typeof aiSections.summary === 'string') {
+  const lines = aiSections.summary.split('\n').filter(line => line.trim());
+  for (const line of lines) {
+    const match = line.match(/(BNS|BNSS|BSA)\s+Section\s+(\d+)\s*[-–]\s*(.+)/i);
+    if (match) {
+      sections.push({
+        law: match[1].toUpperCase(),
+        section: match[2],
+        title: match[3].trim(),
+        confidence: 90,
+        reasoning: 'AI suggested based on incident description'
+      });
+    }
+  }
+}
       const result = await window.crimeGPT.registerCase({
         case_type: form.caseType, incident_date: form.incidentDate, incident_time: form.incidentTime,
         incident_location: form.incidentLocation, description: form.description,

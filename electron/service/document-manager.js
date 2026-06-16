@@ -36,7 +36,12 @@ export function getRequiredDocuments(caseType) {
 
 export function getGeneratedDocuments(caseId) {
   const db = getDatabase();
-  return db.prepare('SELECT * FROM documents WHERE case_id = ? ORDER BY created_at DESC').all(caseId);
+  const stmt = db.prepare('SELECT * FROM documents WHERE case_id = ? ORDER BY created_at DESC');
+  stmt.bind([caseId]);
+  const docs = [];
+  while (stmt.step()) docs.push(stmt.getAsObject());
+  stmt.free();
+  return docs;
 }
 
 export function saveDocumentRecord(caseId, docType, docName, docPath) {
@@ -50,7 +55,11 @@ export function saveDocumentRecord(caseId, docType, docName, docPath) {
 
 export function getDocumentsForCase(caseId) {
   const db = getDatabase();
-  const caseData = db.prepare('SELECT case_type FROM cases WHERE id = ?').get(caseId);
+  const stmt = db.prepare('SELECT case_type FROM cases WHERE id = ?');
+  stmt.bind([caseId]);
+  const caseData = stmt.step() ? stmt.getAsObject() : null;
+  stmt.free();
+  
   if (!caseData) return [];
 
   const requiredDocs = getRequiredDocuments(caseData.case_type);
@@ -89,28 +98,28 @@ export async function generateDocumentForCase(caseId, docKey, caseData) {
 
   try {
     if (docKey === 'FIR') {
-      const { renderFIR } = await import('../../doc/fir.js');
+      const { renderFIR } = await import('../../electron/doc/FIR.js');
       html = renderFIR(caseData);
     } else if (docKey === 'CHARGESHEET') {
-      const { renderChargesheet } = await import('../../doc/chargesheet.js');
+      const { renderChargesheet } = await import('../../electron/doc/chargeSheet.js');
       html = renderChargesheet(caseData);
     } else if (docKey === 'MEDICAL_LETTER') {
-      const { renderMedicalLetter } = await import('../../doc/medical.js');
+      const { renderMedicalLetter } = await import('../../electron/doc/medicalLetter.js');
       html = renderMedicalLetter(caseData);
     } else if (docKey === 'REMAND_LETTER') {
-      const { renderRemandLetter } = await import('../../doc/remand.js');
+      const { renderRemandLetter } = await import('../../electron/doc/remandLetter.js');
       html = renderRemandLetter(caseData);
     } else if (docKey === 'SEIZURE_RECEIPT') {
-      const { renderSeizurePanchanama } = await import('../../doc/seizure.js');
+      const { renderSeizurePanchanama } = await import('../../electron/doc/seizureLetter.js');
       html = renderSeizurePanchanama(caseData);
     } else if (docKey === 'COURT_CUSTODY') {
-      const { renderCustodyLetter } = await import('../../doc/custody.js');
+      const { renderCustodyLetter } = await import('../../electron/doc/custodyLetter.js');
       html = renderCustodyLetter(caseData);
     } else if (docKey === 'PANCHNAMA') {
-      const { renderAccusedPanchanama } = await import('../../doc/panchanama.js');
+      const { renderAccusedPanchanama } = await import('../../electron/doc/accusedPunchnama.js');
       html = renderAccusedPanchanama(caseData);
     } else if (docKey === 'FACE_ID') {
-      const { renderFaceIDForm } = await import('../../doc/faceid.js');
+      const { renderFaceIDForm } = await import('../../electron/doc/face_id.js');
       html = renderFaceIDForm(caseData);
     }
 

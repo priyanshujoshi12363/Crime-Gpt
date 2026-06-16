@@ -25,7 +25,7 @@ let dataIndexed = false;
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1400, height: 900, minWidth: 1024, minHeight: 768,
-    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false },
+    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false , webSecurity: false },
     title: 'CrimeGPT', show: false, autoHideMenuBar: true,
     icon: path.join(__dirname, '../public/logo1.png')
   });
@@ -70,13 +70,6 @@ function queryAll(stmt, params = []) {
   while (stmt.step()) results.push(stmt.getAsObject());
   stmt.free();
   return results;
-}
-
-function queryOne(stmt, params = []) {
-  if (params.length) stmt.bind(params);
-  const result = stmt.step() ? stmt.getAsObject() : null;
-  stmt.free();
-  return result;
 }
 
 function queryCount(sql, params = []) {
@@ -137,15 +130,41 @@ ipcMain.handle('case:get-all', () => queryAll(getDatabase().prepare('SELECT * FR
 ipcMain.handle('case:search', (_, q) => queryAll(getDatabase().prepare('SELECT * FROM cases WHERE fir_number LIKE ? OR description LIKE ? OR incident_location LIKE ? ORDER BY created_at DESC'), [`%${q}%`, `%${q}%`, `%${q}%`]));
 
 ipcMain.handle('diary:add', async (_, data) => {
+  console.log('📨 [IPC] diary:add received:', {
+    case_id: data.case_id,
+    title: data.title,
+    event_type: data.event_type,
+    imagesCount: data.images?.length || 0,
+    hasImages: !!data.images,
+    imageDetails: data.images?.map(i => ({
+      name: i.originalName || i.name,
+      base64Len: i.base64?.length || 0,
+      size: i.size
+    }))
+  });
+
   const result = await addDiaryEntry(data.case_id, data);
+  
   if (result.success) {
     const db = getDatabase();
     const stmt = db.prepare('SELECT * FROM cases WHERE id = ?');
     stmt.bind([data.case_id]);
     const cd = stmt.step() ? stmt.getAsObject() : null;
     stmt.free();
-    await indexCaseData({ id: result.entryId, fir_number: cd?.fir_number, description: data.description, incident_location: cd?.incident_location, incident_date: data.entry_date, case_type: 'DIARY_ENTRY', sections_applied: [] });
+    if (cd) {
+      await indexCaseData({ 
+        id: result.entryId, 
+        fir_number: cd?.fir_number, 
+        description: data.description, 
+        incident_location: cd?.incident_location, 
+        incident_date: data.entry_date, 
+        case_type: 'DIARY_ENTRY', 
+        sections_applied: [] 
+      });
+    }
   }
+  
+  console.log('📤 [IPC] diary:add result:', result);
   return result;
 });
 ipcMain.handle('diary:get', (_, cid) => queryAll(getDatabase().prepare('SELECT * FROM case_diary WHERE case_id = ? ORDER BY entry_date DESC, entry_time DESC'), [cid]));
@@ -160,7 +179,13 @@ ipcMain.handle('doc:get-for-case', (_, cid) => getDocumentsForCase(cid));
 ipcMain.handle('doc:get-required', (_, ct) => getRequiredDocuments(ct));
 ipcMain.handle('doc:save-record', (_, cid, dt, dn, dp) => saveDocumentRecord(cid, dt, dn, dp));
 ipcMain.handle('doc:generate', async (_, cid, dk, cd) => await generateDocumentForCase(cid, dk, cd));
-ipcMain.handle('doc:save-as-pdf', async (_, html, fn) => await generateAndSavePDF(html, fn));
+ipcMain.handle('doc:save-as-pdf', async (_, html, fn) => {
+  const result = await generateAndSavePDF(html, fn);
+  if (result.success && mainWindow) {
+    mainWindow.webContents.send('download-complete', { filename: fn, path: result.path });
+  }
+  return result;
+});
 
 app.on('window-all-closed', () => { closeDatabase(); if (process.platform !== 'darwin') app.quit(); });
 app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });

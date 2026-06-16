@@ -45,6 +45,11 @@ export async function initDatabase() {
   const schema = fs.readFileSync(schemaPath, 'utf-8');
   db.run(schema);
   
+  // ✅ ADD THESE 4 LINES
+  db.run(`CREATE TABLE IF NOT EXISTS diary_images (id TEXT PRIMARY KEY, diary_entry_id TEXT NOT NULL, file_path TEXT NOT NULL, file_name TEXT NOT NULL, file_size INTEGER, created_at TEXT DEFAULT (datetime('now', 'localtime')))`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_diary_images_entry ON diary_images(diary_entry_id)`);
+  console.log('[Database] diary_images table ready');
+  
   saveToFile();
   return db;
 }

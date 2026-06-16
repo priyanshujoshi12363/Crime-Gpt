@@ -27,4 +27,8 @@ contextBridge.exposeInMainWorld('crimeGPT', {
   getStats: () => ipcRenderer.invoke('dashboard:stats'),
   saveAsPDF: (html, filename) => ipcRenderer.invoke('doc:save-as-pdf', html, filename),
   suggestSections: (query) => ipcRenderer.invoke('ai:suggest-sections', query),
+  getDocsForCase: (caseId) => ipcRenderer.invoke('doc:get-for-case', caseId),
+generateDocument: (caseId, docKey, caseData) => ipcRenderer.invoke('doc:generate', caseId, docKey, caseData),
+saveDocRecord: (caseId, docType, docName, docPath) => ipcRenderer.invoke('doc:save-record', caseId, docType, docName, docPath),
+onDownloadComplete: (callback) => ipcRenderer.on('download-complete', (_, data) => callback(data)),
 });

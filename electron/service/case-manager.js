@@ -11,6 +11,13 @@ function getEvidenceDir(caseId) {
   return dir;
 }
 
+function getDiaryImagesDir(caseId, entryId) {
+  const userDataPath = app?.getPath?.('userData') || path.join(process.cwd(), 'data');
+  const dir = path.join(userDataPath, 'diary_images', caseId, entryId);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  return dir;
+}
+
 export function generateFIRNumber() {
   const year = new Date().getFullYear();
   const random = String(Math.floor(Math.random() * 10000)).padStart(5, '0');
@@ -22,11 +29,14 @@ export async function registerCase(caseData) {
   const caseId = uuidv4();
   const firNumber = caseData.fir_number || generateFIRNumber();
 
-  const complainantJSON = caseData.complainant ? JSON.stringify(caseData.complainant) : '{}';
-  const accusedJSON = caseData.accused ? JSON.stringify(caseData.accused) : '[]';
-  const witnessesJSON = caseData.witnesses ? JSON.stringify(caseData.witnesses) : '[]';
-  const seizedJSON = caseData.seized_items ? JSON.stringify(caseData.seized_items) : '[]';
-  const sectionsJSON = caseData.sections ? JSON.stringify(caseData.sections) : '[]';
+  const complainantJSON = JSON.stringify(caseData.complainant || {});
+  const accusedJSON = JSON.stringify(caseData.accused || []);
+  const witnessesJSON = JSON.stringify(caseData.witnesses || []);
+  const seizedJSON = JSON.stringify(caseData.seized_items || []);
+  const sectionsJSON = JSON.stringify(caseData.sections || []);
+
+  console.log('Saving complainant:', complainantJSON);
+  console.log('Saving accused:', accusedJSON);
 
   db.run(`
     INSERT INTO cases (id, fir_number, case_type, incident_date, incident_time, incident_location, incident_district, description, description_lang, status, officer_name, officer_badge, officer_rank, complainant, accused, witnesses, seized_items, applied_sections)
@@ -67,43 +77,122 @@ export async function registerCase(caseData) {
 
 export async function getFullCase(caseId) {
   const db = getDatabase();
-  const caseData = db.prepare('SELECT * FROM cases WHERE id = ?').get(caseId);
+  
+  const stmt = db.prepare('SELECT * FROM cases WHERE id = ?');
+  stmt.bind([caseId]);
+  const caseData = stmt.step() ? stmt.getAsObject() : null;
+  stmt.free();
+  
   if (!caseData) return null;
 
-  try { caseData.complainant = JSON.parse(caseData.complainant || '{}'); } catch { caseData.complainant = {}; }
-  try { caseData.accused = JSON.parse(caseData.accused || '[]'); } catch { caseData.accused = []; }
-  try { caseData.witnesses = JSON.parse(caseData.witnesses || '[]'); } catch { caseData.witnesses = []; }
-  try { caseData.seized_items = JSON.parse(caseData.seized_items || '[]'); } catch { caseData.seized_items = []; }
-  try { caseData.applied_sections = JSON.parse(caseData.applied_sections || '[]'); } catch { caseData.applied_sections = []; }
+  caseData.complainant = JSON.parse(caseData.complainant || '{}');
+  caseData.accused = JSON.parse(caseData.accused || '[]');
+  caseData.witnesses = JSON.parse(caseData.witnesses || '[]');
+  caseData.seized_items = JSON.parse(caseData.seized_items || '[]');
+  caseData.applied_sections = JSON.parse(caseData.applied_sections || '[]');
 
-  const evidenceStmt = db.prepare('SELECT * FROM evidence_files WHERE case_id = ?');
-  evidenceStmt.bind([caseId]);
-  const evidence = [];
-  while (evidenceStmt.step()) evidence.push(evidenceStmt.getAsObject());
-  evidenceStmt.free();
+  // Load evidence files
+  const evStmt = db.prepare('SELECT * FROM evidence_files WHERE case_id = ?');
+  evStmt.bind([caseId]);
+  caseData.evidence = [];
+  while (evStmt.step()) caseData.evidence.push(evStmt.getAsObject());
+  evStmt.free();
 
-  const docsStmt = db.prepare('SELECT * FROM documents WHERE case_id = ?');
-  docsStmt.bind([caseId]);
-  const documents = [];
-  while (docsStmt.step()) documents.push(docsStmt.getAsObject());
-  docsStmt.free();
+  // Load documents
+  const docStmt = db.prepare('SELECT * FROM documents WHERE case_id = ?');
+  docStmt.bind([caseId]);
+  caseData.documents = [];
+  while (docStmt.step()) caseData.documents.push(docStmt.getAsObject());
+  docStmt.free();
 
+  // Load diary entries WITH their images
   const diaryStmt = db.prepare('SELECT * FROM case_diary WHERE case_id = ? ORDER BY entry_date DESC, entry_time DESC');
   diaryStmt.bind([caseId]);
-  const diary = [];
-  while (diaryStmt.step()) diary.push(diaryStmt.getAsObject());
+  caseData.diary = [];
+  while (diaryStmt.step()) {
+    const entry = diaryStmt.getAsObject();
+    
+    // Load images for this diary entry
+    const imgStmt = db.prepare('SELECT * FROM diary_images WHERE diary_entry_id = ?');
+    imgStmt.bind([entry.id]);
+    entry.images = [];
+    while (imgStmt.step()) entry.images.push(imgStmt.getAsObject());
+    imgStmt.free();
+    
+    caseData.diary.push(entry);
+  }
   diaryStmt.free();
 
-  return { ...caseData, evidence, documents, diary };
+  return caseData;
 }
 
 export async function addDiaryEntry(caseId, entryData) {
   const db = getDatabase();
   const id = uuidv4();
+  
+  console.log('📝 [Diary] Creating entry:', { caseId, entryId: id, title: entryData.title });
+  console.log('📸 [Diary] Images received:', entryData.images?.length || 0);
+
+  // Insert the diary entry
   db.run('INSERT INTO case_diary (id, case_id, entry_date, entry_time, event_type, title, description, location, officer_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
     id, caseId, entryData.entry_date, entryData.entry_time || null,
     entryData.event_type, entryData.title, entryData.description || null,
     entryData.location || null, entryData.officer_name || null
   ]);
+
+  // Handle diary images
+  if (entryData.images && Array.isArray(entryData.images)) {
+    const diaryDir = getDiaryImagesDir(caseId, id);
+    console.log('📁 [Diary] Saving images to:', diaryDir);
+    
+    for (let i = 0; i < entryData.images.length; i++) {
+      const img = entryData.images[i];
+      const ext = path.extname(img.originalName || img.name || 'image.jpg') || '.jpg';
+      const filename = `${uuidv4()}${ext}`;
+      const filePath = path.join(diaryDir, filename);
+      
+      console.log(`💾 [Diary] Processing image ${i + 1}:`, {
+        name: img.originalName || img.name,
+        hasBuffer: !!img.buffer,
+        hasBase64: !!img.base64,
+        base64Length: img.base64?.length || 0,
+        size: img.size || 0
+      });
+      
+      // Determine the buffer source
+      let buffer = null;
+      if (img.buffer) {
+        // If buffer is an ArrayBuffer or Uint8Array
+        buffer = Buffer.from(img.buffer);
+      } else if (img.base64 && img.base64.length > 0) {
+        // If base64 string is provided
+        buffer = Buffer.from(img.base64, 'base64');
+      }
+      
+      if (!buffer || buffer.length === 0) {
+        console.error(`❌ [Diary] No valid image data for image ${i + 1}, skipping`);
+        continue;
+      }
+      
+      // Write to disk
+      fs.writeFileSync(filePath, buffer);
+      console.log(`✅ [Diary] Image saved: ${filePath} (${buffer.length} bytes)`);
+      
+      // Save record to database
+      db.run('INSERT INTO diary_images (id, diary_entry_id, file_path, file_name, file_size) VALUES (?, ?, ?, ?, ?)', [
+        uuidv4(), id, filePath, img.originalName || img.name || filename,
+        img.size || buffer.length
+      ]);
+    }
+  }
+
+  // Verify what was saved
+  const imgCountStmt = db.prepare('SELECT COUNT(*) as count FROM diary_images WHERE diary_entry_id = ?');
+  imgCountStmt.bind([id]);
+  const imgCount = imgCountStmt.step() ? imgCountStmt.getAsObject().count : 0;
+  imgCountStmt.free();
+  
+  console.log(`✅ [Diary] Entry saved successfully. ID: ${id}, Images saved: ${imgCount}`);
+
   return { success: true, entryId: id };
 }
