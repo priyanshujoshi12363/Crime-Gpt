@@ -39,6 +39,61 @@ export default function NewCase({ onNavigate }) {
   const [saving, setSaving] = useState(false);
   const [caseResult, setCaseResult] = useState(null);
   const [firDownloaded, setFirDownloaded] = useState(false);
+  const [aiFilling, setAiFilling] = useState(false);
+
+const autoFillWithAI = async () => {
+  if (!form.description.trim() || form.description.length < 10) {
+    setErrors(p => ({ ...p, description: 'Write at least a short description first' }));
+    return;
+  }
+  
+  setAiFilling(true);
+  try {
+    const prompt = `Based on this FIR description: "${form.description}"
+
+Extract and return ONLY a JSON object with these fields. If a field is not mentioned, leave it empty.
+{
+  "caseType": "Theft/Murder/Rape/Assault/Robbery/Fraud/Kidnapping/Cyber Crime/Domestic Violence/Dowry/Other",
+  "incidentDate": "YYYY-MM-DD",
+  "incidentTime": "HH:MM",
+  "incidentLocation": "location mentioned",
+  "expandedDescription": "Expand the description into a proper police narrative with details",
+  "complainantName": "victim name if mentioned",
+  "complainantPhone": "phone if mentioned",
+  "accusedName": "accused name if mentioned",
+  "accusedAlias": "alias if mentioned",
+  "accusedFatherName": "father name if mentioned",
+  "accusedAge": "age if mentioned",
+  "accusedDescription": "physical description if mentioned"
+}
+
+Return ONLY the JSON. No other text.`;
+
+    const response = await window.crimeGPT.aiChat(prompt);
+    
+    // Parse JSON from AI response
+    const jsonMatch = response.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      const data = JSON.parse(jsonMatch[0]);
+      
+      if (data.caseType) set('caseType', data.caseType);
+      if (data.incidentDate) set('incidentDate', data.incidentDate);
+      if (data.incidentTime) set('incidentTime', data.incidentTime);
+      if (data.incidentLocation) set('incidentLocation', data.incidentLocation);
+      if (data.expandedDescription) set('description', data.expandedDescription);
+      if (data.complainantName) set('complainantName', data.complainantName);
+      if (data.complainantPhone) set('complainantPhone', data.complainantPhone);
+      if (data.accusedName) set('accusedName', data.accusedName);
+      if (data.accusedAlias) set('accusedAlias', data.accusedAlias);
+      if (data.accusedFatherName) set('accusedFatherName', data.accusedFatherName);
+      if (data.accusedAge) set('accusedAge', data.accusedAge);
+      if (data.accusedDescription) set('accusedDescription', data.accusedDescription);
+    }
+  } catch (err) {
+    console.error('AI auto-fill failed:', err);
+  }
+  setAiFilling(false);
+};
   const fileRef = useRef();
 
   const [form, setForm] = useState({
@@ -51,7 +106,56 @@ export default function NewCase({ onNavigate }) {
     seizedItems: [{ item: '', qty: '', seizedFrom: '' }],
     evidenceFiles: [],
   });
+const autoFillPartiesWithAI = async () => {
+  if (!form.description || form.description.length < 10) {
+    setErrors(p => ({ ...p, description: 'Need description from Step 1 first' }));
+    return;
+  }
+  
+  setAiFilling(true);
+  try {
+    const prompt = `Based on this FIR description: "${form.description}"
 
+Extract and return ONLY a JSON object with these fields. If a field is not mentioned, leave it empty string.
+{
+  "complainantName": "victim/complainant name",
+  "complainantPhone": "complainant phone number",
+  "complainantAddress": "complainant address",
+  "accusedName": "accused/suspect name",
+  "accusedAlias": "accused nickname or alias",
+  "accusedFatherName": "accused father name",
+  "accusedAge": "accused age as number string",
+  "accusedDescription": "physical description of accused",
+  "witnessName": "witness name if any",
+  "witnessPhone": "witness phone",
+  "witnessStatement": "what witness saw or heard"
+}
+
+Return ONLY the JSON. No other text.`;
+
+    const response = await window.crimeGPT.aiChat(prompt);
+    
+    const jsonMatch = response.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      const data = JSON.parse(jsonMatch[0]);
+      
+      if (data.complainantName) set('complainantName', data.complainantName);
+      if (data.complainantPhone) set('complainantPhone', data.complainantPhone);
+      if (data.complainantAddress) set('complainantAddress', data.complainantAddress);
+      if (data.accusedName) set('accusedName', data.accusedName);
+      if (data.accusedAlias) set('accusedAlias', data.accusedAlias);
+      if (data.accusedFatherName) set('accusedFatherName', data.accusedFatherName);
+      if (data.accusedAge) set('accusedAge', data.accusedAge);
+      if (data.accusedDescription) set('accusedDescription', data.accusedDescription);
+      if (data.witnessName) set('witnessName', data.witnessName);
+      if (data.witnessPhone) set('witnessPhone', data.witnessPhone);
+      if (data.witnessStatement) set('witnessStatement', data.witnessStatement);
+    }
+  } catch (err) {
+    console.error('AI party fill failed:', err);
+  }
+  setAiFilling(false);
+};
   const set = (field, val) => { setForm(p => ({ ...p, [field]: val })); if (errors[field]) setErrors(p => { const e = { ...p }; delete e[field]; return e; }); };
   const validate = (s) => { const e = {}; if (s === 1) { if (!form.caseType) e.caseType = 'Select case type'; if (!form.incidentDate) e.incidentDate = 'Required'; if (!form.incidentLocation.trim()) e.incidentLocation = 'Required'; if (form.description.trim().length < 20) e.description = 'Minimum 20 characters required'; } if (s === 2 && !form.complainantName.trim()) e.complainantName = 'Required'; setErrors(e); return Object.keys(e).length === 0; };
   const next = () => { if (validate(step)) setStep(s => s + 1); };
@@ -162,9 +266,31 @@ if (aiSections?.summary && typeof aiSections.summary === 'string') {
           {step === 1 && (<>
             <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"><h3 className="text-base font-semibold text-gray-800 mb-5">Incident Information</h3><div className="grid grid-cols-2 gap-4"><Field label="Case Type" required error={errors.caseType}><select value={form.caseType} onChange={e => set('caseType', e.target.value)} className={`${inputCls} appearance-none`}><option value="">Select case type...</option>{['Theft','Murder','Assault','Robbery','Fraud','Kidnapping','Domestic Violence','Cyber Crime','Rape','Dowry','Other'].map(t => <option key={t}>{t}</option>)}</select></Field><Field label="Language"><div className="flex gap-2">{['English','हिन्दी','ગુજરાતી'].map(lang=>(<button key={lang} onClick={()=>set('language',lang)} className={`flex-1 py-2.5 rounded-lg text-xs font-medium transition border ${form.language===lang?'bg-orange-50 border-orange-300 text-orange-600':'border-gray-200 text-gray-500 hover:bg-gray-50'}`}>{lang}</button>))}</div></Field><Field label="Incident Date" required error={errors.incidentDate}><input type="date" value={form.incidentDate} onChange={e=>set('incidentDate',e.target.value)} className={inputCls}/></Field><Field label="Incident Time"><input type="time" value={form.incidentTime} onChange={e=>set('incidentTime',e.target.value)} className={inputCls}/></Field><div className="col-span-2"><Field label="Incident Location" required error={errors.incidentLocation}><input type="text" value={form.incidentLocation} onChange={e=>set('incidentLocation',e.target.value)} placeholder="Full address of incident location" className={inputCls}/></Field></div><div className="col-span-2"><Field label="Incident Description" required error={errors.description}><textarea rows={5} value={form.description} onChange={e=>set('description',e.target.value)} placeholder="Describe the incident in detail..." className={`${inputCls} resize-none`}/></Field></div></div></div>
             <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"><div className="flex items-center justify-between"><div className="flex items-center gap-3"><Sparkles size={18} className="text-orange-500"/><div><h3 className="text-sm font-semibold text-gray-800">AI Legal Section Analysis</h3><p className="text-xs text-gray-400">Get BNS/BNSS/BSA suggestions</p></div></div><button onClick={analyzeWithAI} disabled={aiLoading} className="px-4 py-2 bg-gradient-to-r from-orange-400 to-green-500 text-white rounded-xl text-sm font-medium hover:from-orange-500 hover:to-green-600 transition flex items-center gap-2 disabled:opacity-60 shadow-lg shadow-orange-200">{aiLoading?<Loader2 size={14} className="animate-spin"/>:<Sparkles size={14}/>}{aiLoading?'Analyzing...':'Analyze Now'}</button></div>{aiSections&&!aiSections.error&&<div className="mt-4 p-4 bg-gradient-to-r from-orange-50 to-green-50 rounded-xl border border-orange-100"><p className="text-xs font-semibold text-orange-700 mb-2">Suggested Legal Sections:</p><pre className="text-xs text-gray-700 whitespace-pre-wrap leading-relaxed font-mono">{aiSections.summary}</pre></div>}{aiSections?.error&&<div className="mt-4 p-3 bg-red-50 border border-red-100 rounded-xl text-xs text-red-500">Failed to analyze. Please try again.</div>}</div>
+           <button onClick={autoFillWithAI} disabled={aiFilling}
+  className="px-4 py-2 bg-gradient-to-r from-purple-400 to-pink-500 text-white rounded-xl text-sm font-medium hover:from-purple-500 hover:to-pink-600 transition flex items-center gap-2 disabled:opacity-60 shadow-lg shadow-purple-200">
+  {aiFilling ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
+  {aiFilling ? 'AI Filling...' : 'AI Auto-Fill'}
+</button>
             <div className="flex justify-end"><button onClick={next} className="px-6 py-3 bg-gradient-to-r from-orange-400 to-green-500 text-white rounded-xl font-medium hover:from-orange-500 hover:to-green-600 transition flex items-center gap-2 shadow-lg shadow-orange-200">Parties & Evidence <ArrowRight size={18}/></button></div>
           </>)}
           {step === 2 && (<>
+           {/* AI Auto-Fill Button */}
+  <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl border border-purple-100 p-4 shadow-sm">
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <Sparkles size={18} className="text-purple-500" />
+        <div>
+          <h3 className="text-sm font-semibold text-gray-800">AI Auto-Fill Parties</h3>
+          <p className="text-xs text-gray-400">Extract complainant, accused & witness from description</p>
+        </div>
+      </div>
+      <button onClick={autoFillPartiesWithAI} disabled={aiFilling}
+        className="px-4 py-2 bg-gradient-to-r from-purple-400 to-pink-500 text-white rounded-xl text-sm font-medium hover:from-purple-500 hover:to-pink-600 transition flex items-center gap-2 disabled:opacity-60 shadow-lg shadow-purple-200">
+        {aiFilling ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />}
+        {aiFilling ? 'Filling...' : 'Auto-Fill All'}
+      </button>
+    </div>
+  </div>
             <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"><h3 className="text-base font-semibold text-gray-800 mb-5">Complainant Details</h3><div className="grid grid-cols-2 gap-4"><Field label="Full Name" required error={errors.complainantName}><input type="text" value={form.complainantName} onChange={e=>set('complainantName',e.target.value)} placeholder="As per ID proof" className={inputCls}/></Field><Field label="Phone Number"><input type="text" value={form.complainantPhone} onChange={e=>set('complainantPhone',e.target.value.replace(/\D/g,'').slice(0,10))} placeholder="10 digit number" className={inputCls}/></Field><div className="col-span-2"><Field label="Address"><input type="text" value={form.complainantAddress} onChange={e=>set('complainantAddress',e.target.value)} placeholder="Full residential address" className={inputCls}/></Field></div><Field label="ID Type"><select value={form.complainantIdType} onChange={e=>set('complainantIdType',e.target.value)} className={inputCls}><option>Aadhaar</option><option>Voter ID</option><option>Passport</option><option>Driving License</option></select></Field><Field label="ID Number"><input type="text" value={form.complainantIdNumber} onChange={e=>set('complainantIdNumber',e.target.value)} placeholder="ID number" className={inputCls}/></Field></div></div>
             <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"><h3 className="text-base font-semibold text-gray-800 mb-5">Accused Details</h3><div className="grid grid-cols-2 gap-4"><Field label="Full Name"><input type="text" value={form.accusedName} onChange={e=>set('accusedName',e.target.value)} placeholder="Name or Unknown" className={inputCls}/></Field><Field label="Alias"><input type="text" value={form.accusedAlias} onChange={e=>set('accusedAlias',e.target.value)} placeholder="Nickname" className={inputCls}/></Field><Field label="Father's Name"><input type="text" value={form.accusedFatherName} onChange={e=>set('accusedFatherName',e.target.value)} placeholder="Father name" className={inputCls}/></Field><Field label="Age"><input type="number" value={form.accusedAge} onChange={e=>set('accusedAge',e.target.value)} placeholder="Age" className={inputCls}/></Field><div className="col-span-2"><Field label="Physical Description"><textarea rows={2} value={form.accusedDescription} onChange={e=>set('accusedDescription',e.target.value)} placeholder="Height, build, complexion, marks..." className={`${inputCls} resize-none`}/></Field></div></div></div>
             <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm"><h3 className="text-base font-semibold text-gray-800 mb-5">Witness Details</h3><div className="grid grid-cols-2 gap-4"><Field label="Name"><input type="text" value={form.witnessName} onChange={e=>set('witnessName',e.target.value)} placeholder="Witness name" className={inputCls}/></Field><Field label="Phone"><input type="text" value={form.witnessPhone} onChange={e=>set('witnessPhone',e.target.value.replace(/\D/g,'').slice(0,10))} placeholder="Phone" className={inputCls}/></Field><div className="col-span-2"><Field label="Statement"><textarea rows={3} value={form.witnessStatement} onChange={e=>set('witnessStatement',e.target.value)} placeholder="What did the witness see or hear?" className={`${inputCls} resize-none`}/></Field></div></div></div>

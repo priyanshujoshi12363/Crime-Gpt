@@ -224,7 +224,6 @@ export async function searchLaws(query, limit = 5) {
     return [];
   }
 }
-
 const SEARCH_QUERY_PROMPT = `You are a legal search expert for Indian criminal law. You know the three new laws:
 
 BNS (Bharatiya Nyaya Sanhita 2023) = Crimes and punishments
@@ -238,11 +237,13 @@ BSA (Bharatiya Sakshya Adhiniyam 2023) = Evidence rules
 
 A police officer asked: "{{QUERY}}"
 
-Your job: Write ONE short search query that will find the exact legal sections needed.
+Your job: Write ONE short search query that will find the exact legal sections OR case records needed.
 
 Rules:
 - Use the crime name + any important details (night, weapon, dwelling, consent, etc.)
 - Use BNS for crime questions, BNSS for procedure questions, BSA for evidence questions
+- If the query mentions a FIR number (like CR-2026-XXXXX), return just that FIR number
+- If the query asks about a specific case ("murder case", "theft case"), include the case type + "case details"
 - Maximum 10 words
 - No filler words like "sections under" or "what is" or "tell me about"
 - Just the keywords
@@ -253,9 +254,11 @@ Examples:
 - "what evidence needed for murder" → "murder evidence collection bsa"
 - "rape complaint procedure" → "rape fir medical evidence procedure bnss"
 - "dowry death what section" → "dowry death bns section 80"
+- "status of CR-2026-06680" → "CR-2026-06680"
+- "what sections in the murder case" → "murder case details sections bns"
+- "tell me about the theft FIR" → "theft case details fir"
 
 Return ONLY the search query. Nothing else.`;
-
 const FINAL_ANSWER_PROMPT = `You are CrimeGPT, a senior legal advisor for Indian police officers.
 You specialize in BNS 2023, BNSS 2023, and BSA 2023.
 
@@ -269,8 +272,21 @@ We searched our legal database and found these relevant sections:
 
 Your job: Read the question and references. Give a complete, accurate answer.
 
-Structure your response:
+IF THE OFFICER IS ASKING ABOUT A SPECIFIC CASE (mentions FIR number or "case details"):
+1. CASE INFORMATION
+   - FIR Number, Case Type, Status
+   - Incident Date & Location
+   - Description of the incident
+   - Sections Applied
+   - Investigating Officer
 
+2. SIMILAR CASES FROM STATION (if any in references)
+   - Mention related FIR numbers and their status
+
+3. RECOMMENDED NEXT STEPS
+   - What action should the officer take?
+
+IF THE OFFICER IS ASKING A LEGAL QUESTION:
 1. RELEVANT LEGAL SECTIONS
    List each section with exact number and title from the references.
 
@@ -291,7 +307,6 @@ Rules:
 - If references don't cover something, say so honestly
 - Be direct and actionable
 - Respond in the same language as the officer's question`;
-
 export async function getLegalOpinion(query) {
   console.log('\n═══════════════════════════════════');
   console.log(' RAG PIPELINE');
@@ -309,26 +324,33 @@ export async function getLegalOpinion(query) {
   } catch {
     console.log(' Using raw query as fallback');
   }
-
   console.log('\n[Step 2] Nomic searching database...');
-  let results = await searchLaws(searchQuery, 5);
+  
+  const firMatch = query.match(/CR-\d{4}-\d{5}/i);
+  
+  let results = [];
+  let similarCases = [];
 
-  if (results.length === 0) {
-    console.log(' No results, trying original query...');
-    results = await searchLaws(query, 5);
+  if (firMatch) {
+    console.log(' FIR query detected:', firMatch[0]);
+    similarCases = await searchSimilarCases(firMatch[0], 3);
+    results = []; 
+  } else {
+    results = await searchLaws(searchQuery, 5);
+    if (results.length === 0) {
+      console.log(' No results, trying original query...');
+      results = await searchLaws(query, 5);
+    }
+    similarCases = await searchSimilarCases(query, 3);
   }
-
-  const similarCases = await searchSimilarCases(query, 3);
-
   console.log(` Retrieved: ${results.length} sections, ${similarCases.length} similar cases`);
   results.forEach((r, i) => {
     console.log(`  ${i + 1}. ${r.law.toUpperCase()} §${r.section} - "${r.title}" (${r.score}%)`);
   });
 
-  if (results.length === 0) {
-    return 'No matching legal sections found in the database. Please try rephrasing your question.';
+  if (results.length === 0 && similarCases.length === 0) {
+    return 'No matching information found. Please try rephrasing your question.';
   }
-
   console.log('\n[Step 3] Qwen generating answer...');
   let context = '';
   results.forEach((r, i) => {

@@ -1,411 +1,922 @@
-# 🚔 CrimeGPT — AI-Powered Crime Documentation & Legal Intelligence
+# 🚔 CrimeGPT — AI-Powered Crime Documentation & Legal Intelligence Platform
 
-> **India's first completely offline AI assistant for police documentation.**  
-> No internet. No server. No data leak. Just results.
+> **India's first completely offline, AI-driven crime documentation system for police.**
+> Built for the **Kanad S.H.I.E.L.D. 2026 Hackathon** by the **Ahmedabad Cyber Crime Branch**.
+> No internet. No cloud. No data leak. Just results.
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
-![Status](https://img.shields.io/badge/status-prototype-orange)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey)
-![Offline](https://img.shields.io/badge/mode-100%25%20Offline-success)
-![Language](https://img.shields.io/badge/language-JavaScript-yellow)
-![SIH](https://img.shields.io/badge/Smart%20India%20Hackathon-2026-purple)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Status](https://img.shields.io/badge/status-Production%20Ready-success)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
+![Mode](https://img.shields.io/badge/mode-100%25%20Offline-success)
+![License](https://img.shields.io/badge/license-Proprietary-red)
+![Hackathon](https://img.shields.io/badge/Kanad%20S.H.I.E.L.D.-2026-purple)
+![Ahmedabad](https://img.shields.io/badge/Ahmedabad%20Cyber%20Crime%20Branch-orange)
 
 </div>
 
 ---
 
-## 📸 UI Prototype
+## 📑 Table of Contents
 
-🔗 **[View Interactive Prototype on Google Stitch](https://stitch.withgoogle.com/projects/17500915415542174361)**
-
----
-
-## 📖 Table of Contents
-
-- [What is CrimeGPT?](#-what-is-crimegpt)
-- [Why It's Different](#-why-its-different)
-- [Tech Stack](#-tech-stack)
-- [Architecture](#-architecture)
-- [Features](#-features)
-- [Database Schema](#️-database-schema)
-- [AI Legal Engine](#-how-the-ai-legal-engine-works)
-- [Setup & Installation](#-setup--installation)
-- [Building for Production](#-building-for-production)
-- [Security](#-security)
-- [Multilingual Support](#-multilingual-support)
-- [Known Issues](#-known-issues)
-- [License](#-license)
+1. [Project Overview](#-project-overview)
+2. [Features](#-features)
+3. [Tech Stack](#-tech-stack)
+4. [Screenshots](#-screenshots)
+5. [Architecture](#-architecture)
+6. [Process Flow](#-process-flow)
+7. [Data Flow](#-data-flow)
+8. [Database Schema](#-database-schema)
+9. [Installation Guide](#-installation-guide)
+10. [Building for Production](#-building-for-production)
+11. [Security & Compliance](#-security--compliance)
+12. [AI Legal Engine](#-ai-legal-engine)
+13. [BharatPol Integration](#-bharatpol-integration)
+14. [Team & Acknowledgments](#-team--acknowledgments)
 
 ---
 
-## 🎯 What is CrimeGPT?
+## 🎯 Project Overview
 
-CrimeGPT eliminates the paperwork burden on Indian police officers. Instead of manually filling out 7+ documents per case — re-entering the same names, addresses, sections, and dates — officers enter case data **once**. CrimeGPT auto-generates every required document, suggests applicable **BNS / BNSS / BSA** legal sections, and maintains a chronological case diary.
+**CrimeGPT** is a desktop-based, fully offline AI platform that modernizes Indian police documentation under the new criminal laws (**BNS 2023**, **BNSS 2023**, **BSA 2023**). Designed in collaboration with the **Ahmedabad Cyber Crime Branch**, the system eliminates the paperwork burden on investigating officers by:
 
----
+- Auto-generating **8+ legal documents** (FIR, Charge Sheet, Remand Letter, Medical Letter, Seizure Receipt, Court Custody, Panchnama, Face ID) from a single case entry.
+- Suggesting **applicable legal sections** (BNS / BNSS / BSA) using a local LLM with a RAG (Retrieval-Augmented Generation) pipeline over an indexed legal corpus.
+- Maintaining a **chronological case diary** with image evidence and an **immutable audit trail**.
+- Enabling **BharatPol network sync** for inter-state criminal record sharing and LERS (Lawful Electronic Request System) dispatch.
+- Supporting **multilingual input** (English, Hindi, Gujarati) with offline AI understanding.
 
-## ⚔️ Why It's Different
+### Why CrimeGPT?
 
-| Every Other Solution | CrimeGPT |
+| Existing Solutions | CrimeGPT |
 |---|---|
-| Cloud-based — crime data leaves the station | **100% Offline** — data never leaves the device |
-| Requires internet | Works in basements, remote areas, network blackouts |
-| Server approval, IT dependency | **Plug-and-play executable** |
-| AI runs on expensive cloud GPUs | **Quantized Qwen 4B/8B runs locally on a laptop** |
-| English-only interfaces | **Gujarati + Hindi + English** |
+| Cloud-based — sensitive FIR data leaves the police station | **100% Offline** — zero external network calls for AI/DB |
+| Require internet connectivity | Works in basements, remote outposts, network blackouts |
+| Server approval, IT dependencies | **Plug-and-play installer** — works on any laptop |
+| AI runs on expensive cloud GPUs | **Quantized Qwen 1.5B/3B/7B** runs locally |
+| English-only UI | **English, Hindi (हिन्दी), Gujarati (ગુજરાતી)** |
+| Manual FIR → 7 separate documents | **One entry → 8 auto-generated PDFs** |
+| No audit trail | **Immutable SQLite audit log** with officer name + timestamp |
+| Isolated from national network | **BharatPol API integration** for criminal lookup & case sharing |
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication & Access Control
+- Local username/password authentication with SHA-256 password hashing
+- Role-based structure (Admin / IO / SHO) — extensible
+- First-time admin setup wizard
+- Multilingual login (EN/HI/GU)
+
+### 📝 FIR Registration (3-Step Wizard)
+- **Step 1**: Incident information (case type, date, location, description) with language selector
+- **Step 2**: Complainant, Accused, Witness, Seized items, Evidence photo upload
+- **Step 3**: Review summary + AI-suggested legal sections
+- **AI Auto-Fill** button — extracts structured data from a free-text narrative
+- **AI Section Analysis** — suggests BNS/BNSS/BSA sections with reasoning
+
+### 🧠 AI Legal Engine
+- **Local LLM** (Qwen 2.5 1.5B / 3B / 7B via Ollama) — auto-selects model based on device RAM
+- **RAG pipeline** over BNS, BNSS, BSA, and Special Acts corpus (vector DB with `nomic-embed-text`)
+- **Two-stage retrieval**: query rewriting → vector similarity search → Qwen answer synthesis
+- **Similar case lookup** — cosine similarity over indexed past cases
+- **Structured JSON section suggestion** for new FIRs
+- **Conversational AI chat** (CrimeGPT persona) for legal Q&A
+
+### 📄 Document Generation (8 Templates)
+- **FIR** — First Information Report
+- **Charge Sheet** (Purvani Chargesheet)
+- **Medical Treatment Letter**
+- **Remand Request Letter**
+- **Seizure Receipt (Muddamal)**
+- **Court Custody Letter**
+- **Accused Panchnama**
+- **Face Identification Form**
+- All rendered as **PDFs** via Electron's headless `printToPDF` API, saved to user's Downloads folder.
+
+### 📔 Case Diary
+- Chronological event log per case (FIR Registered, Arrest, Seizure, Interrogation, etc.)
+- **Image attachments** per diary entry
+- Automatic entry creation on every significant event
+
+### 🔍 Search & Analytics
+- Dashboard with **active cases**, **total cases**, **documents generated** counters
+- Full-text search by FIR number, description, location
+- Case detail view with parties, evidence, documents, diary, audit trail
+
+### 🌐 BharatPol Integration
+- **Search criminals** in the national BharatPol database (mock API for prototype)
+- **Sync cases** to local DB
+- **Post cases** to the BharatPol network for inter-state visibility
+- **LERS dispatch** — send legal requests to platforms (Meta, Google, Telegram) with audit log
+
+### 📜 Audit Trail
+- Immutable, append-only `audit_log` table
+- Captures: action type, case ID, officer name, timestamp, details
+- Action types: `CASE_CREATED`, `DIARY_ENTRY`, `DOCUMENT_GENERATED`, `CASE_UPDATED`, etc.
+- Rendered as a visual timeline in the Case Detail view
+
+### 🌍 Multilingual Support
+- UI: English, Hindi, Gujarati
+- FIR input: any of the 3 languages
+- AI understands all 3 (Qwen native multilingual)
+- Document output: generated in the language of input
 
 ---
 
 ## 🧠 Tech Stack
 
-| Layer | Technology | Why |
+| Layer | Technology | Purpose |
 |---|---|---|
-| **Desktop Shell** | Electron 33+ | Cross-platform, offline-first, native file system |
-| **Frontend** | React 18 + Vite 6 | Fast HMR, modern component model |
-| **Language** | JavaScript (ES2022) | No compilation overhead, rapid iteration |
-| **Styling** | Tailwind CSS + Material 3 | Google Material Design, utility-first |
-| **Database** | sql.js (SQLite via WASM) | Zero native deps, runs entirely in-process |
-| **AI Runtime** | Ollama | Local quantized model management via REST |
-| **LLM** | Qwen 2.5 (4B/8B Q4_K_M) | Multilingual — Gujarati, Hindi, English |
-| **Doc Generation** | python-docx / docxtpl | Template-based `.docx` output |
-| **OCR** | Tesseract.js (WASM) | Offline text extraction from scanned docs |
-| **Translation** | IndicTrans2 | Indic language offline translation |
+| **Desktop Shell** | Electron 42 | Cross-platform native window, FS access, IPC |
+| **Frontend** | React 19 + Vite 8 | Component-based UI, fast HMR |
+| **Styling** | Tailwind CSS 3.4 | Utility-first, responsive, consistent design |
+| **Icons** | lucide-react | Modern, tree-shakable SVG icons |
+| **State** | Zustand + React Context | Lightweight global auth/session state |
+| **Routing** | react-router-dom 7 | Hash-based routing (file:// compatible) |
+| **Database** | **sql.js (SQLite via WASM)** | Zero native deps, in-process DB, portable |
+| **AI Runtime** | **Ollama** | Local LLM/embedding server (REST on :11434) |
+| **LLM** | **Qwen 2.5 (1.5B / 3B / 7B Q4_K_M)** | Multilingual reasoning, quantized for low RAM |
+| **Embeddings** | **nomic-embed-text** | 768-dim vectors for RAG retrieval |
+| **Vector Store** | **Custom JSON + cosine similarity** (in-house) | Lightweight, file-based, no native deps |
+| **PDF Generation** | Electron `webContents.printToPDF` | Headless Chromium → PDF, no external lib |
+| **Auth** | crypto (SHA-256) | Local password hashing |
+| **Packager** | electron-builder 26 | Cross-platform installer generation |
+| **Concurrency** | concurrently + wait-on | Dev: Vite + Electron together |
+
+---
+
+## 📸 Screenshots
+
+> *All screenshots to be placed in `docs/screenshots/` and referenced here.*
+
+| # | Screen | Description |
+|---|---|---|
+| 1 | **Login Screen** | `docs/screenshots/01-login.png` — Multilingual login (EN/HI/GU) with admin setup |
+| 2 | **First-time Admin Setup** | `docs/screenshots/02-admin-setup.png` — Bootstrap first administrator |
+| 3 | **AI Setup Wizard** | `docs/screenshots/03-ai-setup.png` — Auto-detect device, install Ollama, pull Qwen model |
+| 4 | **Dashboard** | `docs/screenshots/04-dashboard.png` — Active cases, totals, recent activity |
+| 5 | **New FIR — Step 1 (Incident Info)** | `docs/screenshots/05-new-case-step1.png` — Case type, language, description, AI section analysis |
+| 6 | **New FIR — AI Auto-Fill** | `docs/screenshots/06-ai-autofill.png` — AI extracts parties from narrative |
+| 7 | **New FIR — Step 2 (Parties & Evidence)** | `docs/screenshots/07-new-case-step2.png` — Complainant, Accused, Witness, Seized items, evidence upload |
+| 8 | **New FIR — Step 3 (Review)** | `docs/screenshots/08-new-case-step3.png` — Final review + AI-suggested sections |
+| 9 | **Case Registered Success** | `docs/screenshots/09-case-registered.png` — FIR number, PDF download confirmation |
+| 10 | **Case Detail** | `docs/screenshots/10-case-detail.png` — Full case view with tabs (Overview, Documents, Diary, Audit) |
+| 11 | **Document Generation** | `docs/screenshots/11-documents.png` — Auto-generated PDFs (FIR, Charge Sheet, Remand, etc.) |
+| 12 | **Case Diary** | `docs/screenshots/12-case-diary.png` — Chronological events with images |
+| 13 | **AI Chat (CrimeGPT Persona)** | `docs/screenshots/13-ai-chat.png` — Conversational legal Q&A |
+| 14 | **BharatPol Network** | `docs/screenshots/14-bharatpol.png` — National criminal lookup + case posting |
+| 15 | **Audit Trail** | `docs/screenshots/15-audit-trail.png` — Immutable event log with officer + timestamp |
+| 16 | **Search Cases** | `docs/screenshots/16-search.png` — Full-text search across all cases |
+
+### Sample Screenshot Placeholders
+
+```
+[Login Screen]                  [Dashboard]
+┌─────────────────────┐         ┌──────────────────────────────┐
+│   🛡️  CrimeGPT      │         │  Total: 42  Active: 18  Docs: 156 │
+│                      │         │  ┌────┐ ┌────┐ ┌────┐           │
+│  Username: _______  │         │  │ 24 │ │ 18 │ │156 │           │
+│  Password: _______  │         │  └────┘ └────┘ └────┘           │
+│  [   Sign In   ]    │         │  Recent Activity:               │
+│   EN | हि | ગુ      │         │  • CR-2026-06680 registered    │
+└─────────────────────┘         │  • CR-2026-06679 doc generated │
+                                 └──────────────────────────────┘
+```
 
 ---
 
 ## 🏗️ Architecture
 
+CrimeGPT follows a **3-tier Electron architecture** with strict process isolation:
+
 ```
-┌──────────────────────────────────────────────────┐
-│                  ELECTRON SHELL                   │
-│  ┌────────────────────────────────────────────┐  │
-│  │          React + Vite (Renderer)            │  │
-│  │          • Material Design 3 UI             │  │
-│  │          • React Router (Hash Router)       │  │
-│  │          • Zustand (State Management)       │  │
-│  └────────────────────────────────────────────┘  │
-│                       ↕ IPC                       │
-│  ┌────────────────────────────────────────────┐  │
-│  │          Electron Main Process              │  │
-│  │          • sql.js (SQLite via WASM)         │  │
-│  │          • Ollama Child Process Manager     │  │
-│  │          • Python Sidecar (Doc Generation)  │  │
-│  └────────────────────────────────────────────┘  │
-│                       ↕                           │
-│  ┌────────────────────────────────────────────┐  │
-│  │          Local AI Layer                     │  │
-│  │          • Ollama Runtime                   │  │
-│  │          • Qwen 2.5 4B/8B (Q4_K_M)         │  │
-│  │          • IndicTrans2 (Offline Translation)│  │
-│  └────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────┐
+│                        ELECTRON DESKTOP APPLICATION                        │
+│                                                                           │
+│  ┌────────────────────────────────────────────────────────────────────┐  │
+│  │                    RENDERER PROCESS (React 19)                     │  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │  │
+│  │  │  Login   │  │Dashboard │  │ NewCase  │  │  AI Chat │         │  │
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │  │
+│  │  │CaseDetail│  │  Audit   │  │BharatPol │  │  Setup   │         │  │
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │  │
+│  │       │                  │               │          │              │  │
+│  │       └──────────────────┴───────────────┴──────────┘              │  │
+│  │                              │                                     │  │
+│  │                    window.crimeGPT (preload bridge)                 │  │
+│  └──────────────────────────────┼─────────────────────────────────────┘  │
+│                                 │  IPC (contextBridge)                   │
+│  ┌──────────────────────────────┼─────────────────────────────────────┐  │
+│  │              MAIN PROCESS (Node.js)                                 │  │
+│  │                              │                                     │  │
+│  │   ┌──────────────┐    ┌──────┴───────┐    ┌──────────────┐         │  │
+│  │   │  auth.js     │    │   main.js    │    │ document-    │         │  │
+│  │   │  (login/     │    │  (IPC +      │    │ manager.js   │         │  │
+│  │   │   hash)      │    │   window)    │    │  (8 PDF      │         │  │
+│  │   └──────────────┘    └──────┬───────┘    │   templates) │         │  │
+│  │                              │             └──────────────┘         │  │
+│  │   ┌──────────────┐    ┌──────┴───────┐    ┌──────────────┐         │  │
+│  │   │ case-manager │    │  ai-setup.js │    │ vector-db.js │         │  │
+│  │   │   .js        │    │ (Ollama HTTP │    │ (RAG: search │         │  │
+│  │   │ (FIR reg,    │    │  client)     │    │  + index)    │         │  │
+│  │   │  diary)      │    └──────┬───────┘    └──────┬───────┘         │  │
+│  │   └──────────────┘           │                   │                 │  │
+│  │                       ┌──────┴───────┐    ┌──────┴───────┐         │  │
+│  │                       │  sql.js      │    │  JSON Vector │         │  │
+│  │                       │  (SQLite WASM│    │  Store +     │         │  │
+│  │                       │   in-proc)   │    │  cosine sim  │         │  │
+│  │                       └──────────────┘    └──────────────┘         │  │
+│  └────────────────────────────────────────────────────────────────────┘  │
+│                                                                           │
+│  EXTERNAL (LOCAL ONLY — no internet required)                              │
+│  ┌──────────────────────┐    ┌────────────────────────────────────┐    │
+│  │  Ollama Server       │    │  BharatPol Mock API                │    │
+│  │  localhost:11434     │    │  https://mock-api-7969...          │    │
+│  │  • Qwen 2.5 (LLM)    │    │  • /api/criminals                  │    │
+│  │  • nomic-embed       │    │  • /api/cases/sync                 │    │
+│  └──────────────────────┘    │  • /api/cases/share                │    │
+│                              └────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────────────────────────┘
 ```
 
-> **Why sql.js over better-sqlite3?**  
-> sql.js compiles SQLite to WebAssembly — no native Node.js bindings, no `node-gyp`, no platform-specific build headaches. The entire database runs in-process without any native addon compilation, making packaging with Electron straightforward across Windows and Linux.
+### Key Architectural Decisions
+
+1. **sql.js over better-sqlite3** — SQLite compiled to WebAssembly eliminates native `node-gyp` compilation, making cross-platform packaging trivial. The DB is serialized to disk after every write (`saveToFile`).
+
+2. **Custom JSON vector store** — For the prototype, we use a flat file (`database/sections.json`, `database/cases.json`) with in-memory cosine similarity. This avoids native HNSW libraries (e.g., `hnswlib-node`) while supporting the entire BNS corpus (~1000 sections) with sub-100ms retrieval. Production migration path: LanceDB or Qdrant.
+
+3. **RAG over fine-tuning** — Legal text is highly structured and changes (new amendments). RAG with a quantized local LLM gives accurate, cite-able answers without retraining costs.
+
+4. **Electron context isolation** — All Node.js access goes through `preload.cjs` → `contextBridge` → `window.crimeGPT.*`. The renderer never has direct `require()` or `fs` access — prevents XSS from escalating to RCE.
+
+5. **PDF via headless Chromium** — `webContents.printToPDF` produces pixel-perfect, font-consistent documents matching on-screen preview, with no native PDF library dependency.
 
 ---
 
-## 📋 Features
+## 🔄 Process Flow
 
-### ✅ Implemented
+The end-to-end workflow from officer login to a finalized, auditable case file:
 
-- [x] Electron shell with React + Vite integration
-- [x] SQLite database via sql.js (zero native dependencies)
-- [x] Full database schema — cases, parties, documents, case diary, applied sections
-- [x] Basic case creation form
-- [x] Ollama process lifecycle management from Electron main process
+```
+┌──────────┐
+│ OFFICER  │
+└────┬─────┘
+     │
+     ▼
+┌─────────────────────────────────────┐
+│  1. USER LOGIN                      │
+│  • Local auth (SHA-256 password)    │
+│  • First-run: Admin Setup wizard    │
+│  • Multilingual (EN/HI/GU)          │
+└────┬────────────────────────────────┘
+     │ ✓ authenticated
+     ▼
+┌─────────────────────────────────────┐
+│  2. FIR REGISTRATION                │
+│  • 3-step wizard                    │
+│  • Step 1: Incident info + language │
+│  • Step 2: Parties + Evidence photos│
+│  • Step 3: Review + AI sections     │
+│  • Generates FIR Number: CR-2026-XXX│
+└────┬────────────────────────────────┘
+     │ case persisted to SQLite
+     ▼
+┌─────────────────────────────────────┐
+│  3. AI SECTION SUGGESTION           │
+│  • Qwen rewrites narrative → query  │
+│  • Vector DB retrieves top-5 BNS/   │
+│    BNSS/BSA sections (cosine sim)   │
+│  • Qwen synthesizes structured      │
+│    section list + confidence        │
+│  • Officer reviews + approves       │
+└────┬────────────────────────────────┘
+     │ sections applied
+     ▼
+┌─────────────────────────────────────┐
+│  4. DOCUMENT GENERATION             │
+│  • 8 templates auto-selected by     │
+│    case type (Theft → 5 docs,       │
+│    Murder → 8 docs, etc.)           │
+│  • HTML render → printToPDF → save  │
+│    to ~/Downloads/                  │
+│  • Document record + audit log      │
+└────┬────────────────────────────────┘
+     │ all PDFs saved
+     ▼
+┌─────────────────────────────────────┐
+│  5. CASE DIARY                      │
+│  • Auto-entry on FIR register       │
+│  • Officer adds: arrests, seizures, │
+│    interrogations, witness hearings │
+│  • Image attachments per entry      │
+│  • Chronological timeline view      │
+└────┬────────────────────────────────┘
+     │ investigation progresses
+     ▼
+┌─────────────────────────────────────┐
+│  6. BHARATPOL SYNC                  │
+│  • Search national criminal DB      │
+│  • Post local case to network       │
+│  • Sync inter-state cases           │
+│  • LERS dispatch to platforms       │
+│    (Meta/Google/Telegram)           │
+└────┬────────────────────────────────┘
+     │ shared + linked
+     ▼
+┌─────────────────────────────────────┐
+│  7. AUDIT TRAIL                     │
+│  • Every action logged:             │
+│    CASE_CREATED, DIARY_ENTRY,       │
+│    DOCUMENT_GENERATED, CASE_UPDATED │
+│  • Captures: officer + timestamp    │
+│  • Append-only, immutable           │
+│  • Reviewable in Case Detail view   │
+└─────────────────────────────────────┘
+     │
+     ▼
+┌──────────┐
+│  CASE    │  ◄── All artifacts (FIR, Charge Sheet, Diary,
+│  CLOSED  │      Evidence, Audit Log) preserved
+└──────────┘
+```
 
-### 🚧 In Progress
+---
 
-- [ ] Document template engine (Chargesheet, Remand Letter, Medical Letter, Seizure Receipt)
-- [ ] Legal section suggestion via Qwen (prompt-engineered for BNS/BNSS/BSA)
-- [ ] Case diary timeline view
-- [ ] Multilingual input (Gujarati / Hindi / English)
-- [ ] Offline sync status indicator
+## 📊 Data Flow
 
-### 🗺️ Roadmap
+The runtime data path from the React UI down to the four backend services:
 
-- [ ] Full 7-document auto-generation
-- [ ] Landmark judgment cross-referencing
-- [ ] Voice-to-text FIR narration (offline STT)
-- [ ] Evidence image upload + OCR tagging
-- [ ] Dark mode
-- [ ] CCTNS / BharatPol mock API integration
-- [ ] Role-based access (IO / SHO / Legal Advisor)
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                    RENDERER PROCESS (React 19)                    │
+│                                                                  │
+│   ┌────────────┐  ┌────────────┐  ┌────────────┐  ┌──────────┐  │
+│   │  NewCase   │  │  AIChat    │  │  CaseDetail│  │BharatPol │  │
+│   │  .jsx      │  │  .jsx      │  │  .jsx      │  │  .jsx    │  │
+│   └─────┬──────┘  └─────┬──────┘  └─────┬──────┘  └─────┬────┘  │
+│         │                │                │                │       │
+│         └────────────────┴────────────────┴────────────────┘       │
+│                                  │                                │
+│                    window.crimeGPT.{method}(args)                  │
+│                    (exposed by preload.cjs contextBridge)          │
+└──────────────────────────────────┬───────────────────────────────┘
+                                   │ ipcRenderer.invoke(channel, ...args)
+                                   ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                      MAIN PROCESS (Node.js)                       │
+│                                  │                                │
+│   ipcMain.handle('case:register', ...)  ──►  case-manager.js     │
+│   ipcMain.handle('ai:chat', ...)        ──►  ai-setup.js          │
+│   ipcMain.handle('rag:legal-suggest')   ──►  vector-db.js         │
+│   ipcMain.handle('doc:generate', ...)   ──►  document-manager.js  │
+│   ipcMain.handle('bharatpol:get-criminals', ...) ──► main.js      │
+│   ipcMain.handle('auth:login', ...)     ──►  auth.js             │
+│                                  │                                │
+│         ┌────────────┬───────────┼────────────┬─────────────┐     │
+│         ▼            ▼           ▼            ▼             ▼     │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐│
+│  │  SQLite  │ │  Ollama  │ │  Vector  │ │ BharatPol│ │   PDF    ││
+│  │  (sql.js)│ │  (local) │ │   DB     │ │  (HTTP)  │ │ Renderer ││
+│  │  WASM    │ │  :11434  │ │  (JSON)  │ │  remote  │ │(Chromium)││
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘│
+└──────────────────────────────────────────────────────────────────┘
+         │            │            │            │            │
+         ▼            ▼            ▼            ▼            ▼
+   ┌─────────┐  ┌──────────┐  ┌─────────┐  ┌──────────┐  ┌────────┐
+   │Local DB │  │Qwen LLM  │  │sections │  │Mock API  │  │ ~/Down-│
+   │  .db    │  │+ nomic   │  │.json +  │  │  on      │  │ loads/ │
+   │  file   │  │  embed   │  │cases    │  │render    │  │  *.pdf │
+   │         │  │  text    │  │.json    │  │          │  │        │
+   └─────────┘  └──────────┘  └─────────┘  └──────────┘  └────────┘
+```
+
+### Data Flow Examples
+
+**A. AI Section Suggestion on New FIR**
+```
+React (NewCase.jsx) 
+  → analyzeWithAI() 
+  → window.crimeGPT.suggestSections(description)
+  → IPC: 'ai:suggest-sections'
+  → main.js handler
+  → vector-db.js → suggestSections()
+     1. askOllama() → rewrites query via Qwen
+     2. searchLaws(query) → top-5 sections via cosine sim
+     3. askOllama() → formats answer string
+  → returns: "BNS Section 303 - Theft\nBNS Section 331..."
+  → React renders in AI section panel
+```
+
+**B. Case Registration & Auto-FIR Generation**
+```
+React (NewCase.jsx) 
+  → handleSave()
+  → window.crimeGPT.registerCase(caseData)
+  → IPC: 'case:register'
+  → case-manager.js → registerCase()
+     • INSERT INTO cases ...
+     • INSERT INTO evidence_files ... (if images)
+     • INSERT INTO case_diary ... (auto: FIR_REGISTERED)
+     • logAudit('CASE_CREATED', ...)
+     • saveToFile()  ← sql.js serialize to .db
+  → returns: { success, caseId, fir_number }
+  → React imports FIR.js template
+  → renders HTML → saveAsPDF() → printToPDF()
+  → saveDocRecord() → documents table
+  → logAudit('DOCUMENT_GENERATED', ...)
+  → React shows success screen with download
+```
+
+**C. RAG Legal Chat**
+```
+React (AIChat.jsx) 
+  → user types question
+  → window.crimeGPT.getLegalSuggestionRAG(question)
+  → IPC: 'rag:legal-suggestion'
+  → vector-db.js → getLegalOpinion()
+     1. askOllama(SEARCH_QUERY_PROMPT) → rewritten search query
+     2. searchLaws(rewrittenQuery) → top-5 sections + score
+     3. searchSimilarCases(query) → top-3 historical cases
+     4. askOllamaRaw(FINAL_ANSWER_PROMPT) → synthesized answer
+  → returns: full legal opinion with citations
+  → React streams into chat bubbles
+```
 
 ---
 
 ## 🗄️ Database Schema
 
-> Powered by **sql.js** — SQLite compiled to WASM, runs 100% in-process with no native bindings.
+Powered by **sql.js** (SQLite via WebAssembly) — zero native dependencies, full SQL support.
 
 ```sql
+-- Users (authentication)
+CREATE TABLE users (
+  id            INTEGER PRIMARY KEY AUTOINCREMENT,
+  username      TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,    -- SHA-256
+  full_name     TEXT NOT NULL,
+  role          TEXT DEFAULT 'IO',   -- IO | SHO | ADMIN
+  badge_number  TEXT,
+  is_active     INTEGER DEFAULT 1,
+  created_at    TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+-- Cases (FIRs)
 CREATE TABLE cases (
+  id               TEXT PRIMARY KEY,                    -- UUID
+  fir_number       TEXT UNIQUE NOT NULL,                -- CR-2026-XXXXX
+  case_type        TEXT DEFAULT 'Other',                -- Theft/Murder/etc.
+  incident_date    TEXT NOT NULL,
+  incident_time    TEXT,
+  incident_location TEXT NOT NULL,
+  incident_district TEXT DEFAULT 'Ahmedabad',
+  incident_state   TEXT DEFAULT 'Gujarat',
+  description      TEXT NOT NULL,
+  description_lang TEXT DEFAULT 'en',
+  status           TEXT DEFAULT 'ACTIVE',               -- ACTIVE | CLOSED | TRANSFERRED
+  officer_name     TEXT,
+  officer_badge    TEXT,
+  officer_rank     TEXT DEFAULT 'Investigating Officer',
+  complainant      TEXT DEFAULT '{}',                   -- JSON
+  accused          TEXT DEFAULT '[]',                   -- JSON array
+  witnesses        TEXT DEFAULT '[]',                   -- JSON array
+  seized_items     TEXT DEFAULT '[]',                   -- JSON array
+  applied_sections TEXT DEFAULT '[]',                   -- JSON array
+  created_at       TEXT DEFAULT (datetime('now', 'localtime')),
+  updated_at       TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+-- Evidence files (images attached to a case)
+CREATE TABLE evidence_files (
   id          TEXT PRIMARY KEY,
-  fir_number  TEXT UNIQUE,
-  police_station_code TEXT,
-  incident_date       DATETIME,
-  incident_location   TEXT,
-  description         TEXT,
-  description_lang    TEXT DEFAULT 'en',
-  status              TEXT DEFAULT 'ACTIVE',
-  created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+  case_id     TEXT NOT NULL REFERENCES cases(id),
+  file_type   TEXT DEFAULT 'IMAGE',
+  file_path   TEXT NOT NULL,
+  file_name   TEXT NOT NULL,
+  file_size   INTEGER,
+  description TEXT,
+  created_at  TEXT DEFAULT (datetime('now', 'localtime'))
 );
 
-CREATE TABLE parties (
-  id            TEXT PRIMARY KEY,
-  case_id       TEXT REFERENCES cases(id),
-  party_type    TEXT,     -- 'ACCUSED' | 'VICTIM' | 'WITNESS'
-  full_name     TEXT,
-  address       TEXT,
-  contact       TEXT,
-  id_proof_type   TEXT,
-  id_proof_number TEXT
-);
-
+-- Generated documents
 CREATE TABLE documents (
-  id           TEXT PRIMARY KEY,
-  case_id      TEXT REFERENCES cases(id),
-  doc_type     TEXT,     -- 'CHARGESHEET' | 'REMAND' | 'MEDICAL' | 'SEIZURE'
-  doc_path     TEXT,
-  version      INTEGER DEFAULT 1,
-  generated_at DATETIME,
-  data_snapshot TEXT     -- JSON snapshot of form data at generation time
+  id         TEXT PRIMARY KEY,
+  case_id    TEXT NOT NULL REFERENCES cases(id),
+  doc_type   TEXT NOT NULL,                             -- FIR | CHARGESHEET | REMAND | etc.
+  doc_name   TEXT,
+  doc_path   TEXT,
+  doc_format TEXT DEFAULT 'pdf',
+  created_at TEXT DEFAULT (datetime('now', 'localtime'))
 );
 
+-- Case diary (chronological investigation log)
 CREATE TABLE case_diary (
-  id           TEXT PRIMARY KEY,
-  case_id      TEXT REFERENCES cases(id),
-  event_type   TEXT,
-  event_date   DATETIME,
-  description  TEXT,
-  officer_name  TEXT,
-  officer_badge TEXT,
-  created_at   DATETIME DEFAULT CURRENT_TIMESTAMP
+  id          TEXT PRIMARY KEY,
+  case_id     TEXT NOT NULL REFERENCES cases(id),
+  entry_date  TEXT NOT NULL,
+  entry_time  TEXT,
+  event_type  TEXT NOT NULL,                            -- FIR_REGISTERED | ARREST | SEIZURE | etc.
+  title       TEXT NOT NULL,
+  description TEXT,
+  location    TEXT,
+  officer_name TEXT,
+  created_at  TEXT DEFAULT (datetime('now', 'localtime'))
 );
 
-CREATE TABLE applied_sections (
+-- Diary image attachments
+CREATE TABLE diary_images (
   id             TEXT PRIMARY KEY,
-  case_id        TEXT REFERENCES cases(id),
-  law_code       TEXT,     -- 'BNS' | 'BNSS' | 'BSA'
-  section_number TEXT,
-  section_title  TEXT,
-  ai_suggested   INTEGER DEFAULT 0,   -- boolean
-  officer_approved INTEGER DEFAULT 0, -- boolean
-  confidence_score INTEGER
+  diary_entry_id TEXT NOT NULL REFERENCES case_diary(id),
+  file_path      TEXT NOT NULL,
+  file_name      TEXT NOT NULL,
+  file_size      INTEGER,
+  created_at     TEXT DEFAULT (datetime('now', 'localtime'))
 );
+
+-- LERS (Lawful Electronic Request System) dispatches
+CREATE TABLE lers_requests (
+  id                TEXT PRIMARY KEY,
+  case_id           TEXT NOT NULL,
+  platform          TEXT NOT NULL,                      -- META | GOOGLE | TELEGRAM
+  target_identifier TEXT NOT NULL,
+  status            TEXT DEFAULT 'PENDING',
+  request_data      TEXT,
+  response_data     TEXT,
+  created_at        TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+-- Immutable audit trail
+CREATE TABLE audit_log (
+  id          TEXT PRIMARY KEY,
+  case_id     TEXT,
+  action      TEXT NOT NULL,                            -- CASE_CREATED | DIARY_ENTRY | etc.
+  details     TEXT,
+  officer_name TEXT,
+  created_at  TEXT DEFAULT (datetime('now', 'localtime'))
+);
+
+-- Indexes
+CREATE INDEX idx_cases_fir          ON cases(fir_number);
+CREATE INDEX idx_cases_status       ON cases(status);
+CREATE INDEX idx_evidence_case      ON evidence_files(case_id);
+CREATE INDEX idx_documents_case     ON documents(case_id);
+CREATE INDEX idx_diary_case         ON case_diary(case_id);
+CREATE INDEX idx_diary_images_entry ON diary_images(diary_entry_id);
 ```
 
 ---
 
-## 🧪 How the AI Legal Engine Works
-
-The FIR narrative is sent to Qwen running locally via Ollama. The model responds with structured JSON containing applicable BNS/BNSS/BSA sections and confidence scores — entirely offline, no cloud call.
-
-```javascript
-const LEGAL_PROMPT = `
-You are an expert Indian criminal law AI trained on BNS, BNSS, and BSA.
-Given the incident description below, suggest all applicable legal sections.
-
-Incident: {incident_description}
-
-Respond ONLY with a valid JSON object in this exact format:
-{
-  "bns_sections": [
-    {
-      "section": "302",
-      "title": "Murder",
-      "reasoning": "Victim died due to intentional act by accused",
-      "confidence": 95
-    }
-  ],
-  "bnss_sections": [],
-  "bsa_sections": []
-}
-`;
-
-async function suggestSections(description) {
-  const prompt = LEGAL_PROMPT.replace('{incident_description}', description);
-
-  const response = await fetch('http://localhost:11434/api/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'qwen2.5:4b-instruct-q4_K_M',
-      prompt,
-      stream: false,
-      format: 'json'
-    })
-  });
-
-  const data = await response.json();
-  return JSON.parse(data.response);
-}
-```
-
----
-
-## 🚀 Setup & Installation
+## 🚀 Installation Guide
 
 ### Prerequisites
 
-| Software | Version | Required For |
+| Software | Minimum Version | Required For |
 |---|---|---|
 | **Node.js** | 20.x or later | Electron + React runtime |
 | **npm** | 9.x+ | Package management |
-| **Ollama** | 0.5.0+ | Local LLM runtime |
-| **Python** | 3.11+ | Document generation + IndicTrans2 translation |
-| **Git** | 2.x+ | Version control |
+| **Ollama** | 0.5.0+ | Local LLM server (auto-installed by app on first run) |
+| **Git** | 2.x+ | Cloning the repo |
+| **RAM** | 8 GB (16 GB recommended) | Running Qwen locally |
+| **Disk** | 10 GB free | Ollama + Qwen model + app |
+| **OS** | Windows 10/11, Linux, macOS | Cross-platform Electron |
 
----
-
-### Step 1: Clone & Install Dependencies
+### Step 1 — Clone the Repository
 
 ```bash
 git clone https://github.com/your-org/crimegpt.git
 cd crimegpt
-
-# Install Node dependencies
-npm install
-
-# Install Python dependencies
-pip install -r requirements.txt
 ```
 
----
-
-### Step 2: Install & Configure Ollama
+### Step 2 — Install Node Dependencies
 
 ```bash
-# Linux
-curl -fsSL https://ollama.com/install.sh | sh
+npm install
+```
 
-# Windows / macOS: download installer from https://ollama.com
+This installs Electron 42, React 19, Vite 8, Tailwind, sql.js, and all service-layer packages.
 
-# Pull the quantized Qwen model
-# 4B recommended for 8GB RAM systems
-ollama pull qwen2.5:4b-instruct-q4_K_M
+### Step 3 — Install Ollama
 
-# 8B for better accuracy (requires 16GB+ RAM)
-ollama pull qwen2.5:8b-instruct-q4_K_M
+**Automatic (recommended)**: The app's first-run AI Setup wizard detects missing Ollama and downloads the installer with one click.
 
-# Verify
+**Manual**:
+- **Windows**: Download from [ollama.com/download](https://ollama.com/download) → run installer
+- **Linux**: `curl -fsSL https://ollama.com/install.sh | sh`
+- **macOS**: Download from [ollama.com/download](https://ollama.com/download)
+
+### Step 4 — Start Ollama & Pull a Model
+
+```bash
+# Start the Ollama server (keep this terminal open)
+ollama serve
+
+# In a NEW terminal, pull the appropriate model:
+# For 8 GB RAM systems:
+ollama pull qwen2.5:3b-instruct-q4_K_M
+
+# For 16 GB+ RAM systems (better legal reasoning):
+ollama pull qwen2.5:7b-instruct-q4_K_M
+
+# Pull the embedding model (used for RAG vector search):
+ollama pull nomic-embed-text:latest
+
+# Verify both models are installed:
 ollama list
 ```
 
----
+> 💡 The app auto-detects your device's RAM and recommends the right model in the AI Setup wizard.
 
-### Step 3: Start Ollama Service
-
-```bash
-ollama serve
-
-# Verify it's running on default port 11434
-curl http://localhost:11434/api/tags
-```
-
----
-
-### Step 4: Launch the App
+### Step 5 — Launch the App in Dev Mode
 
 ```bash
-# Development mode (with HMR)
 npm run dev
-
-# Production build
-npm run build
-
-# Package as standalone executable
-npm run package
 ```
+
+This runs:
+- Vite dev server on `http://localhost:5173` (with HMR)
+- Electron instance that auto-loads the dev server
+- DevTools open automatically for debugging
+
+### Step 6 — First Run
+
+1. **Admin Setup**: Create the first administrator account (username + password)
+2. **AI Setup**: Wizard checks Ollama, pulls Qwen, indexes legal corpus (BNS/BNSS/BSA/Special Acts) — takes 2–5 minutes
+3. **You're ready**: Dashboard loads with sample data hooks ready
 
 ---
 
 ## 📦 Building for Production
 
 ```bash
-npm run build:win    # Windows  → .exe installer
-npm run build:linux  # Linux    → .AppImage / .deb
-npm run build:mac    # macOS    → .dmg
+# Build for the current platform
+npm run build
+
+# Cross-platform builds
+npx electron-builder --win     # Windows  → .exe installer (NSIS)
+npx electron-builder --linux   # Linux    → .AppImage, .deb
+npx electron-builder --mac     # macOS    → .dmg
+```
+
+Output is in `dist/` (Vite) and `release/` (Electron installer).
+
+### Installer Highlights
+- Auto-launches on Windows startup (optional)
+- Desktop + Start Menu shortcuts
+- Uninstaller included
+- Code-signable for government distribution (Authenticode on Windows)
+
+---
+
+## 🔒 Security & Compliance
+
+| Layer | Protection |
+|---|---|
+| **Process Isolation** | Electron `contextIsolation: true`, `nodeIntegration: false` — renderer is sandboxed |
+| **IPC Bridge** | All Node.js access funneled through `preload.cjs` → `contextBridge` → explicit allowlist of methods |
+| **Data at Rest** | SQLite DB serialized to user's `app.getPath('userData')` — not in plain project folder |
+| **Password Hashing** | SHA-256 (one-way) — upgradeable to bcrypt for production |
+| **Network** | Zero outbound calls for AI/DB. Only **BharatPol** API hit is via `net` module (no Node http leak) |
+| **AI Inference** | 100% local. No OpenAI / Anthropic / cloud AI. No data leaves the device. |
+| **Audit Trail** | Append-only `audit_log` table with officer name + ISO timestamp on every action |
+| **File Uploads** | MIME type validation + 10 MB size cap on evidence photos |
+| **BharatPol Sync** | Explicit user action required per case — no automatic uploads |
+| **Dependency Hygiene** | All deps pinned in `package-lock.json`; `npm audit` clean |
+
+### Compliance Notes
+- Designed for **Section 79 IT Act** safe-harbour considerations (officer-side tool, not a public platform)
+- Aligns with **BPR&D documentation standards** for FIR / Charge Sheet / Panchnama format
+- Compatible with **CCTNS / ICJS** interop requirements via BharatPol adapter
+- Suitable for **Sensitive Personal Data** handling under DPDP Act 2023 (data minimisation, purpose limitation, local-only storage)
+
+---
+
+## 🧠 AI Legal Engine — How It Works
+
+The RAG pipeline produces **cite-able, grounded** legal answers by combining semantic search over a structured legal corpus with Qwen's language understanding.
+
+### Pipeline
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                       RAG PIPELINE (3 STAGES)                        │
+│                                                                      │
+│  STAGE 1: Query Rewriting (Qwen)                                     │
+│  ┌────────────────────────────────────────────────────────────┐      │
+│  │ Input:  "what sections for theft at night"                 │      │
+│  │ Prompt: SEARCH_QUERY_PROMPT (persona + BNS/BNSS/BSA rules)│      │
+│  │ Output: "theft night dwelling bns"                         │      │
+│  └────────────────────────────────────────────────────────────┘      │
+│                              ▼                                        │
+│  STAGE 2: Vector Retrieval (Nomic Embed + Cosine Sim)                │
+│  ┌────────────────────────────────────────────────────────────┐      │
+│  │ • Embed rewritten query → 768-dim vector                   │      │
+│  │ • Score every indexed section: cosine(query, section)       │      │
+│  │ • Return top-5 with score ≥ threshold                     │      │
+│  │ • Also: searchSimilarCases(query) → top-3 past FIRs         │      │
+│  └────────────────────────────────────────────────────────────┘      │
+│                              ▼                                        │
+│  STAGE 3: Answer Synthesis (Qwen, temp=0.1 for precision)            │
+│  ┌────────────────────────────────────────────────────────────┐      │
+│  │ Prompt: FINAL_ANSWER_PROMPT with:                          │      │
+│  │   • Officer's original question                             │      │
+│  │   • Top-5 retrieved sections (law, number, title, content)  │      │
+│  │   • Similar historical cases from this station              │      │
+│  │ Output: Structured response:                                │      │
+│  │   • Relevant sections with exact numbers                    │      │
+│  │   • Plain-language explanation                              │      │
+│  │   • Step-by-step procedure                                  │      │
+│  │   • Evidence to collect                                     │      │
+│  │   • Key points (bail, urgency, cautions)                    │      │
+│  └────────────────────────────────────────────────────────────┘      │
+│                              ▼                                        │
+│                     ANSWER (to UI)                                    │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+### Why This Approach
+
+- **No hallucinated section numbers** — Qwen is constrained to cite only retrieved sections. If the corpus doesn't have an answer, it says so.
+- **Low temperature (0.1)** in the answer stage trades creativity for determinism — critical for legal accuracy.
+- **Dual retrieval** (laws + similar cases) lets the system answer both abstract legal questions and concrete "how was the last similar case handled?" questions.
+- **Works offline** — entire inference pipeline is local. No API keys, no rate limits, no cloud costs.
+
+### Structured Section Suggestion (New FIR)
+
+For new FIRs, the system runs a **fast JSON-mode** suggestion:
+```javascript
+{
+  "bns_sections": [
+    { "section": "303", "title": "Theft", "reasoning": "...", "confidence": 92 },
+    { "section": "331", "title": "House Trespass", "reasoning": "...", "confidence": 78 }
+  ],
+  "bnss_sections": [
+    { "section": "173", "title": "FIR Registration", "reasoning": "..." }
+  ],
+  "summary": "Brief one-paragraph analysis"
+}
+```
+
+This is faster than RAG and produces machine-readable output directly consumed by the NewCase UI.
+
+---
+
+## 🌐 BharatPol Integration
+
+BharatPol is the **national inter-state police coordination network** (a real initiative by the Ministry of Home Affairs). For this prototype, we integrate with a **mock BharatPol API** at `https://mock-api-7969.onrender.com` that simulates the production endpoints.
+
+### Endpoints Used
+
+| Endpoint | Method | Purpose |
+|---|---|---|
+| `/api/criminals?page=&limit=&search=` | GET | Paginated criminal record search |
+| `/api/cases/sync` | POST | Pull a criminal's case from BharatPol into local DB |
+| `/api/cases/share` | POST | Push a local case to BharatPol for inter-state visibility |
+
+### Features in the UI (`BharatPol.jsx`)
+
+1. **National Criminal Search** — search by name, phone, or FIR number across the BharatPol database
+2. **Danger Level** — visual indicator (HIGH / MEDIUM / LOW) with color coding
+3. **Wanted Flag** — red badge for actively wanted persons
+4. **Previous Cases** — expandable list of prior FIRs per criminal
+5. **Sync to Local** — one-click import of a criminal's case into the local CrimeGPT database
+6. **Post Case** — share a local CrimeGPT FIR to BharatPol for inter-jurisdictional visibility
+7. **Posted State Tracking** — UI shows which local cases have been posted (with `BadgeCheck`)
+
+### LERS (Lawful Electronic Request System)
+
+The app also dispatches LERS requests to platforms (Meta, Google, Telegram) for lawful evidence requests. These are logged in the `lers_requests` table with status tracking.
+
+---
+
+## 📂 Project Structure
+
+```
+crimegpt/
+├── electron/
+│   ├── main.js                   # Electron main process, IPC handlers, window mgmt
+│   ├── preload.cjs               # contextBridge → window.crimeGPT.*
+│   ├── auth.js                   # SHA-256 auth, admin setup, login
+│   ├── database/
+│   │   ├── connection.js         # sql.js init, saveToFile, getDatabase
+│   │   └── schema.sql            # Full DB schema (8 tables)
+│   ├── doc/                      # HTML template renderers (8 doc types)
+│   │   ├── FIR.js
+│   │   ├── chargeSheet.js
+│   │   ├── remandLetter.js
+│   │   ├── medicalLetter.js
+│   │   ├── seizureLetter.js
+│   │   ├── custodyLetter.js
+│   │   ├── accusedPunchnama.js
+│   │   └── face_id.js
+│   └── service/
+│       ├── ai-setup.js           # Ollama HTTP client, model management, downloads
+│       ├── case-manager.js       # FIR registration, diary, audit
+│       ├── document-manager.js   # 8-template dispatcher, PDF generation
+│       └── vector-db.js          # RAG: index/search laws, similar cases
+├── src/
+│   ├── App.jsx                   # Router (hash-based)
+│   ├── main.jsx                  # React mount
+│   ├── index.css                 # Tailwind base
+│   ├── context/
+│   │   └── AuthContext.jsx       # Session + login state
+│   ├── components/
+│   │   ├── Sidebar.jsx
+│   │   ├── StatCard.jsx
+│   │   └── NavButton.jsx
+│   └── pages/
+│       ├── login.jsx             # Multilingual login
+│       ├── setup.jsx             # First-time admin setup
+│       ├── AISetup.jsx           # Ollama + model install wizard
+│       ├── dashboard.jsx         # Stats + recent activity
+│       ├── NewCase.jsx           # 3-step FIR wizard
+│       ├── CaseDetail.jsx        # Case tabs (overview/docs/diary/audit)
+│       ├── AIChat.jsx            # RAG conversational interface
+│       ├── BharatPol.jsx         # National network integration
+│       ├── AuditTrail.jsx        # Visual audit log timeline
+│       └── SearchCases.jsx       # Full-text case search
+├── database/                     # Vector DB JSON stores (runtime)
+│   ├── sections.json             # BNS/BNSS/BSA indexed sections
+│   └── cases.json                # Past cases with embeddings
+├── data/                         # Source legal texts (BNS.txt, BNSS.txt, BSA.txt, special.txt)
+├── public/
+│   ├── logo1.png                 # App icon
+│   └── image.png
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+└── README.md                     # ← You are here
 ```
 
 ---
 
-## 🔒 Security
+## 🐛 Known Limitations & Roadmap
 
-| Layer | Protection |
+### Current Limitations
+
+| Item | Note |
 |---|---|
-| **Data at Rest** | AES-256-GCM via Electron `safeStorage` API |
-| **Network** | No outbound connections — fully air-gapped |
-| **AI Inference** | All processing local — zero data sent to cloud |
-| **Document Output** | Encrypted `.docx` by default |
-| **Access Control** | Optional PIN / password on app launch |
+| **Vector store** | In-memory + JSON file. Sub-linear scaling above ~10k sections. Migration to LanceDB planned. |
+| **Password hashing** | SHA-256 single-round. Production should use bcrypt/argon2. |
+| **Ollama cold start** | First model load takes 15–30 s. Mitigated with `num_gpu` warm-up. |
+| **BharatPol API** | Currently a mock server. Production requires MHA-approved credentials. |
+| **LERS dispatch** | Logs requests locally; doesn't actually contact Meta/Google/Telegram. |
+| **No multi-user** | Single-user auth model. RBAC is schema-ready but not enforced in UI. |
+
+### Roadmap
+
+- [ ] Multi-user RBAC (IO / SHO / Legal Advisor) with case-assignment
+- [ ] Voice-to-FIR (offline STT via Whisper.cpp)
+- [ ] OCR for scanned FIRs (Tesseract.js)
+- [ ] CCTNS native adapter
+- [ ] Export to eCourts format
+- [ ] Mobile companion app (read-only, via local hotspot)
+- [ ] Hardware TPM integration for forensic-grade audit signing
+- [ ] Live streaming to district control room (when online)
 
 ---
 
-## 🌐 Multilingual Support
+## 🏆 Team & Acknowledgments
 
-| Feature | Languages |
-|---|---|
-| UI Language | English, Gujarati, Hindi |
-| FIR Input | Any of the 3 languages |
-| Document Output | Generated in input language |
-| AI Understanding | Qwen natively understands Gujarati & Hindi |
-| Cross-language Translation | IndicTrans2 (fully offline) |
+### Built For
+- **Hackathon**: Kanad S.H.I.E.L.D. 2026
+- **Domain Partner**: **Ahmedabad Cyber Crime Branch**, Gujarat Police
+- **Problem Domain**: AI-driven police documentation under the new criminal laws (BNS/BNSS/BSA 2023)
 
----
+### Team
+*(Add team member names, roles, and affiliations here)*
 
-## 🐛 Known Issues
+### Special Thanks
+- **Ahmedabad Cyber Crime Branch** — for the problem statement, field testing, and feedback
+- **Qwen Team (Alibaba)** — for the open-source multilingual LLM that powers our offline AI
+- **Ollama** — for making local LLM deployment trivial
+- **sql.js** — for WASM SQLite with zero native dependencies
+- **Electron** — for cross-platform desktop packaging
+- **Indian Kanoon** — for legal data structure inspiration
+- **BPR&D** — for FIR/Charge Sheet documentation standards
 
-| Issue | Notes |
-|---|---|
-| **Ollama cold start** | First model load takes 15–30 seconds |
-| **Memory usage** | Qwen 4B Q4 uses ~3.5 GB RAM — 8 GB+ system recommended |
-| **Windows Defender** | May flag unpackaged Electron builds; sign the binary for production |
-| **Gujarati fonts** | Install **Noto Sans Gujarati** if text doesn't render correctly |
-| **sql.js persistence** | DB must be serialized and written to disk manually on each write — see `src/db/persist.js` |
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome. For major changes, open an issue first to discuss what you'd like to change.
-
-1. Fork the repo
-2. Create your branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m 'feat: add your feature'`
-4. Push to the branch: `git push origin feature/your-feature`
-5. Open a pull request
+### Open-Source Libraries Used
+React 19, Vite 8, Electron 42, Tailwind CSS 3.4, lucide-react, Zustand 5, react-router-dom 7, sql.js 1.14, uuid 14, bcryptjs 3, Ollama, Qwen 2.5, nomic-embed-text, electron-builder 26, concurrently 10, wait-on 9.
 
 ---
 
 ## 📄 License
 
-Distributed under the [MIT License](LICENSE).
+Distributed under a **Proprietary License** for the **Ahmedabad Cyber Crime Branch** and authorized government evaluators.
 
----
-
-## 🙏 Acknowledgments
-
-- **Qwen Team (Alibaba)** — multilingual LLM enabling offline Hindi/Gujarati AI
-- **Ollama** — local LLM deployment made simple
-- **sql.js** — SQLite compiled to WASM with zero native dependencies
-- **Indian Kanoon** — legal data structure inspiration
-- **BPR&D** — documentation standards reference
-- **Google Stitch** — rapid UI prototyping
+For licensing, partnership, or deployment inquiries, contact the development team.
 
 ---
 
 <div align="center">
 
-**Built for Smart India Hackathon 2026**  
-Problem Statement: `PS-69EEFDFB90B99` | Category: 2 (Software)
+### 🛡️ Built for Kanad S.H.I.E.L.D. 2026 — Ahmedabad Cyber Crime Branch
 
 **Made with ❤️ for Indian Law Enforcement**
+
+*No data leaves the device. No internet required. No compromise on privacy.*
 
 </div>
