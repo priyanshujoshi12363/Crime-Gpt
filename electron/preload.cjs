@@ -31,4 +31,11 @@ contextBridge.exposeInMainWorld('crimeGPT', {
 generateDocument: (caseId, docKey, caseData) => ipcRenderer.invoke('doc:generate', caseId, docKey, caseData),
 saveDocRecord: (caseId, docType, docName, docPath) => ipcRenderer.invoke('doc:save-record', caseId, docType, docName, docPath),
 onDownloadComplete: (callback) => ipcRenderer.on('download-complete', (_, data) => callback(data)),
+sendLERS: (data) => ipcRenderer.invoke('lers:send', data),
+getLERSForCase: (caseId) => ipcRenderer.invoke('lers:get-for-case', caseId),
+getBharatPolCriminals: (params) => ipcRenderer.invoke('bharatpol:get-criminals', params),
+syncBharatPolCase: (data) => ipcRenderer.invoke('bharatpol:sync-case', data),
+shareBharatPolCase: (data) => ipcRenderer.invoke('bharatpol:share-case', data),
+getAuditLog: (caseId) => ipcRenderer.invoke('audit:get-for-case', caseId),
+updateCaseAccused: (caseId, accused) => ipcRenderer.invoke('case:update-accused', caseId, accused),
 });

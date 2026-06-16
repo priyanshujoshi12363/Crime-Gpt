@@ -1,4 +1,4 @@
-import { FileText, Plus, Clock, MessageSquare, Zap } from 'lucide-react';
+import { FileText, Plus, Clock, MessageSquare, Zap, Search, Shield } from 'lucide-react';
 import NavButton from './NavButton';
 
 export default function Sidebar({ user, activeView, onNavigate, onLogout }) {
@@ -41,10 +41,16 @@ export default function Sidebar({ user, activeView, onNavigate, onLogout }) {
           onClick={() => onNavigate('new-case')} 
         />
         <NavButton 
-          icon={<Clock size={18} />} 
-          label="Case Diary" 
+          icon={<Search size={18} />} 
+          label="Search Cases" 
           active={activeView === 'search'} 
           onClick={() => onNavigate('search')} 
+        />
+        <NavButton 
+          icon={<Shield size={18} />} 
+          label="BharatPol" 
+          active={activeView === 'bharatpol'} 
+          onClick={() => onNavigate('bharatpol')} 
         />
         <NavButton 
           icon={<MessageSquare size={18} />} 
@@ -64,13 +70,6 @@ export default function Sidebar({ user, activeView, onNavigate, onLogout }) {
             <p className="text-sm font-semibold truncate text-gray-700">{user?.fullName}</p>
             <p className="text-[10px] text-green-600 font-medium">{user?.role}</p>
           </div>
-          <button onClick={onLogout} className="text-gray-400 hover:text-red-400 transition p-1">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
-          </button>
         </div>
       </div>
     </aside>

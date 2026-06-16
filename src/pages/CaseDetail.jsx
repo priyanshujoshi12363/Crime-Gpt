@@ -1,9 +1,8 @@
 // src/pages/CaseDetail.jsx
 import { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, FileText, Download, Eye, Calendar, MapPin, User, Shield, Check, Loader2, Plus, X, Clock, Printer, Image, Upload, Trash2 } from 'lucide-react';
-import Sidebar from '../components/Sidebar';
+import { ArrowLeft, FileText, Download, Eye, Calendar, Camera, Upload, MapPin, User, Shield, Check, Loader2, Plus, X, Clock, Printer, Image, Trash2, Send, Phone } from 'lucide-react';import Sidebar from '../components/Sidebar';
 import { useAuth } from '../context/AuthContext';
-
+import AuditTrail from './AuditTrail.jsx';
 const EVENT_TYPES = [
   { value: 'FIR_REGISTERED', label: 'FIR Registered' },
   { value: 'INVESTIGATION_STARTED', label: 'Investigation Started' },
@@ -44,7 +43,10 @@ export default function CaseDetail({ onNavigate, caseId }) {
   const [showDiaryForm, setShowDiaryForm] = useState(false);
   const [savingDiary, setSavingDiary] = useState(false);
   const [viewingImage, setViewingImage] = useState(null);
-  const [diaryImages, setDiaryImages] = useState([]); // For new entry images
+  const [diaryImages, setDiaryImages] = useState([]); 
+  const [lersPlatform, setLersPlatform] = useState('WhatsApp');
+const [lersTarget, setLersTarget] = useState('');
+const [lersSending, setLersSending] = useState(false);
   const [newDiaryEntry, setNewDiaryEntry] = useState({
     event_type: 'INVESTIGATION_STARTED',
     title: '',
@@ -53,7 +55,17 @@ export default function CaseDetail({ onNavigate, caseId }) {
     entry_time: new Date().toTimeString().split(' ')[0].substring(0, 5),
     location: '',
   });
-
+const [showFaceIDModal, setShowFaceIDModal] = useState(false);
+const [faceIDDocKey, setFaceIDDocKey] = useState(null);
+const [accusedPhoto, setAccusedPhoto] = useState(null);
+const [cameraStream, setCameraStream] = useState(null);
+const videoRef = useRef(null);
+const canvasRef = useRef(null);
+const [faceIDForm, setFaceIDForm] = useState({
+  name: '', fatherName: '', age: '', gender: '', occupation: '',
+  address: '', phone: '', height: '', build: '', complexion: '',
+  hair: '', eyes: '', beard: '', mark1: '', mark2: '', mark3: '',
+});
   useEffect(() => { loadCaseData(); }, [caseId]);
 
   useEffect(() => {
@@ -80,7 +92,6 @@ export default function CaseDetail({ onNavigate, caseId }) {
     setLoading(false);
   };
 
-  // ─── IMAGE HANDLING FOR DIARY ───
   const handleDiaryImageSelect = (e) => {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
@@ -172,26 +183,378 @@ export default function CaseDetail({ onNavigate, caseId }) {
     });
     setShowDiaryForm(true);
   };
+const startCamera = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 400, height: 400, facingMode: 'user' } });
+    setCameraStream(stream);
+    if (videoRef.current) videoRef.current.srcObject = stream;
+  } catch (err) { addNotification('error', 'Camera Error', 'Could not access camera'); }
+};
 
-  const handleGenerate = async (docKey) => {
-    setGenerating(docKey);
-    try {
-      await window.crimeGPT.generateDocument(caseId, docKey, caseData);
-      addNotification('success', 'Document Generated', 'Document is ready to view and download');
-      await loadCaseData();
-    } catch (err) { addNotification('error', 'Generation Failed', 'Please try again'); }
-    setGenerating(null);
-  };
+const stopCamera = () => {
+  if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); setCameraStream(null); }
+};
 
+const capturePhoto = () => {
+  if (videoRef.current && canvasRef.current) {
+    const c = canvasRef.current;
+    c.width = videoRef.current.videoWidth || 400;
+    c.height = videoRef.current.videoHeight || 400;
+    c.getContext('2d').drawImage(videoRef.current, 0, 0, c.width, c.height);
+    setAccusedPhoto(c.toDataURL('image/jpeg', 0.9));
+    stopCamera();
+  }
+};
+
+const handlePhotoUpload = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => setAccusedPhoto(reader.result);
+  reader.readAsDataURL(file);
+};
+
+const handleGenerateFaceID = (docKey) => {
+  const firstAccused = caseData.accused?.[0] || {};
+  setFaceIDDocKey(docKey);
+  // setAccusedPhoto(null);
+  stopCamera();
+  setFaceIDForm({
+    name: firstAccused.full_name || firstAccused.name || '',
+    fatherName: firstAccused.father_name || '',
+    age: firstAccused.age || '',
+    gender: firstAccused.gender || '',
+    occupation: firstAccused.occupation || '',
+    address: firstAccused.address || '',
+    phone: firstAccused.phone || '',
+    height: firstAccused.height || '',
+    build: firstAccused.build || '',
+    complexion: firstAccused.complexion || '',
+    hair: firstAccused.hair || '',
+    eyes: firstAccused.eyes || '',
+    beard: firstAccused.beard || '',
+    mark1: firstAccused.mark1 || '',
+    mark2: firstAccused.mark2 || '',
+    mark3: firstAccused.mark3 || '',
+  });
+  setShowFaceIDModal(true);
+};
+
+const handleGenerateFaceIDDoc = async () => {
+  if (!faceIDForm.name.trim()) { addNotification('error', 'Missing', 'Accused name is required'); return; }
+  setShowFaceIDModal(false);
+  setGenerating(faceIDDocKey);
+  try {
+    // Update accused in database
+    const updatedAccused = [{
+      ...caseData.accused?.[0] || {},
+      full_name: faceIDForm.name,
+      name: faceIDForm.name,
+      father_name: faceIDForm.fatherName,
+      age: faceIDForm.age,
+      gender: faceIDForm.gender,
+      occupation: faceIDForm.occupation,
+      address: faceIDForm.address,
+      phone: faceIDForm.phone,
+      height: faceIDForm.height,
+      build: faceIDForm.build,
+      complexion: faceIDForm.complexion,
+      hair_description: faceIDForm.hair,
+      eye_description: faceIDForm.eyes,
+      beard_moustache: faceIDForm.beard,
+      identification_mark_1: faceIDForm.mark1,
+      identification_mark_2: faceIDForm.mark2,
+      identification_mark_3: faceIDForm.mark3,
+    }];
+
+    // Update caseData with new accused info
+    const enrichedCaseData = {
+      ...caseData,
+      _accusedPhoto: accusedPhoto,
+      accused: updatedAccused,
+    };
+
+    // Generate document with enriched data
+    await window.crimeGPT.generateDocument(caseId, faceIDDocKey, enrichedCaseData);
+    console.log('📸 Sending to backend - Photo:', accusedPhoto ? 'YES - ' + accusedPhoto.substring(0, 50) : 'NO');
+console.log('📸 enrichedCaseData._accusedPhoto:', enrichedCaseData._accusedPhoto ? 'YES' : 'NO');
+    // Update accused in database
+    await window.crimeGPT.updateCaseAccused(caseId, updatedAccused);
+    
+    addNotification('success', 'Face ID Generated', 'Document ready & accused details updated');
+    await loadCaseData();
+  } catch (err) { addNotification('error', 'Failed', 'Please try again'); }
+  setGenerating(null);
+  stopCamera();
+};
+const handleGenerate = async (docKey) => {
+  if (docKey === 'FACE_ID') { handleGenerateFaceID(docKey); return; }
+  setGenerating(docKey);
+  try {
+    await window.crimeGPT.generateDocument(caseId, docKey, caseData);
+    addNotification('success', 'Document Generated', 'Ready');
+    await loadCaseData();
+  } catch (err) { addNotification('error', 'Generation Failed', 'Please try again'); }
+  setGenerating(null);
+};
   const handleDownload = (docPath) => {
     if (docPath) {
       window.open(`file://${docPath}`);
       addNotification('success', 'Opening Document', 'Opening in default PDF viewer');
     }
   };
+  // Add this right after the EVENT_COLORS object, before export default function
+function mapCaseDataForPreview(caseData, user) {
+  const complainant = caseData.complainant || {};
+  const accused = caseData.accused || [];
+  const witnesses = caseData.witnesses || [];
+  const seizedItems = caseData.seized_items || [];
+  const sections = caseData.applied_sections || [];
+  const firstAccused = accused[0] || {};
 
+  const sectionsText = sections.map(s => 
+    typeof s === 'object' ? `${s.law || s.law_code || 'BNS'} Section ${s.section || s.section_number}` : s
+  ).join(', ');
+
+  // ✅ USE LOGGED-IN USER for officer name
+  const officerName = user?.fullName || caseData.officer_name || '';
+  const officerRank = caseData.officer_rank || 'Investigating Officer';
+  const officerBadge = caseData.officer_badge || '';
+
+  return {
+    fir_number: caseData.fir_number || '',
+    fir_year: new Date(caseData.incident_date || Date.now()).getFullYear().toString(),
+    incident_date: caseData.incident_date || '',
+    incident_time: caseData.incident_time || '',
+    incident_location: caseData.incident_location || '',
+    incident_district: caseData.incident_district || 'Ahmedabad',
+    incident_state: caseData.incident_state || 'Gujarat',
+    description: caseData.description || '',
+    description_lang: caseData.description_lang || 'en',
+    case_type: caseData.case_type || 'Other',
+    status: caseData.status || 'ACTIVE',
+    sections_applied: sections,
+    sections_text: sectionsText,
+    
+    // ✅ OFFICER FROM LOGGED-IN USER
+    officer_name: officerName,
+    officer_rank: officerRank,
+    officer_badge: officerBadge,
+    police_station: 'CrimeGPT Police Station, Ahmedabad',
+    district: caseData.incident_district || 'Ahmedabad',
+    state: caseData.incident_state || 'Gujarat',
+    registration_date: new Date().toLocaleDateString('en-IN'),
+    registration_time: new Date().toLocaleTimeString('en-IN'),
+
+    complainant: {
+      full_name: complainant.full_name || '',
+      father_name: complainant.father_name || complainant.fatherName || '',
+      address: complainant.address || '',
+      phone: complainant.phone || '',
+      id_proof_type: complainant.id_proof_type || '',
+      id_proof_number: complainant.id_proof_number || '',
+      name: complainant.full_name || '',
+    },
+
+    accused: accused.map(a => ({
+      name: a.full_name || a.name || '',
+      full_name: a.full_name || a.name || '',
+      alias: a.alias || '',
+      father_name: a.father_name || '',
+      age: a.age || '',
+      gender: a.gender || '',
+      address: a.address || '',
+      physical_description: a.physical_description || '',
+      occupation: a.occupation || '',
+      mobile_number: a.phone || a.mobile_number || '',
+      custody_status: a.custody_status || 'In Police Custody',
+      bail_status: a.bail_status || 'Not Applied',
+    })),
+
+    witnesses: witnesses.map(w => ({
+      name: w.full_name || w.name || '',
+      full_name: w.full_name || w.name || '',
+      phone: w.phone || '',
+      statement: w.statement || '',
+      address: w.address || '',
+    })),
+
+    seized_items: seizedItems.map(item => ({
+      item: item.item_name || item.item || '',
+      item_name: item.item_name || item.item || '',
+      description: item.description || '',
+      quantity: item.quantity || item.qty || '1',
+      qty: item.quantity || item.qty || '1',
+      seized_from: item.seized_from || firstAccused.full_name || firstAccused.name || 'Unknown',
+      seizedFrom: item.seized_from || firstAccused.full_name || firstAccused.name || 'Unknown',
+    })),
+
+    fir: {
+      fir_number: caseData.fir_number || '',
+      fir_year: new Date(caseData.incident_date || Date.now()).getFullYear().toString(),
+      sections: sectionsText,
+      police_station: 'CrimeGPT Police Station, Ahmedabad',
+    },
+
+    panchnama: {
+      date: new Date().toLocaleDateString('en-IN'),
+      time: new Date().toLocaleTimeString('en-IN'),
+      place: caseData.incident_location || '',
+    },
+
+    accused_data: {
+      name: firstAccused.full_name || firstAccused.name || '',
+      father_name: firstAccused.father_name || '',
+      age: firstAccused.age || '',
+      occupation: firstAccused.occupation || '',
+      address: firstAccused.address || '',
+      mobile_number: firstAccused.phone || firstAccused.mobile_number || '',
+    },
+
+    identification_marks: {
+      mark_1: firstAccused.mark1 || '',
+      mark_2: firstAccused.mark2 || '',
+    },
+
+    clothes_worn: {
+      upper_wear: firstAccused.upperWear || '',
+      lower_wear: firstAccused.lowerWear || '',
+      footwear: firstAccused.footwear || '',
+    },
+
+    articles_found: {
+      article_1: firstAccused.article1 || '',
+      article_2: firstAccused.article2 || '',
+      article_3: firstAccused.article3 || '',
+      article_4: firstAccused.article4 || '',
+    },
+
+    panch_witnesses: witnesses.slice(0, 2).map(w => ({
+      name: w.full_name || w.name || '',
+      address: w.address || '',
+    })),
+
+    // ✅ OFFICER FROM LOGGED-IN USER
+    investigating_officer: {
+      name: officerName,
+      rank: officerRank,
+      badge_number: officerBadge,
+      police_station: 'CrimeGPT Police Station, Ahmedabad',
+    },
+
+    court_details: {
+      court_name: 'The Honourable Judicial Magistrate First Class, Ahmedabad',
+      district: caseData.incident_district || 'Ahmedabad',
+      case_number: caseData.fir_number || '',
+      submission_date: new Date().toLocaleDateString('en-IN'),
+      place: 'Ahmedabad',
+      court_order_date: new Date().toLocaleDateString('en-IN'),
+    },
+
+    court: {
+      court_name: 'The Honourable Judicial Magistrate First Class, Ahmedabad',
+      district: caseData.incident_district || 'Ahmedabad',
+    },
+
+    police_station_details: {
+      police_station: 'CrimeGPT Police Station, Ahmedabad',
+      fir_number: caseData.fir_number || '',
+      fir_year: new Date(caseData.incident_date || Date.now()).getFullYear().toString(),
+    },
+
+    // ✅ THESE ARE THE CHARGESHEET FIELDS THAT WERE EMPTY
+    offence_details: {
+      sections_applied: sections,
+      crime_type: caseData.case_type || 'Other',
+      date_of_occurrence: caseData.incident_date || '',
+      place_of_occurrence: caseData.incident_location || '',
+      brief_facts: caseData.description || '',
+    },
+
+    investigation_details: {
+      investigating_officer: `${officerRank} ${officerName}`,
+      date_of_arrest: new Date().toLocaleDateString('en-IN'),
+      date_of_charge_sheet: new Date().toLocaleDateString('en-IN'),
+      case_diary_reference: '',
+      final_opinion: 'Sufficient evidence found to prosecute the accused.',
+    },
+
+    custody: {
+      custody_type: 'Judicial Custody',
+      custody_period: '14 Days',
+      jail_name: 'Sabarmati Central Jail, Ahmedabad',
+    },
+
+    escort_officer: {
+      name: officerName,
+      rank: officerRank,
+    },
+
+    remand: { requested_days: '14', grounds: '' },
+
+    seizure: {
+      date: new Date().toLocaleDateString('en-IN'),
+      time: new Date().toLocaleTimeString('en-IN'),
+      location: caseData.incident_location || '',
+    },
+
+    seal: {
+      number: `SEAL-${caseData.fir_number || '001'}`,
+      description: 'Official seal of Investigating Officer',
+    },
+
+    muddamal: { entry_number: `MD-${caseData.fir_number || '001'}` },
+
+    property: {
+      recovered_from: firstAccused.full_name || firstAccused.name || 'Unknown',
+      recovery_location: caseData.incident_location || '',
+      property_seized: seizedItems.map(i => i.item_name || i.item || ''),
+      property_value: '',
+      property_status: 'In Police Custody',
+    },
+
+    victim: {
+      name: complainant.full_name || '',
+      age: complainant.age || '',
+      gender: complainant.gender || '',
+      address: complainant.address || '',
+    },
+
+    incident: {
+      date: caseData.incident_date || '',
+      time: caseData.incident_time || '',
+      place: caseData.incident_location || '',
+      brief_description: caseData.description || '',
+    },
+
+    injuries: { visible_injuries: '', weapon_used: '', condition_of_victim: '' },
+
+    hospital: {
+      hospital_name: 'Civil Hospital, Ahmedabad',
+      doctor_name: 'The Medical Officer, Civil Hospital, Ahmedabad',
+    },
+
+    request: { medical_examination: true, injury_certificate: true, mlc_report: true },
+
+    // ✅ OFFICER FROM LOGGED-IN USER
+    certification: {
+      officer_name: officerName,
+      rank: officerRank,
+      police_station: 'CrimeGPT Police Station, Ahmedabad',
+      signature: '',
+      seal: 'CrimeGPT Police Station, Ahmedabad',
+    },
+
+    evidence: { documents: [], images: [], forensic_reports: [], medical_reports: [] },
+    court_status: { accused_in_custody: true, released_on_bail: false, bail_bond_details: '', inquest_report_number: '' },
+    appendices: [],
+    subject: 'Application for Police Custody Remand',
+    document_type: '',
+  };
+}
   const handlePreview = async (docKey, docName) => {
     setPreviewTitle(docName || 'Document');
+    const templateData = mapCaseDataForPreview(caseData, user);
     try {
       const { renderFIR } = await import('../../electron/doc/FIR.js');
       const { renderChargesheet } = await import('../../electron/doc/chargeSheet.js');
@@ -231,6 +594,25 @@ export default function CaseDetail({ onNavigate, caseId }) {
       setTimeout(() => printWindow.print(), 300);
     }
   };
+  // ─── LERS ───
+const handleLersSend = async () => {
+  const target = lersTarget.trim();
+  if (!target) { addNotification('error', 'Missing Info', 'Enter target phone/username'); return; }
+  setLersSending(true);
+  try {
+    const result = await window.crimeGPT.sendLERS({
+      caseId, firNumber: caseData.fir_number, platform: lersPlatform,
+      targetIdentifier: target, caseType: caseData.case_type,
+      officerName: user?.fullName, sections: sections.map(s => `${s.law || 'BNS'} ${s.section}`).join(', '),
+    });
+    if (result.success) {
+      addNotification('success', 'LERS Sent', `Request sent to ${lersPlatform}. ID: ${result.requestId?.slice(0, 8) || 'N/A'}`);
+      setLersTarget('');
+      await loadCaseData();
+    }
+  } catch (err) { addNotification('error', 'Failed', 'Could not send LERS request'); }
+  setLersSending(false);
+};
 
   if (loading) {
     return (
@@ -290,8 +672,8 @@ export default function CaseDetail({ onNavigate, caseId }) {
         <div className="p-8">
           <div className="max-w-6xl mx-auto">
             <div className="flex gap-1 bg-gray-100 rounded-xl p-1 mb-6">
-              {['overview','parties','sections','documents','diary'].map(tab => (
-                <button key={tab} onClick={() => setActiveSection(tab)} className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all capitalize ${activeSection === tab ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>{tab === 'diary' ? 'Diary & Evidence' : tab}</button>
+              {['overview','parties','sections','documents','diary','lers', 'audit'].map(tab => (
+                <button key={tab} onClick={() => setActiveSection(tab)} className={`flex-1 py-2.5 rounded-lg text-sm font-medium transition-all capitalize ${activeSection === tab ? 'bg-white text-gray-800 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}>{tab === 'diary' ? 'Diary & Evidence' : tab === 'lers' ? 'LERS' : tab}</button>
               ))}
             </div>
 
@@ -408,7 +790,7 @@ export default function CaseDetail({ onNavigate, caseId }) {
                         </div>
                         <div className="flex items-center gap-1">
                           {doc.generated ? (
-                            <><button onClick={() => handlePreview(doc.key, doc.name)} className="p-2 hover:bg-blue-50 rounded-lg transition" title="Preview"><Eye size={16} className="text-blue-500" /></button><button onClick={() => handleDownload(doc.path)} className="p-2 hover:bg-green-100 rounded-lg transition" title="Download"><Download size={16} className="text-green-500" /></button></>
+                            <><button onClick={() => handleDownload(doc.path)} className="p-2 hover:bg-green-100 rounded-lg transition" title="Download"><Download size={16} className="text-green-500" /></button></>
                           ) : (
                             <button onClick={() => handleGenerate(doc.key)} disabled={generating === doc.key} className="px-3 py-1.5 bg-gradient-to-r from-orange-400 to-green-500 text-white rounded-lg text-xs font-medium hover:from-orange-500 hover:to-green-600 transition disabled:opacity-50 flex items-center gap-1">{generating === doc.key ? <Loader2 size={12} className="animate-spin" /> : <FileText size={12} />}{generating === doc.key ? '...' : 'Generate'}</button>
                           )}
@@ -730,6 +1112,166 @@ export default function CaseDetail({ onNavigate, caseId }) {
       </div>
     </div>
   </div>
+
+)}
+{/* LERS REQUESTS TAB */}
+{activeSection === 'lers' && (
+  <div className="space-y-6">
+    <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h3 className="text-base font-semibold text-gray-800">LERS Requests</h3>
+          <p className="text-xs text-gray-400 mt-1">Legal Emergency Request to Meta / WhatsApp / Instagram</p>
+        </div>
+      </div>
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100 mb-6">
+        <h4 className="text-sm font-semibold text-gray-800 mb-4 flex items-center gap-2"><Send size={14} className="text-blue-500" /> Send New LERS Request</h4>
+        <div className="grid grid-cols-3 gap-3">
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Platform</label>
+            <select value={lersPlatform} onChange={(e) => setLersPlatform(e.target.value)}
+              className="w-full bg-white border-2 border-gray-200 rounded-xl px-3 py-2.5 text-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400 transition" style={{ color: '#111827' }}>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Instagram">Instagram</option>
+            </select>
+          </div>
+          <div>
+            <label className="text-xs font-medium text-gray-500 mb-1 block">Target Phone/Username</label>
+            <input type="text" value={lersTarget} onChange={(e) => setLersTarget(e.target.value)}
+              placeholder={complainant?.phone || accused[0]?.phone || 'Phone or username'}
+              className="w-full bg-white border-2 border-gray-200 rounded-xl px-3 py-2.5 text-gray-900 placeholder-gray-400 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400 transition" style={{ color: '#111827', caretColor: '#3b82f6' }} />
+          </div>
+          <div className="flex items-end">
+            <button onClick={handleLersSend} disabled={lersSending || !lersTarget.trim()}
+              className="w-full py-2.5 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 transition disabled:opacity-50 flex items-center justify-center gap-2">
+              {lersSending ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
+              {lersSending ? 'Sending...' : 'Send Request'}
+            </button>
+          </div>
+        </div>
+        <p className="text-[10px] text-gray-400 mt-2">Requests account details, IP logs, and activity data under BNSS Section 94</p>
+      </div>
+      <div>
+        <h4 className="text-sm font-semibold text-gray-800 mb-3">Request History</h4>
+        {(caseData.lers_requests && caseData.lers_requests.length > 0) ? (
+          <div className="space-y-3">
+            {caseData.lers_requests.map((req, i) => (
+              <div key={i} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Send size={18} className="text-blue-500" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800">{req.platform}</p>
+                    <p className="text-xs text-gray-400 flex items-center gap-1"><Phone size={10} /> {req.target_identifier}</p>
+                    <p className="text-[10px] text-gray-400">{new Date(req.created_at).toLocaleString('en-IN')}</p>
+                  </div>
+                </div>
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${req.status === 'SENT' ? 'bg-blue-50 text-blue-600 border-blue-200' : req.status === 'RESPONDED' ? 'bg-green-50 text-green-600 border-green-200' : 'bg-yellow-50 text-yellow-600 border-yellow-200'}`}>{req.status}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-10 bg-gray-50 rounded-xl border border-dashed border-gray-200">
+            <Send size={32} className="text-gray-300 mx-auto mb-3" />
+            <p className="text-gray-400 text-sm font-medium">No LERS requests sent yet</p>
+            <p className="text-xs text-gray-400 mt-1">Send a legal emergency request to Meta platforms</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+{activeSection === 'audit' && (
+  <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+    <h3 className="text-base font-semibold text-gray-800 mb-4">Audit Trail</h3>
+    <AuditTrail caseId={caseId} />
+  </div>
+)}
+{/* FACE ID MODAL */}
+{showFaceIDModal && (
+  <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+      <div className="flex items-center justify-between mb-4 sticky top-0 bg-white pb-2">
+        <h3 className="text-lg font-semibold text-gray-800">Face Identification Form</h3>
+        <button onClick={() => { setShowFaceIDModal(false); stopCamera(); }} className="p-2 hover:bg-gray-100 rounded-xl"><X size={20} /></button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="text-xs font-medium text-gray-500 mb-2 block">Accused Photo</label>
+          <div className="relative w-full aspect-square bg-gray-900 rounded-xl overflow-hidden mb-2">
+            {!accusedPhoto ? (
+              <>
+                <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" style={{ display: cameraStream ? 'block' : 'none' }} />
+                {!cameraStream && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
+                    <Camera size={40} className="text-gray-600 mb-2" />
+                    <p className="text-gray-400 text-sm">Photo preview</p>
+                  </div>
+                )}
+              </>
+            ) : (
+              <img src={accusedPhoto} alt="Accused" className="w-full h-full object-cover" />
+            )}
+            <canvas ref={canvasRef} className="hidden" />
+          </div>
+          {!accusedPhoto ? (
+            <div className="space-y-2">
+              {!cameraStream ? (
+                <button onClick={startCamera} className="w-full py-2 bg-gray-900 text-white rounded-lg text-xs font-medium flex items-center justify-center gap-2">
+                  <Camera size={14} /> Open Camera
+                </button>
+              ) : (
+                <button onClick={capturePhoto} className="w-full py-2 bg-green-500 text-white rounded-lg text-xs font-medium flex items-center justify-center gap-2">
+                  <Camera size={14} /> Capture Photo
+                </button>
+              )}
+              <label className="w-full py-2 border-2 border-dashed border-gray-300 rounded-lg text-xs text-gray-500 text-center cursor-pointer hover:border-orange-400 flex items-center justify-center gap-2">
+                <Upload size={14} /> Upload Photo
+                <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+              </label>
+            </div>
+          ) : (
+            <button onClick={() => setAccusedPhoto(null)} className="w-full py-2 bg-gray-100 text-gray-600 rounded-lg text-xs flex items-center justify-center gap-2">
+              <X size={14} /> Retake
+            </button>
+          )}
+        </div>
+
+        <div className="space-y-2">
+          <Input label="Full Name *" value={faceIDForm.name} onChange={v => setFaceIDForm(p => ({...p, name: v}))} />
+          <Input label="Father's Name" value={faceIDForm.fatherName} onChange={v => setFaceIDForm(p => ({...p, fatherName: v}))} />
+          <div className="grid grid-cols-2 gap-2">
+            <Input label="Age" value={faceIDForm.age} onChange={v => setFaceIDForm(p => ({...p, age: v}))} />
+            <Input label="Gender" value={faceIDForm.gender} onChange={v => setFaceIDForm(p => ({...p, gender: v}))} />
+          </div>
+          <Input label="Occupation" value={faceIDForm.occupation} onChange={v => setFaceIDForm(p => ({...p, occupation: v}))} />
+          <Input label="Address" value={faceIDForm.address} onChange={v => setFaceIDForm(p => ({...p, address: v}))} />
+          <Input label="Phone" value={faceIDForm.phone} onChange={v => setFaceIDForm(p => ({...p, phone: v}))} />
+          <div className="grid grid-cols-3 gap-2">
+            <Input label="Height" value={faceIDForm.height} onChange={v => setFaceIDForm(p => ({...p, height: v}))} />
+            <Input label="Build" value={faceIDForm.build} onChange={v => setFaceIDForm(p => ({...p, build: v}))} />
+            <Input label="Complexion" value={faceIDForm.complexion} onChange={v => setFaceIDForm(p => ({...p, complexion: v}))} />
+          </div>
+          <Input label="Hair" value={faceIDForm.hair} onChange={v => setFaceIDForm(p => ({...p, hair: v}))} />
+          <Input label="Eyes" value={faceIDForm.eyes} onChange={v => setFaceIDForm(p => ({...p, eyes: v}))} />
+          <Input label="Beard/Moustache" value={faceIDForm.beard} onChange={v => setFaceIDForm(p => ({...p, beard: v}))} />
+          <div className="grid grid-cols-3 gap-2">
+            <Input label="Mark 1" value={faceIDForm.mark1} onChange={v => setFaceIDForm(p => ({...p, mark1: v}))} />
+            <Input label="Mark 2" value={faceIDForm.mark2} onChange={v => setFaceIDForm(p => ({...p, mark2: v}))} />
+            <Input label="Mark 3" value={faceIDForm.mark3} onChange={v => setFaceIDForm(p => ({...p, mark3: v}))} />
+          </div>
+        </div>
+      </div>
+
+      <button onClick={handleGenerateFaceIDDoc}
+        className="w-full mt-4 py-3 bg-gradient-to-r from-orange-400 to-green-500 text-white rounded-xl font-medium hover:from-orange-500 hover:to-green-600 transition flex items-center justify-center gap-2">
+        <FileText size={16} /> Generate Face ID Document
+      </button>
+    </div>
+  </div>
 )}
 
         {/* IMAGE VIEWER MODAL */}
@@ -777,6 +1319,8 @@ export default function CaseDetail({ onNavigate, caseId }) {
             </div>
           </div>
         )}
+       
+    
 
         <style>{`
           @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
@@ -786,9 +1330,22 @@ export default function CaseDetail({ onNavigate, caseId }) {
         `}</style>
       </main>
     </div>
+ 
+    
   );
 }
-
+ 
+{/* Helper Input Component — add at bottom of file */}
+function Input({ label, value, onChange }) {
+  return (
+    <div>
+      <label className="text-[10px] font-medium text-gray-500 mb-0.5 block">{label}</label>
+      <input type="text" value={value} onChange={e => onChange(e.target.value)}
+        className="w-full bg-white border-2 border-gray-200 rounded-lg px-2.5 py-1.5 text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-orange-400/50 transition"
+        style={{ color: '#111827' }} />
+    </div>
+  );
+}
 // ─── Helper Components ───
 
 function StatBox({ icon, color, value, label }) {

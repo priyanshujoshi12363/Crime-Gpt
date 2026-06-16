@@ -1,4 +1,4 @@
-import { getDatabase } from '../database/connection.js';
+import { getDatabase , saveToFile} from '../database/connection.js';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
@@ -71,7 +71,8 @@ export async function registerCase(caseData) {
     `FIR ${firNumber} registered for ${caseData.case_type || 'case'} at ${caseData.incident_location}. ${caseData.description}`,
     caseData.officer_name || 'Unknown'
   ]);
-
+  logAudit(caseId, 'CASE_CREATED', `FIR ${firNumber} registered for ${caseData.case_type}`, caseData.officer_name);
+  saveToFile();
   return { success: true, caseId, fir_number: firNumber };
 }
 
@@ -90,29 +91,24 @@ export async function getFullCase(caseId) {
   caseData.witnesses = JSON.parse(caseData.witnesses || '[]');
   caseData.seized_items = JSON.parse(caseData.seized_items || '[]');
   caseData.applied_sections = JSON.parse(caseData.applied_sections || '[]');
-
-  // Load evidence files
   const evStmt = db.prepare('SELECT * FROM evidence_files WHERE case_id = ?');
   evStmt.bind([caseId]);
   caseData.evidence = [];
   while (evStmt.step()) caseData.evidence.push(evStmt.getAsObject());
   evStmt.free();
 
-  // Load documents
   const docStmt = db.prepare('SELECT * FROM documents WHERE case_id = ?');
   docStmt.bind([caseId]);
   caseData.documents = [];
   while (docStmt.step()) caseData.documents.push(docStmt.getAsObject());
   docStmt.free();
 
-  // Load diary entries WITH their images
   const diaryStmt = db.prepare('SELECT * FROM case_diary WHERE case_id = ? ORDER BY entry_date DESC, entry_time DESC');
   diaryStmt.bind([caseId]);
   caseData.diary = [];
   while (diaryStmt.step()) {
     const entry = diaryStmt.getAsObject();
-    
-    // Load images for this diary entry
+  
     const imgStmt = db.prepare('SELECT * FROM diary_images WHERE diary_entry_id = ?');
     imgStmt.bind([entry.id]);
     entry.images = [];
@@ -125,25 +121,31 @@ export async function getFullCase(caseId) {
 
   return caseData;
 }
-
+export function logAudit(caseId, action, details, officerName) {
+  const db = getDatabase();
+  db.run('INSERT INTO audit_log (id, case_id, action, details, officer_name) VALUES (?, ?, ?, ?, ?)', [
+    uuidv4(), caseId, action, details, officerName || 'System'
+  ]);
+  saveToFile();
+}
 export async function addDiaryEntry(caseId, entryData) {
   const db = getDatabase();
   const id = uuidv4();
   
-  console.log('📝 [Diary] Creating entry:', { caseId, entryId: id, title: entryData.title });
-  console.log('📸 [Diary] Images received:', entryData.images?.length || 0);
-
-  // Insert the diary entry
+  console.log('[Diary] Creating entry:', { caseId, entryId: id, title: entryData.title });
+  console.log('[Diary] Images received:', entryData.images?.length || 0);
+  saveToFile();
+  logAudit(caseId, 'DIARY_ENTRY', entryData.title, entryData.officer_name); // ✅ Here
+  
   db.run('INSERT INTO case_diary (id, case_id, entry_date, entry_time, event_type, title, description, location, officer_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [
     id, caseId, entryData.entry_date, entryData.entry_time || null,
     entryData.event_type, entryData.title, entryData.description || null,
     entryData.location || null, entryData.officer_name || null
   ]);
 
-  // Handle diary images
   if (entryData.images && Array.isArray(entryData.images)) {
     const diaryDir = getDiaryImagesDir(caseId, id);
-    console.log('📁 [Diary] Saving images to:', diaryDir);
+    console.log('[Diary] Saving images to:', diaryDir);
     
     for (let i = 0; i < entryData.images.length; i++) {
       const img = entryData.images[i];
@@ -151,7 +153,7 @@ export async function addDiaryEntry(caseId, entryData) {
       const filename = `${uuidv4()}${ext}`;
       const filePath = path.join(diaryDir, filename);
       
-      console.log(`💾 [Diary] Processing image ${i + 1}:`, {
+      console.log(`[Diary] Processing image ${i + 1}:`, {
         name: img.originalName || img.name,
         hasBuffer: !!img.buffer,
         hasBase64: !!img.base64,
@@ -159,26 +161,21 @@ export async function addDiaryEntry(caseId, entryData) {
         size: img.size || 0
       });
       
-      // Determine the buffer source
       let buffer = null;
       if (img.buffer) {
-        // If buffer is an ArrayBuffer or Uint8Array
         buffer = Buffer.from(img.buffer);
       } else if (img.base64 && img.base64.length > 0) {
-        // If base64 string is provided
         buffer = Buffer.from(img.base64, 'base64');
       }
       
       if (!buffer || buffer.length === 0) {
-        console.error(`❌ [Diary] No valid image data for image ${i + 1}, skipping`);
+        console.error(`[Diary] No valid image data for image ${i + 1}, skipping`);
         continue;
       }
       
-      // Write to disk
       fs.writeFileSync(filePath, buffer);
-      console.log(`✅ [Diary] Image saved: ${filePath} (${buffer.length} bytes)`);
-      
-      // Save record to database
+      console.log(` [Diary] Image saved: ${filePath} (${buffer.length} bytes)`);
+   
       db.run('INSERT INTO diary_images (id, diary_entry_id, file_path, file_name, file_size) VALUES (?, ?, ?, ?, ?)', [
         uuidv4(), id, filePath, img.originalName || img.name || filename,
         img.size || buffer.length
@@ -186,13 +183,12 @@ export async function addDiaryEntry(caseId, entryData) {
     }
   }
 
-  // Verify what was saved
   const imgCountStmt = db.prepare('SELECT COUNT(*) as count FROM diary_images WHERE diary_entry_id = ?');
   imgCountStmt.bind([id]);
   const imgCount = imgCountStmt.step() ? imgCountStmt.getAsObject().count : 0;
   imgCountStmt.free();
   
-  console.log(`✅ [Diary] Entry saved successfully. ID: ${id}, Images saved: ${imgCount}`);
+  console.log(`[Diary] Entry saved successfully. ID: ${id}, Images saved: ${imgCount}`);
 
   return { success: true, entryId: id };
 }
