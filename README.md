@@ -150,26 +150,41 @@
 
 ## 📸 Screenshots
 
-> *All screenshots to be placed in `docs/screenshots/` and referenced here.*
+> **📁 All screenshots are placed in `docs/screenshots/`.** Drop your 4 images into that folder with the filenames below and they will render here automatically.
 
-| # | Screen | Description |
+| Screenshot | File Path | Highlights |
 |---|---|---|
-| 1 | **Login Screen** | `docs/screenshots/01-login.png` — Multilingual login (EN/HI/GU) with admin setup |
-| 2 | **First-time Admin Setup** | `docs/screenshots/02-admin-setup.png` — Bootstrap first administrator |
-| 3 | **AI Setup Wizard** | `docs/screenshots/03-ai-setup.png` — Auto-detect device, install Ollama, pull Qwen model |
-| 4 | **Dashboard** | `docs/screenshots/04-dashboard.png` — Active cases, totals, recent activity |
-| 5 | **New FIR — Step 1 (Incident Info)** | `docs/screenshots/05-new-case-step1.png` — Case type, language, description, AI section analysis |
-| 6 | **New FIR — AI Auto-Fill** | `docs/screenshots/06-ai-autofill.png` — AI extracts parties from narrative |
-| 7 | **New FIR — Step 2 (Parties & Evidence)** | `docs/screenshots/07-new-case-step2.png` — Complainant, Accused, Witness, Seized items, evidence upload |
-| 8 | **New FIR — Step 3 (Review)** | `docs/screenshots/08-new-case-step3.png` — Final review + AI-suggested sections |
-| 9 | **Case Registered Success** | `docs/screenshots/09-case-registered.png` — FIR number, PDF download confirmation |
-| 10 | **Case Detail** | `docs/screenshots/10-case-detail.png` — Full case view with tabs (Overview, Documents, Diary, Audit) |
-| 11 | **Document Generation** | `docs/screenshots/11-documents.png` — Auto-generated PDFs (FIR, Charge Sheet, Remand, etc.) |
-| 12 | **Case Diary** | `docs/screenshots/12-case-diary.png` — Chronological events with images |
-| 13 | **AI Chat (CrimeGPT Persona)** | `docs/screenshots/13-ai-chat.png` — Conversational legal Q&A |
-| 14 | **BharatPol Network** | `docs/screenshots/14-bharatpol.png` — National criminal lookup + case posting |
-| 15 | **Audit Trail** | `docs/screenshots/15-audit-trail.png` — Immutable event log with officer + timestamp |
-| 16 | **Search Cases** | `docs/screenshots/16-search.png` — Full-text search across all cases |
+| 🛡️ **Login** | `docs/screenshots/crime.png` | Multilingual login (EN / हिन्दी / ગુજરાતી) with secure local authentication |
+| 📊 **Dashboard** | `docs/screenshots/crime1.png` | Active cases, totals, documents generated, recent activity |
+| 🤖 **New FIR — AI Analysis** | `docs/screenshots/crime2.png` | 3-step FIR wizard with **AI-suggested BNS/BNSS/BSA sections** |
+| 🌐 **BharatPol Network** | `docs/screenshots/crime3.png` | National criminal lookup, case sync, inter-state case sharing |
+
+### UI Preview (ASCII)
+
+```
+┌─────────────────────┐         ┌──────────────────────────────────┐
+│ 🛡️  CrimeGPT        │         │  Dashboard                       │
+│                     │         │  ┌──────┐ ┌──────┐ ┌──────┐      │
+│  Username: ______   │         │  │  42  │ │  18  │ │ 156  │      │
+│  Password: ______   │         │  │Total │ │Active│ │ Docs │      │
+│  [  Sign In  ]      │         │  └──────┘ └──────┘ └──────┘      │
+│   EN | हि | ગુ       │         │  Recent: CR-2026-06680 registered│
+└─────────────────────┘         └──────────────────────────────────┘
+
+┌─────────────────────┐         ┌──────────────────────────────────┐
+│ New FIR — Step 1    │         │ BharatPol Network                │
+│ Case Type: [Theft]  │         │ Search: [____________]           │
+│ Date: [_________]   │         │ ┌────────────────────────────┐   │
+│ Location: [______]  │         │ │ ⚠️ Raj Patel   HIGH  WANTED│   │
+│                     │         │ │   3 cases • Phone: 98xxx    │   │
+│ Description:        │         │ │   [Sync to Local]           │   │
+│ [_________________] │         │ └────────────────────────────┘   │
+│                     │         │ [+ Post Case to BharatPol]        │
+│ ✨ AI Suggested:    │         └──────────────────────────────────┘
+│ BNS §303 - Theft    │
+│ BNS §331 - Trespass │
+└─────────────────────┘
+```
 
 ### Sample Screenshot Placeholders
 
