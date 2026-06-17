@@ -218,7 +218,14 @@ export default function Setup() {
               )}
             </button>
           </form>
-
+<div className="text-center mt-4">
+            <button 
+              onClick={() => window.location.reload()}
+              className="text-sm text-orange-500 hover:text-orange-600 font-medium"
+            >
+              Already have an account? Sign In
+            </button>
+          </div>
           <div className="flex justify-center gap-6 mt-6 text-[10px] text-gray-400">
             <span className="hover:text-gray-600 cursor-pointer">Privacy Policy</span>
             <span className="hover:text-gray-600 cursor-pointer">Offline Secure</span>

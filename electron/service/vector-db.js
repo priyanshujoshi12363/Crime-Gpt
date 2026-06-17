@@ -1,27 +1,20 @@
 import path from 'path';
+import { app } from 'electron';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { getEmbedding, askOllama } from './ai-setup.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 let sectionsStore = [];
 let casesStore = [];
-
 function getStorePath() {
-  const dbDir = path.join(__dirname, '..', '..', 'database');
-  if (!fs.existsSync(dbDir)) {
-    fs.mkdirSync(dbDir, { recursive: true });
-  }
+  const dbDir = path.join(app.getPath('userData'), 'database');
+  if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir, { recursive: true });
   return path.join(dbDir, 'sections.json');
 }
 
 function getCasesPath() {
-  const dbDir = path.join(__dirname, '..', '..', 'database');
-  if (!fs.existsSync(dbDir)) {
-    fs.mkdirSync(dbDir, { recursive: true });
-  }
+  const dbDir = path.join(app.getPath('userData'), 'database');
+  if (!fs.existsSync(dbDir)) fs.mkdirSync(dbDir, { recursive: true });
   return path.join(dbDir, 'cases.json');
 }
 

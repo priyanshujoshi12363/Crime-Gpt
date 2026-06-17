@@ -1,14 +1,59 @@
 {
   "name": "crimegpt",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "AI-Powered Police Documentation Platform",
+  "author": "CrimeGPT Team",
   "type": "module",
   "main": "electron/main.js",
   "scripts": {
     "dev": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
-    "build": "vite build && electron-builder",
+    "build": "vite build",
+    "dist": "vite build && electron-builder --win",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.crimegpt.app",
+    "productName": "CrimeGPT",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "public/**/*",
+      "package.json"
+    ],
+"extraResources": [
+  {
+    "from": "database/",
+    "to": "database/",
+    "filter": ["*.json"]
+  },
+  {
+    "from": "data/",
+    "to": "data/",
+    "filter": ["*.txt"]
+  },
+  {
+    "from": "installer/OllamaSetup.exe",
+    "to": "installer/OllamaSetup.exe"
+  }
+],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CrimeGPT"
+    },
+    "npmRebuild": false,
+    "nodeGypRebuild": false
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

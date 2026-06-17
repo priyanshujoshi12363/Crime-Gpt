@@ -23,49 +23,62 @@ const BHARATPOL_API = 'https://mock-api-7969.onrender.com';
 
 let mainWindow = null;
 let dataIndexed = false;
-
+let logToFile = () => {}; 
 function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 1400, height: 900, minWidth: 1024, minHeight: 768,
-    webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, webSecurity: false },
-    title: 'CrimeGPT', show: false, autoHideMenuBar: true,
-    icon: path.join(__dirname, '../public/logo1.png')
-  });
-  mainWindow.setMenuBarVisibility(false);
-  Menu.setApplicationMenu(null);
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show();
-    if (process.env.VITE_DEV_SERVER_URL) mainWindow.webContents.openDevTools();
-  });
-  if (process.env.VITE_DEV_SERVER_URL) mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
-  else mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
-}
-
-async function indexAllLegalData() {
-  const storePath = path.join(__dirname, '..', 'database', 'sections.json');
-  if (fs.existsSync(storePath) && (fs.statSync(storePath).size / 1024) > 100) {
-    console.log('[Index] Store already populated — skipping');
-    await rebuildCache();
-    dataIndexed = true;
-    return;
+  try {
+    mainWindow = new BrowserWindow({
+      width: 1400, height: 900, minWidth: 1024, minHeight: 768,
+      webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, webSecurity: false },
+      title: 'CrimeGPT', show: false, autoHideMenuBar: true
+    });
+    mainWindow.webContents.on('did-fail-load', (e, code, desc) => logToFile(`did-fail-load: ${desc}`));
+    mainWindow.webContents.on('preload-error', (e, p, error) => logToFile(`preload-error: ${error}`));
+    mainWindow.webContents.on('render-process-gone', (e, details) => logToFile(`render-gone: ${JSON.stringify(details)}`));
+    mainWindow.setMenuBarVisibility(false);
+    Menu.setApplicationMenu(null);
+    mainWindow.once('ready-to-show', () => {
+      mainWindow.show();
+      logToFile('Window shown');
+    });
+    if (process.env.VITE_DEV_SERVER_URL) mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
+    else mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
+    logToFile('createWindow success');
+  } catch (err) {
+    logToFile(`createWindow ERROR: ${err.stack}`);
   }
-  console.log('[Index] Starting fresh indexing...');
-  const dataPath = path.join(__dirname, '..', 'data');
-  for (const file of [
-    { path: path.join(dataPath, 'BNS1.txt'), name: 'BNS' },
-    { path: path.join(dataPath, 'BNSS.txt'), name: 'BNSS' },
-    { path: path.join(dataPath, 'BSA.txt'), name: 'BSA' },
-    { path: path.join(dataPath, 'special.txt'), name: 'SPECIAL' },
-  ]) {
-    if (fs.existsSync(file.path)) {
-      try { await indexLawFile(file.path, file.name); }
-      catch (err) { console.error(`[Index] Failed ${file.name}:`, err.message); }
+}
+async function indexAllLegalData() {
+  const isPackaged = app.isPackaged;
+  
+  if (isPackaged) {
+    const userDbDir = path.join(app.getPath('userData'), 'database');
+    if (!fs.existsSync(userDbDir)) fs.mkdirSync(userDbDir, { recursive: true });
+    
+    const sectionsSrc = path.join(process.resourcesPath, 'database', 'sections.json');
+    const sectionsDest = path.join(userDbDir, 'sections.json');
+    
+    if (fs.existsSync(sectionsSrc) && !fs.existsSync(sectionsDest)) {
+      fs.copyFileSync(sectionsSrc, sectionsDest);
+      logToFile('sections.json copied to userData');
+    }
+    
+    const userDataDir = path.join(app.getPath('userData'), 'data');
+    if (!fs.existsSync(userDataDir)) fs.mkdirSync(userDataDir, { recursive: true });
+    
+    const resourcesData = path.join(process.resourcesPath, 'data');
+    if (fs.existsSync(resourcesData)) {
+      const files = fs.readdirSync(resourcesData);
+      for (const f of files) {
+        const src = path.join(resourcesData, f);
+        const dest = path.join(userDataDir, f);
+        if (!fs.existsSync(dest)) fs.copyFileSync(src, dest);
+      }
     }
   }
+  
   await rebuildCache();
   dataIndexed = true;
 }
-
 function queryAll(stmt, params = []) {
   if (params.length) stmt.bind(params);
   const results = [];
@@ -115,20 +128,35 @@ function httpPost(url, body) {
     req.write(JSON.stringify(body));
     req.end();
   });
-}
+}app.whenReady().then(async () => {
+  const logPath = path.join(app.getPath('userData'), 'crimegpt.log');
+  logToFile = (msg) => {
+    try { fs.appendFileSync(logPath, `[${new Date().toISOString()}] ${msg}\n`); } catch (e) {}
+  };
+  process.on('uncaughtException', (err) => logToFile(`UNCAUGHT: ${err.stack}`));
+  process.on('unhandledRejection', (err) => logToFile(`REJECTION: ${err}`));
+  logToFile('=== App starting ===');
 
-app.whenReady().then(async () => {
-  try {
-    await initDatabase();
-    await initVectorStore();
-    await indexAllLegalData();
-    const ollama = isOllamaInstalled();
-    if (ollama.installed && !(await isOllamaRunning())) startOllamaProcess();
-    createWindow();
-    console.log('[Startup] CrimeGPT ready');
-  } catch (err) { console.error('[Startup] Fatal error:', err); }
+  await initDatabase();
+  logToFile('DB OK');
+
+  createWindow();
+  logToFile('Window created');
+
+  setTimeout(async () => {
+    try {
+      await initVectorStore();
+      logToFile('Vector OK');
+      await indexAllLegalData();
+      logToFile('Index OK');
+      const ollama = isOllamaInstalled();
+      if (ollama.installed && !(await isOllamaRunning())) startOllamaProcess();
+      logToFile('Startup complete');
+    } catch (err) {
+      logToFile(`Data error: ${err.stack}`);
+    }
+  }, 500);
 });
-
 // ─── AUTH ───
 ipcMain.handle('auth:check-setup', () => ({ needsSetup: !hasUsers() }));
 ipcMain.handle('auth:setup-admin', (_, u, p) => setupAdmin(u, p));
