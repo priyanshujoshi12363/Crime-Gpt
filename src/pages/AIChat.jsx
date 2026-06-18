@@ -19,12 +19,12 @@ const UI_TEXT = {
   en: {
     title: 'CrimeGPT',
     subtitle: 'Legal AI Assistant',
-    status: 'RAG Active • Offline',
+    status: 'Offline',
     placeholder: 'Ask about BNS sections, procedures, FIR filing...',
     thinking: 'Searching legal database...',
     emptyTitle: 'How can I help, Officer?',
     emptySubtitle: 'Ask about BNS, BNSS, BSA 2023 sections, procedures, or case analysis.',
-    ragBadge: 'RAG • BNS + BNSS + BSA',
+    ragBadge: 'CrimeGPT',
     copy: 'Copy',
     copied: 'Copied',
     retry: 'Retry',
@@ -39,12 +39,12 @@ const UI_TEXT = {
   hi: {
     title: 'CrimeGPT',
     subtitle: 'कानूनी AI सहायक',
-    status: 'RAG सक्रिय • ऑफलाइन',
+    status: 'ऑफलाइन',
     placeholder: 'BNS धाराओं, प्रक्रियाओं या FIR के बारे में पूछें...',
     thinking: 'कानूनी डेटाबेस खोज रहा है...',
     emptyTitle: 'नमस्ते अधिकारी, मैं कैसे मदद करूं?',
     emptySubtitle: 'BNS, BNSS, BSA 2023 धाराओं, प्रक्रियाओं या केस विश्लेषण के बारे में पूछें।',
-    ragBadge: 'RAG • BNS + BNSS + BSA',
+    ragBadge: 'CrimeGPT',
     copy: 'कॉपी',
     copied: 'हो गया',
     retry: 'पुनः प्रयास',
@@ -59,12 +59,12 @@ const UI_TEXT = {
   gu: {
     title: 'CrimeGPT',
     subtitle: 'કાનૂની AI સહાયક',
-    status: 'RAG સક્રિય • ઑફલાઇન',
+    status: 'ઑફલાઇન',
     placeholder: 'BNS કલમો, પ્રક્રિયાઓ અથવા FIR વિશે પૂછો...',
     thinking: 'કાનૂની ડેટાબેઝ શોધી રહ્યું છે...',
     emptyTitle: 'નમસ્તે અધિકારી, હું કેવી રીતે મદદ કરી શકું?',
     emptySubtitle: 'BNS, BNSS, BSA 2023 કલમો, પ્રક્રિયાઓ અથવા કેસ વિશ્લેષણ વિશે પૂછો.',
-    ragBadge: 'RAG • BNS + BNSS + BSA',
+    ragBadge: 'CrimeGPT',
     copy: 'કૉપિ',
     copied: 'થઈ ગયું',
     retry: 'ફરી પ્રયાસ',
@@ -328,9 +328,6 @@ function ThinkingBubble({ lang }) {
   );
 }
 
-// ─────────────────────────────────────────────
-//  EMPTY STATE
-// ─────────────────────────────────────────────
 function EmptyState({ lang, onSuggestion }) {
   const t = UI_TEXT[lang];
   return (
@@ -444,7 +441,6 @@ const sendMessage = useCallback(async (overrideText = null) => {
     setTimeout(() => inputRef.current?.focus(), 100);
   }
 }, [input, loading, t.error]);
-  // ── Retry last failed message ───────────────
   const retryLast = useCallback(() => {
     if (!lastQuery) return;
     // Remove last AI error message
@@ -452,7 +448,6 @@ const sendMessage = useCallback(async (overrideText = null) => {
     sendMessage(lastQuery);
   }, [lastQuery, sendMessage]);
 
-  // ── Suggestion click ────────────────────────
   const handleSuggestion = useCallback((text) => {
     sendMessage(text);
   }, [sendMessage]);

@@ -24,7 +24,11 @@ data/
 *.sln
 *.sw?
 
-release/
+release/win-unpacked
+release/builder-debug.yml
+release/builder-effective-config.yaml
+release/CrimeGPT Setup 1.0.0.exe.blockmap
+release/latest.yml
 
 installer/
 dist/

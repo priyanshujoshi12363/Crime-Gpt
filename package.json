@@ -25,24 +25,25 @@
       "public/**/*",
       "package.json"
     ],
-"extraResources": [
-  {
-    "from": "database/",
-    "to": "database/",
-    "filter": ["*.json"]
-  },
-  {
-    "from": "data/",
-    "to": "data/",
-    "filter": ["*.txt"]
-  },
-  {
-    "from": "installer/OllamaSetup.exe",
-    "to": "installer/OllamaSetup.exe"
-  }
-],
+    "extraResources": [
+      {
+        "from": "database/",
+        "to": "database/",
+        "filter": ["*.json"]
+      },
+      {
+        "from": "data/",
+        "to": "data/",
+        "filter": ["*.txt"]
+      },
+      {
+        "from": "installer/OllamaSetup.exe",
+        "to": "installer/OllamaSetup.exe"
+      }
+    ],
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "public/logo1.ico"
     },
     "nsis": {
       "oneClick": false,
@@ -50,7 +51,9 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "CrimeGPT"
+      "shortcutName": "CrimeGPT",
+      "installerIcon": "public/logo1.ico",
+      "uninstallerIcon": "public/logo1.ico"
     },
     "npmRebuild": false,
     "nodeGypRebuild": false

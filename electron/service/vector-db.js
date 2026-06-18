@@ -255,7 +255,7 @@ Return ONLY the search query. Nothing else.`;
 const FINAL_ANSWER_PROMPT = `You are CrimeGPT, a senior legal advisor for Indian police officers.
 You specialize in BNS 2023, BNSS 2023, and BSA 2023.
 
-The officer asked: "{{QUERY}}"
+ {{QUERY}}
 
 We searched our legal database and found these relevant sections:
 
@@ -272,12 +272,6 @@ IF THE OFFICER IS ASKING ABOUT A SPECIFIC CASE (mentions FIR number or "case det
    - Description of the incident
    - Sections Applied
    - Investigating Officer
-
-2. SIMILAR CASES FROM STATION (if any in references)
-   - Mention related FIR numbers and their status
-
-3. RECOMMENDED NEXT STEPS
-   - What action should the officer take?
 
 IF THE OFFICER IS ASKING A LEGAL QUESTION:
 1. RELEVANT LEGAL SECTIONS
