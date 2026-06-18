@@ -49,17 +49,22 @@ function createWindow() {
 }
 async function indexAllLegalData() {
   const isPackaged = app.isPackaged;
-  
+  const basePath = isPackaged ? process.resourcesPath : path.join(__dirname, '..');
+   const storePath = path.join(app.getPath('userData'), 'database', 'sections.json');
+    if (fs.existsSync(storePath) && (fs.statSync(storePath).size / 1024) > 1000) {
+    logToFile('Store already populated — skipping indexing');
+    await rebuildCache();
+    dataIndexed = true;
+    return;
+  }
   if (isPackaged) {
     const userDbDir = path.join(app.getPath('userData'), 'database');
     if (!fs.existsSync(userDbDir)) fs.mkdirSync(userDbDir, { recursive: true });
     
     const sectionsSrc = path.join(process.resourcesPath, 'database', 'sections.json');
     const sectionsDest = path.join(userDbDir, 'sections.json');
-    
     if (fs.existsSync(sectionsSrc) && !fs.existsSync(sectionsDest)) {
       fs.copyFileSync(sectionsSrc, sectionsDest);
-      logToFile('sections.json copied to userData');
     }
     
     const userDataDir = path.join(app.getPath('userData'), 'data');
@@ -74,9 +79,33 @@ async function indexAllLegalData() {
         if (!fs.existsSync(dest)) fs.copyFileSync(src, dest);
       }
     }
+    await rebuildCache();
+  } else {
+    // Dev mode: force re-index all files
+    const dataPath = path.join(basePath, 'data');
+    const storePath = path.join(app.getPath('userData'), 'database', 'sections.json');
+    
+    // Delete old cache to force re-index
+    if (fs.existsSync(storePath)) fs.unlinkSync(storePath);
+    
+    for (const file of [
+      { path: path.join(dataPath, 'BNS1.txt'), name: 'BNS' },
+      { path: path.join(dataPath, 'BNSS.txt'), name: 'BNSS' },
+      { path: path.join(dataPath, 'BSA.txt'), name: 'BSA' },
+      { path: path.join(dataPath, 'special.txt'), name: 'SPECIAL' },
+      { path: path.join(dataPath, 'judgments.txt'), name: 'JUDGMENTS' },
+    ]) {
+      if (fs.existsSync(file.path)) {
+        try { 
+          await indexLawFile(file.path, file.name);
+          logToFile(`Indexed: ${file.name}`);
+        } catch (err) { 
+          logToFile(`Index failed ${file.name}: ${err.message}`); 
+        }
+      }
+    }
   }
   
-  await rebuildCache();
   dataIndexed = true;
 }
 function queryAll(stmt, params = []) {

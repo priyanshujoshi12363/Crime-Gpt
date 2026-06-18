@@ -132,7 +132,36 @@ export async function searchSimilarCases(query, limit = 5) {
     return [];
   }
 }
-
+function parseJudgments(content) {
+  const sections = [];
+  
+  const cleanContent = content.replace(/[A-Z\s-]+(?:CIVIL|CRIMINAL)\s*MATTERS?\s*\n?/gi, '');
+  const blocks = cleanContent.split(/\n\s*(?=\d+\.\s+JUDGMENT:)/);
+  
+  for (const block of blocks) {
+    if (!block.trim()) continue;
+    
+    // Match WITH the number prefix: "1. JUDGMENT: Case Name"
+    const titleMatch = block.match(/^\d+\.\s+JUDGMENT:\s*(.+?)(?:\n|$)/im);
+    if (!titleMatch) continue;
+    
+    const coreMatch = block.match(/CORE CONTENT:\s*\n([\s\S]*?)(?=\n\s*(?:PROCEDURE|ILLUSTRATION|CITATION|JUDGES):)/i);
+    const procMatch = block.match(/PROCEDURE:\s*\n([\s\S]*?)(?=\n\s*(?:ILLUSTRATION):)/i);
+    const illusMatch = block.match(/ILLUSTRATION:\s*\n([\s\S]*?)$/i);
+    
+    sections.push({
+      law: 'JUDGMENT',
+      section: '',
+      title: titleMatch[1].trim().substring(0, 300),
+      coreContent: coreMatch ? coreMatch[1].trim() : '',
+      procedure: procMatch ? procMatch[1].trim() : '',
+      illustration: illusMatch ? illusMatch[1].trim() : ''
+    });
+  }
+  
+  console.log(`[parseJudgments] Parsed ${sections.length} judgments`);
+  return sections;
+}
 function parseSections(content, lawName) {
   content = content.toLowerCase();
   const sections = [];
@@ -167,16 +196,15 @@ function parseSections(content, lawName) {
 
   return sections;
 }
-
 export async function indexLawFile(filePath, lawName) {
   const content = fs.readFileSync(filePath, 'utf-8');
-  const sections = parseSections(content, lawName);
+  const sections = lawName === 'JUDGMENTS' ? parseJudgments(content) : parseSections(content, lawName);
   console.log(`[VectorDB] Indexing ${lawName}: ${sections.length} sections`);
 
   let indexed = 0, skipped = 0;
 
   for (const s of sections) {
-    const text = `${s.law} section ${s.section} ${s.title} ${s.coreContent.substring(0, 2000)}`;
+    const text = `${s.law} ${s.title} ${s.coreContent.substring(0, 2000)}`;
     try {
       const embedding = await getEmbedding(text);
       if (embedding && embedding.length === 768) {
@@ -216,84 +244,62 @@ export async function searchLaws(query, limit = 5) {
     console.error('[VectorDB] Search error:', err.message);
     return [];
   }
-}
-const SEARCH_QUERY_PROMPT = `You are a legal search expert for Indian criminal law. You know the three new laws:
+}const SEARCH_QUERY_PROMPT = `You are a query optimizer for a dual-database legal search system.
 
-BNS (Bharatiya Nyaya Sanhita 2023) = Crimes and punishments
-- Examples: theft (303), murder (101), rape (63), robbery (309), assault, kidnapping, fraud, dowry death (80), house trespass (331)
-
-BNSS (Bharatiya Nagarik Suraksha Sanhita 2023) = Police procedures
-- Examples: FIR registration (173), arrest without warrant (35), search (97), remand (187), charge sheet (193)
-
-BSA (Bharatiya Sakshya Adhiniyam 2023) = Evidence rules
-- Examples: electronic evidence (61, 63), confessions (22, 23), burden of proof (105), witness testimony (124)
+DATABASE 1: sections.json — Contains BNS/BNSS/BSA law sections AND Supreme Court/High Court judgments
+DATABASE 2: cases.json — Contains registered FIR cases from this police station
 
 A police officer asked: "{{QUERY}}"
 
-Your job: Write ONE short search query that will find the exact legal sections OR case records needed.
+Your job: Write ONE search query that finds the most relevant information.
 
-Rules:
-- Use the crime name + any important details (night, weapon, dwelling, consent, etc.)
-- Use BNS for crime questions, BNSS for procedure questions, BSA for evidence questions
-- If the query mentions a FIR number (like CR-2026-XXXXX), return just that FIR number
-- If the query asks about a specific case ("murder case", "theft case"), include the case type + "case details"
+RULES:
+- If query asks about court rulings, legal principles, guidelines, or case law → Start with "judgment" + key topic
+- If query asks about crimes, punishments, definitions → Use crime name + "bns"
+- If query asks about police procedures, FIR, arrest, investigation → Use procedure + "bnss"  
+- If query asks about evidence, witnesses, testimony → Use topic + "bsa"
+- If query mentions FIR number (CR-XXXX-XXXXX) → Return just the FIR number
 - Maximum 10 words
-- No filler words like "sections under" or "what is" or "tell me about"
-- Just the keywords
+- Never return empty
 
-Examples:
-- "theft at night" → "theft night house breaking dwelling bns"
-- "how to arrest without warrant" → "arrest without warrant procedure bnss"
-- "what evidence needed for murder" → "murder evidence collection bsa"
-- "rape complaint procedure" → "rape fir medical evidence procedure bnss"
-- "dowry death what section" → "dowry death bns section 80"
-- "status of CR-2026-06680" → "CR-2026-06680"
-- "what sections in the murder case" → "murder case details sections bns"
-- "tell me about the theft FIR" → "theft case details fir"
+EXAMPLES:
+"dk basu arrest guidelines" → "judgment dk basu arrest guidelines"
+"what is theft section" → "theft bns section"
+"how to file fir" → "fir registration bnss procedure"
+"evidence in rape case" → "rape evidence bsa"
+"cheque bounce security judgment" → "judgment security cheque bounce"
+"bail in non-bailable offence" → "judgment bail non-bailable offence"
+"satender antil" → "judgment satender antil bail"
+"status of CR-2026-06680" → "CR-2026-06680"
 
 Return ONLY the search query. Nothing else.`;
-const FINAL_ANSWER_PROMPT = `You are CrimeGPT, a senior legal advisor for Indian police officers.
-You specialize in BNS 2023, BNSS 2023, and BSA 2023.
+const FINAL_ANSWER_PROMPT = `You are CrimeGPT. Answer using ONLY the references below.
 
- {{QUERY}}
+QUESTION: {{QUERY}}
 
-We searched our legal database and found these relevant sections:
-
+LEGAL REFERENCES:
 {{CONTEXT}}
 
+PAST CASES FROM STATION:
 {{SIMILAR_CASES}}
 
-Your job: Read the question and references. Give a complete, accurate answer.
+HOW TO ANSWER:
 
-IF THE OFFICER IS ASKING ABOUT A SPECIFIC CASE (mentions FIR number or "case details"):
-1. CASE INFORMATION
-   - FIR Number, Case Type, Status
-   - Incident Date & Location
-   - Description of the incident
-   - Sections Applied
-   - Investigating Officer
+If REFERENCES contain JUDGMENT entries:
+"According to the [Judgment Name] ([Year]), the court held that [key principle]. This means [how it applies to your situation]. You should [practical steps]."
 
-IF THE OFFICER IS ASKING A LEGAL QUESTION:
-1. RELEVANT LEGAL SECTIONS
-   List each section with exact number and title from the references.
+If REFERENCES contain law sections:
+"Under [BNS/BNSS/BSA] Section [number], [simple explanation of what it means]. The procedure is: [steps]. Key points: [bail/court/urgency]."
 
-2. LEGAL EXPLANATION
-   Explain what each section means in simple terms.
+If PAST CASES are relevant:
+"A similar case [FIR number] was registered at this station involving [description]. That case is currently [status]."
 
-3. PROCEDURE TO FOLLOW
-   Step-by-step what the officer should do.
-
-4. EVIDENCE TO COLLECT
-   What evidence is needed and how to collect it.
-
-5. KEY POINTS
-   Bail status, urgency, victim protection, or important cautions.
-
-Rules:
-- Only cite section numbers from the REFERENCES above
-- If references don't cover something, say so honestly
-- Be direct and actionable
-- Respond in the same language as the officer's question`;
+RULES:
+- Never invent sections or judgments not in REFERENCES
+- If asked about a specific FIR, provide its details from PAST CASES
+- Respond in the SAME LANGUAGE as the officer's question
+- Be conversational and direct — no rigid formatting
+- No disclaimers, no "consult a lawyer"`;
 export async function getLegalOpinion(query) {
   console.log('\n═══════════════════════════════════');
   console.log(' RAG PIPELINE');
